@@ -1,1 +1,1 @@
-web:gunicorn appp:dapp
+web: gunicorn appp:dapp
