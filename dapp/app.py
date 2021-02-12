@@ -5,7 +5,7 @@ import dash_html_components as html
 import dbm
 import plotly.graph_objs as go
 import re
-import smtp_alert
+#import smtp_alert
 
 
 # Set up the app
@@ -140,7 +140,8 @@ def send_alert(selected_dropdown_value):
         latest_price = product_df_specific.product_price.values[-1]
         print(product_title, original_price, latest_price)
         if (latest_price < original_price):
-            smtp_alert.send_alert_of_price_reduction(product_title, original_price, latest_price)
+            print(f'Product Title: {product_title} / Original Price: {original_price} / Latest Price: {latest_price}')
+            #smtp_alert.send_alert_of_price_reduction(product_title, original_price, latest_price)
     return None
 
 
