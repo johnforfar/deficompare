@@ -11,7 +11,7 @@ import dbm
 # Run the argument with incognito
 option = webdriver.ChromeOptions()
 option.add_argument(' — incognito')
-driver = webdriver.Chrome(executable_path='chromedriver', chrome_options=option)
+driver = webdriver.Chrome(executable_path='/app/dapp/chromedriver.exe', options=option) # chrome_options deprecated changed to options, executable_path change from 'chromedriver'
 
 driver.get('https://www.lazada.sg/#')
 
