@@ -222,6 +222,17 @@ def build_tab_3():
         ),
     ]
 
+def build_tab_4():
+    return [
+        # Manually select metrics
+        html.Div(
+            id="returns-intro-container",
+            # className='twelve columns',
+            children=html.P(
+                "This is the Returns tab."
+            ),
+        ),
+    ]
 
 ud_usl_input = daq.NumericInput(
     id="ud_usl_input", className="setting-input", size=200, max=9999999
@@ -888,6 +899,8 @@ def render_tab_content(tab_switch, stopped_interval):
         return build_tab_1(), stopped_interval
     if tab_switch == "tab3":
         return build_tab_3(), stopped_interval
+    if tab_switch == "tab4":
+        return build_tab_4(), stopped_interval
     return (
         html.Div(
             id="status-container",
@@ -916,10 +929,11 @@ def render_tab_content(tab_switch, stopped_interval):
 def update_interval_state(tab_switch, cur_interval, disabled, cur_stage):
     if disabled:
         return cur_interval
-
     if tab_switch == "tab1":
         return cur_interval
     if tab_switch == "tab3":
+        return cur_interval
+    if tab_switch == "tab4":
         return cur_interval
     return cur_stage
 

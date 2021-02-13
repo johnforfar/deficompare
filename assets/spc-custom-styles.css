@@ -142,7 +142,7 @@ body {
   cursor: pointer;
 }
 
-#Specs-tab.custom-tab, #Control-chart-tab.custom-tab {
+#Specs-tab.custom-tab, #Control-chart-tab.custom-tab, #Latency-tab.custom-tab, #Returns-tab.custom-tab {
   background-color: #161a28;
   letter-spacing: 1px;
   color: inherit;
