@@ -41,8 +41,8 @@ def build_banner():
             html.Div(
                 id="banner-text",
                 children=[
-                    html.H5("Manufacturing SPC Dashboard"),
-                    html.H6("Process Control and Exception Reporting"),
+                    html.H5("DeFi Compare"),
+                    html.H6("A DeFi Comparison Tool"),
                 ],
             ),
             html.Div(
@@ -51,7 +51,7 @@ def build_banner():
                     html.Button(
                         id="learn-more-button", children="LEARN MORE", n_clicks=0
                     ),
-                    html.Img(id="logo", src=app.get_asset_url("dash-logo-new.png")),
+                    html.Img(id="logo", src=app.get_asset_url("defi-hackathon.png")),
                 ],
             ),
         ],
@@ -70,14 +70,28 @@ def build_tabs():
                 children=[
                     dcc.Tab(
                         id="Specs-tab",
-                        label="Specification Settings",
+                        label="All",
                         value="tab1",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
                     ),
                     dcc.Tab(
                         id="Control-chart-tab",
-                        label="Control Charts Dashboard",
+                        label="Fees",
+                        value="tab2",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+                    ),
+                    dcc.Tab(
+                        id="Control-chart-tab",
+                        label="Latency",
+                        value="tab2",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+                    ),
+                    dcc.Tab(
+                        id="Control-chart-tab",
+                        label="Returns",
                         value="tab2",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
@@ -246,20 +260,16 @@ def generate_modal():
                         children=dcc.Markdown(
                             children=(
                                 """
-                        ###### What is this mock app about?
+                        ###### What is this app about?
 
-                        This is a dashboard for monitoring real-time process quality along manufacture production line.
+                        This is a dashboard for monitoring DeFi Dapp user-experience (including fees & latency delays) across multiple blockchains. 
 
-                        ###### What does this app shows
+                        ###### What does this app show?
 
                         Click on buttons in `Parameter` column to visualize details of measurement trendlines on the bottom panel.
 
-                        The sparkline on top panel and control chart on bottom panel show Shewhart process monitor using mock data.
-                        The trend is updated every other second to simulate real-time measurements. Data falling outside of six-sigma control limit are signals indicating 'Out of Control(OOC)', and will
-                        trigger alerts instantly for a detailed checkup.
+                        Put more information about how to use here...
                         
-                        Operators may stop measurement by clicking on `Stop` button, and edit specification parameters by clicking specification tab.
-
                     """
                             )
                         ),
