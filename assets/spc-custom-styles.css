@@ -156,7 +156,7 @@ body {
   height: 18px;
 }
 
-#Specs-tab.custom-tab--selected, #Control-chart-tab.custom-tab--selected {
+#Specs-tab.custom-tab--selected, #Control-chart-tab.custom-tab--selected, #Latency-tab.custom-tab--selected, #Returns-tab.custom-tab--selected {
   border-bottom: #91dfd2 solid 4px !important;
 }
 
