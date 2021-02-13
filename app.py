@@ -41,7 +41,7 @@ def build_banner():
             html.Div(
                 id="banner-text",
                 children=[
-                    html.H5("DeFi Compare"),
+                    html.H5("DeFi Compare (BETA)"),
                     html.H6("A DeFi Dapp & Blockchain Comparison Tool"),
                 ],
             ),
@@ -207,6 +207,18 @@ def build_tab_1():
                     ],
                 ),
             ],
+        ),
+    ]
+
+def build_tab_3():
+    return [
+        # Manually select metrics
+        html.Div(
+            id="latency-intro-container",
+            # className='twelve columns',
+            children=html.P(
+                "This is the Latency tab."
+            ),
         ),
     ]
 
@@ -874,6 +886,8 @@ app.layout = html.Div(
 def render_tab_content(tab_switch, stopped_interval):
     if tab_switch == "tab1":
         return build_tab_1(), stopped_interval
+    if tab_switch == "tab3":
+        return build_tab_3(), stopped_interval
     return (
         html.Div(
             id="status-container",
@@ -904,6 +918,8 @@ def update_interval_state(tab_switch, cur_interval, disabled, cur_stage):
         return cur_interval
 
     if tab_switch == "tab1":
+        return cur_interval
+    if tab_switch == "tab3":
         return cur_interval
     return cur_stage
 
