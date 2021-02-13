@@ -42,7 +42,7 @@ def build_banner():
                 id="banner-text",
                 children=[
                     html.H5("DeFi Compare"),
-                    html.H6("A DeFi Comparison Tool"),
+                    html.H6("A DeFi Dapp & Blockchain Comparison Tool"),
                 ],
             ),
             html.Div(
@@ -85,14 +85,14 @@ def build_tabs():
                     dcc.Tab(
                         id="Latency-tab",
                         label="Latency",
-                        value="tab2",
+                        value="tab3",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
                     ),
                     dcc.Tab(
                         id="Returns-tab",
                         label="Returns",
-                        value="tab2",
+                        value="tab4",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
                     ),
