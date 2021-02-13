@@ -83,14 +83,14 @@ def build_tabs():
                         selected_className="custom-tab--selected",
                     ),
                     dcc.Tab(
-                        id="Control-chart-tab",
+                        id="Latency-tab",
                         label="Latency",
                         value="tab2",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
                     ),
                     dcc.Tab(
-                        id="Control-chart-tab",
+                        id="Returns-tab",
                         label="Returns",
                         value="tab2",
                         className="custom-tab",
