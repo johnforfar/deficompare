@@ -14,7 +14,14 @@ We want to create a platform where the user can look for the cheapest and/or fas
   - Exchange rates (to convert fees into $ or €):
     * https://pro.coinmarketcap.com/ (widely used)
     * https://binance-docs.github.io/apidocs/spot/en/#websocket-market-streams (First exchange to list SOL, for free)
-
+  - DEX data:
+    * https://docs.bonfida.com/#project-serum
+  - Good list of DeFi Dapps:
+    * https://en.cryptonomist.ch/Defi/
+    * https://apy.plasma.finance/liquidity-pools (This has Pool fees over 7 days)
+    * https://zapper.fi/dashboard (Another list)
+    * https://defi.instadapp.io/ (Another list)
+    
 # Methods
 ## Web Scraping
 Web scraping is a very powerful tool to learn for any data professional. With web scraping the entire internet becomes your database. In this repository how to parse a web page into a data file (csv) using a Python package called BeautifulSoup Two ways to extract data from a website:
