@@ -142,7 +142,7 @@ body {
   cursor: pointer;
 }
 
-#Specs-tab.custom-tab, #Control-chart-tab.custom-tab, #Latency-tab.custom-tab, #Returns-tab.custom-tab {
+#All-tab.custom-tab, #Fees-tab.custom-tab, #Latency-tab.custom-tab, #Ux-tab.custom-tab {
   background-color: #161a28;
   letter-spacing: 1px;
   color: inherit;
@@ -156,17 +156,19 @@ body {
   height: 18px;
 }
 
-#Specs-tab.custom-tab--selected, #Control-chart-tab.custom-tab--selected, #Latency-tab.custom-tab--selected, #Returns-tab.custom-tab--selected {
+#All-tab.custom-tab--selected, #Fees-tab.custom-tab--selected, #Latency-tab.custom-tab--selected, #Ux-tab.custom-tab--selected {
   border-bottom: #91dfd2 solid 4px !important;
 }
 
-#Specs-tab.custom-tab {
+/*
+#All-tab.custom-tab {
   margin-right: 3px;
 }
 
 #Control-chart-tab.custom-tab {
   margin-left: 3px;
 }
+*/
 
 .section-banner {
   color: darkgray;
@@ -266,11 +268,6 @@ body {
   margin-bottom: 3rem;
 }
 
-#utility-card {
-  height: 4rem !important;
-  margin-top: 2rem;
-}
-
 #stop-button > div > button:hover {
   color: #91dfd2 !important;
 }
@@ -278,12 +275,11 @@ body {
 /* Tab1 content
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-#set-specs-intro-container {
+#all-intro-container {
   font-weight: bold;
   margin: 8rem 5rem 1rem;
   font-size: 1.6rem;
 }
-
 
 #metric-select-title {
   color: darkgray;
@@ -515,6 +511,18 @@ body {
   color: white !important;
 }
 
+#progress-gauge1 > div, #progress-gauge2 > div {
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+#progress-gauge1 > div > div > div, #progress-gauge2 > div > div > div {
+  width: 100% !important;
+  text-align: center;
+  float: left;
+}
+
 /*pressure-gauge track*/
 .eUJyCY .track {
   stroke: #f4d44d !important;
@@ -575,7 +583,7 @@ body {
 #metric-rows {
   overflow-y: scroll;
   width: 100%;
-  height: 30rem;
+  height: 60rem;
 }
 
 /*
@@ -789,11 +797,13 @@ body {
 }
 
 @media screen and (max-width: 800px) {
-  #Specs-tab.custom-tab {
+/*  #Specs-tab.custom-tab {
     margin-right: 0;
   }
 
   #Control-chart-tab.custom-tab {
     margin-left: 0;
   }
+*/
+
 }

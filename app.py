@@ -17,7 +17,9 @@ app = dash.Dash(
 )
 server = app.server
 app.config["suppress_callback_exceptions"] = True
+app.title = 'DeFi Compare'
 
+## Specify CSV file path and store as 'df' 
 APP_PATH = str(pathlib.Path(__file__).parent.resolve())
 df = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "spc_data.csv")))
 
@@ -29,10 +31,10 @@ suffix_button_id = "_button"
 suffix_sparkline_graph = "_sparkline_graph"
 suffix_count = "_count"
 suffix_ooc_n = "_OOC_number"
-suffix_ooc_g = "_OOC_graph"
 suffix_indicator = "_indicator"
 
 
+## page header, about pop-up and logo
 def build_banner():
     return html.Div(
         id="banner",
@@ -44,6 +46,10 @@ def build_banner():
                     html.H5("DeFi Compare (BETA)"),
                     html.H6("A DeFi Dapp & Blockchain Comparison Tool"),
                 ],
+            ),
+            html.Div(
+                id="banner-button",
+                children=[daq.StopButton(id="stop-button", size=160, n_clicks=0)],
             ),
             html.Div(
                 id="banner-logo",
@@ -58,6 +64,7 @@ def build_banner():
     )
 
 
+## Page tabs html structure
 def build_tabs():
     return html.Div(
         id="tabs",
@@ -65,18 +72,18 @@ def build_tabs():
         children=[
             dcc.Tabs(
                 id="app-tabs",
-                value="tab2",
+                value="alltabs",
                 className="custom-tabs",
                 children=[
                     dcc.Tab(
-                        id="Specs-tab",
+                        id="All-tab",
                         label="All",
                         value="tab1",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
                     ),
                     dcc.Tab(
-                        id="Control-chart-tab",
+                        id="Fees-tab",
                         label="Fees",
                         value="tab2",
                         className="custom-tab",
@@ -90,8 +97,8 @@ def build_tabs():
                         selected_className="custom-tab--selected",
                     ),
                     dcc.Tab(
-                        id="Returns-tab",
-                        label="Returns",
+                        id="Ux-tab",
+                        label="User Experience",
                         value="tab4",
                         className="custom-tab",
                         selected_className="custom-tab--selected",
@@ -131,9 +138,7 @@ def init_df():
                 }
             }
         )
-
     return ret
-
 
 def populate_ooc(data, ucl, lcl):
     ooc_count = 0
@@ -156,57 +161,37 @@ def init_value_setter_store():
     return state_dict
 
 
-def build_tab_1():
+##Build page tabs
+def build_tab_1(stopped_interval):
     return [
         # Manually select metrics
         html.Div(
-            id="set-specs-intro-container",
+            id="all-intro-container",
+            # className='twelve columns',
+            children=[
+                #html.P("Use historical control limits to establish a benchmark, or set new values."),
+                generate_section_banner("Blockchain Comparison"),
+                html.Div(
+                    id="top-section-container",
+                    children=[
+                        daq.Gauge(id="progress-gauge", max=max_length * 2, min=0, showCurrentValue=True),
+                        daq.Gauge(id="progress-gauge", max=max_length * 2, min=0, showCurrentValue=True),
+                    ],
+                ),
+                defi_app_comparison_panel(stopped_interval),
+            ],
+        ),
+    ]
+
+def build_tab_2():
+    return [
+        # Manually select metrics
+        html.Div(
+            id="tab2-container",
             # className='twelve columns',
             children=html.P(
-                "Use historical control limits to establish a benchmark, or set new values."
+                "This is Tab 2."
             ),
-        ),
-        html.Div(
-            id="settings-menu",
-            children=[
-                html.Div(
-                    id="metric-select-menu",
-                    # className='five columns',
-                    children=[
-                        html.Label(id="metric-select-title", children="Select Metrics"),
-                        html.Br(),
-                        dcc.Dropdown(
-                            id="metric-select-dropdown",
-                            options=list(
-                                {"label": param, "value": param} for param in params[1:]
-                            ),
-                            value=params[1],
-                        ),
-                    ],
-                ),
-                html.Div(
-                    id="value-setter-menu",
-                    # className='six columns',
-                    children=[
-                        html.Div(id="value-setter-panel"),
-                        html.Br(),
-                        html.Div(
-                            id="button-div",
-                            children=[
-                                html.Button("Update", id="value-setter-set-btn"),
-                                html.Button(
-                                    "View current setup",
-                                    id="value-setter-view-btn",
-                                    n_clicks=0,
-                                ),
-                            ],
-                        ),
-                        html.Div(
-                            id="value-setter-view-output", className="output-datatable"
-                        ),
-                    ],
-                ),
-            ],
         ),
     ]
 
@@ -216,9 +201,10 @@ def build_tab_3():
         html.Div(
             id="latency-intro-container",
             # className='twelve columns',
-            children=html.P(
-                "This is the Latency tab."
-            ),
+            children=[
+                html.P("This is the Latency tab."),
+                #build_chart_panel(),
+            ]
         ),
     ]
 
@@ -229,37 +215,13 @@ def build_tab_4():
             id="returns-intro-container",
             # className='twelve columns',
             children=html.P(
-                "This is the Returns tab."
+                "This is the User Experience tab."
             ),
         ),
     ]
 
-ud_usl_input = daq.NumericInput(
-    id="ud_usl_input", className="setting-input", size=200, max=9999999
-)
-ud_lsl_input = daq.NumericInput(
-    id="ud_lsl_input", className="setting-input", size=200, max=9999999
-)
-ud_ucl_input = daq.NumericInput(
-    id="ud_ucl_input", className="setting-input", size=200, max=9999999
-)
-ud_lcl_input = daq.NumericInput(
-    id="ud_lcl_input", className="setting-input", size=200, max=9999999
-)
 
-
-def build_value_setter_line(line_num, label, value, col3):
-    return html.Div(
-        id=line_num,
-        children=[
-            html.Label(label, className="four columns"),
-            html.Label(value, className="four columns"),
-            html.Div(col3, className="four columns"),
-        ],
-        className="row",
-    )
-
-
+## Generate popup about information box in header
 def generate_modal():
     return html.Div(
         id="markdown",
@@ -285,11 +247,9 @@ def generate_modal():
                                 """
                         ###### What is this app about?
 
-                        This is a dashboard for monitoring DeFi Dapp user-experience (including fees & latency delays) across multiple blockchains. 
+                        This is a dashboard for monitoring Blockchain Fees, Latency and DeFi App User Experience. 
 
                         ###### What does this app show?
-
-                        Click on buttons in `Parameter` column to visualize details of measurement trendlines on the bottom panel.
 
                         Put more information about how to use here...
                         
@@ -303,59 +263,21 @@ def generate_modal():
     )
 
 
-def build_quick_stats_panel():
-    return html.Div(
-        id="quick-stats",
-        className="row",
-        children=[
-            html.Div(
-                id="card-1",
-                children=[
-                    html.P("Operator ID"),
-                    daq.LEDDisplay(
-                        id="operator-led",
-                        value="1704",
-                        color="#92e0d3",
-                        backgroundColor="#1e2130",
-                        size=50,
-                    ),
-                ],
-            ),
-            html.Div(
-                id="card-2",
-                children=[
-                    html.P("Time to completion"),
-                    daq.Gauge(
-                        id="progress-gauge",
-                        max=max_length * 2,
-                        min=0,
-                        showCurrentValue=True,  # default size 200 pixel
-                    ),
-                ],
-            ),
-            html.Div(
-                id="utility-card",
-                children=[daq.StopButton(id="stop-button", size=160, n_clicks=0)],
-            ),
-        ],
-    )
-
-
 def generate_section_banner(title):
     return html.Div(className="section-banner", children=title)
 
 
-def build_top_panel(stopped_interval):
+def defi_app_comparison_panel(stopped_interval):
     return html.Div(
         id="top-section-container",
         className="row",
         children=[
-            # Metrics summary
+            # Table list of DeFi Applications
             html.Div(
                 id="metric-summary-session",
                 className="eight columns",
                 children=[
-                    generate_section_banner("Process Control Metrics Summary"),
+                    generate_section_banner("DeFi Application Summary"),
                     html.Div(
                         id="metric-div",
                         children=[
@@ -369,63 +291,26 @@ def build_top_panel(stopped_interval):
                                     generate_metric_row_helper(stopped_interval, 4),
                                     generate_metric_row_helper(stopped_interval, 5),
                                     generate_metric_row_helper(stopped_interval, 6),
-                                    generate_metric_row_helper(stopped_interval, 7),
                                 ],
                             ),
                         ],
                     ),
                 ],
             ),
-            # Piechart
-            html.Div(
-                id="ooc-piechart-outer",
-                className="four columns",
-                children=[
-                    generate_section_banner("% OOC per Parameter"),
-                    generate_piechart(),
-                ],
-            ),
         ],
     )
 
 
-def generate_piechart():
-    return dcc.Graph(
-        id="piechart",
-        figure={
-            "data": [
-                {
-                    "labels": [],
-                    "values": [],
-                    "type": "pie",
-                    "marker": {"line": {"color": "white", "width": 1}},
-                    "hoverinfo": "label",
-                    "textinfo": "label",
-                }
-            ],
-            "layout": {
-                "margin": dict(l=20, r=20, t=20, b=20),
-                "showlegend": True,
-                "paper_bgcolor": "rgba(0,0,0,0)",
-                "plot_bgcolor": "rgba(0,0,0,0)",
-                "font": {"color": "white"},
-                "autosize": True,
-            },
-        },
-    )
-
-
-# Build header
+# Build header of DeFi Application table
 def generate_metric_list_header():
     return generate_metric_row(
         "metric_header",
         {"height": "3rem", "margin": "1rem 0", "textAlign": "center"},
-        {"id": "m_header_1", "children": html.Div("Parameter")},
-        {"id": "m_header_2", "children": html.Div("Count")},
-        {"id": "m_header_3", "children": html.Div("Sparkline")},
-        {"id": "m_header_4", "children": html.Div("OOC%")},
-        {"id": "m_header_5", "children": html.Div("%OOC")},
-        {"id": "m_header_6", "children": "Pass/Fail"},
+        {"id": "m_header_1", "children": html.Div("Dapp Name")},
+        {"id": "m_header_2", "children": html.Div("Fees")},
+        {"id": "m_header_3", "children": html.Div("Latency")},
+        {"id": "m_header_4", "children": html.Div("UX_Review")},
+        {"id": "m_header_5", "children": "Pass/Fail"},
     )
 
 
@@ -437,7 +322,6 @@ def generate_metric_row_helper(stopped_interval, index):
     sparkline_graph_id = item + suffix_sparkline_graph
     count_id = item + suffix_count
     ooc_percentage_id = item + suffix_ooc_n
-    ooc_graph_id = item + suffix_ooc_g
     indicator_id = item + suffix_indicator
 
     return generate_metric_row(
@@ -502,22 +386,6 @@ def generate_metric_row_helper(stopped_interval, index):
         },
         {"id": ooc_percentage_id, "children": "0.00%"},
         {
-            "id": ooc_graph_id + "_container",
-            "children": daq.GraduatedBar(
-                id=ooc_graph_id,
-                color={
-                    "ranges": {
-                        "#92e0d3": [0, 3],
-                        "#f4d44d ": [3, 7],
-                        "#f45060": [7, 15],
-                    }
-                },
-                showCurrentValue=False,
-                max=15,
-                value=0,
-            ),
-        },
-        {
             "id": item + "_pf",
             "children": daq.Indicator(
                 id=indicator_id, value=True, color="#91dfd2", size=12
@@ -526,7 +394,7 @@ def generate_metric_row_helper(stopped_interval, index):
     )
 
 
-def generate_metric_row(id, style, col1, col2, col3, col4, col5, col6):
+def generate_metric_row(id, style, col1, col2, col3, col4, col5):
     if style is None:
         style = {"height": "8rem", "width": "100%"}
 
@@ -565,22 +433,15 @@ def generate_metric_row(id, style, col1, col2, col3, col4, col5, col6):
                 className="three columns",
                 children=col5["children"],
             ),
-            html.Div(
-                id=col6["id"],
-                style={"display": "flex", "justifyContent": "center"},
-                className="one column",
-                children=col6["children"],
-            ),
         ],
     )
 
-
-def build_chart_panel():
+def blockchain_latency_panel():
     return html.Div(
         id="control-chart-container",
         className="twelve columns",
         children=[
-            generate_section_banner("Live SPC Chart"),
+            generate_section_banner("Blockchain Latency Comparison"),
             dcc.Graph(
                 id="control-chart-live",
                 figure=go.Figure(
@@ -896,25 +757,14 @@ app.layout = html.Div(
 )
 def render_tab_content(tab_switch, stopped_interval):
     if tab_switch == "tab1":
-        return build_tab_1(), stopped_interval
+        return build_tab_1(stopped_interval), stopped_interval
+    if tab_switch == "tab2":
+        return build_tab_2(), stopped_interval        
     if tab_switch == "tab3":
         return build_tab_3(), stopped_interval
     if tab_switch == "tab4":
         return build_tab_4(), stopped_interval
-    return (
-        html.Div(
-            id="status-container",
-            children=[
-                build_quick_stats_panel(),
-                html.Div(
-                    id="graphs-container",
-                    children=[build_top_panel(stopped_interval), build_chart_panel()],
-                ),
-            ],
-        ),
-        stopped_interval,
-    )
-
+    return (build_tab_1(stopped_interval), stopped_interval)
 
 # Update interval
 @app.callback(
@@ -930,6 +780,8 @@ def update_interval_state(tab_switch, cur_interval, disabled, cur_stage):
     if disabled:
         return cur_interval
     if tab_switch == "tab1":
+        return cur_interval
+    if tab_switch == "tab2":
         return cur_interval
     if tab_switch == "tab3":
         return cur_interval
@@ -978,86 +830,6 @@ def update_gauge(interval):
         total_count = max_length
 
     return int(total_count)
-
-
-# ===== Callbacks to update values based on store data and dropdown selection =====
-@app.callback(
-    output=[
-        Output("value-setter-panel", "children"),
-        Output("ud_usl_input", "value"),
-        Output("ud_lsl_input", "value"),
-        Output("ud_ucl_input", "value"),
-        Output("ud_lcl_input", "value"),
-    ],
-    inputs=[Input("metric-select-dropdown", "value")],
-    state=[State("value-setter-store", "data")],
-)
-def build_value_setter_panel(dd_select, state_value):
-    return (
-        [
-            build_value_setter_line(
-                "value-setter-panel-header",
-                "Specs",
-                "Historical Value",
-                "Set new value",
-            ),
-            build_value_setter_line(
-                "value-setter-panel-usl",
-                "Upper Specification limit",
-                state_dict[dd_select]["usl"],
-                ud_usl_input,
-            ),
-            build_value_setter_line(
-                "value-setter-panel-lsl",
-                "Lower Specification limit",
-                state_dict[dd_select]["lsl"],
-                ud_lsl_input,
-            ),
-            build_value_setter_line(
-                "value-setter-panel-ucl",
-                "Upper Control limit",
-                state_dict[dd_select]["ucl"],
-                ud_ucl_input,
-            ),
-            build_value_setter_line(
-                "value-setter-panel-lcl",
-                "Lower Control limit",
-                state_dict[dd_select]["lcl"],
-                ud_lcl_input,
-            ),
-        ],
-        state_value[dd_select]["usl"],
-        state_value[dd_select]["lsl"],
-        state_value[dd_select]["ucl"],
-        state_value[dd_select]["lcl"],
-    )
-
-
-# ====== Callbacks to update stored data via click =====
-@app.callback(
-    output=Output("value-setter-store", "data"),
-    inputs=[Input("value-setter-set-btn", "n_clicks")],
-    state=[
-        State("metric-select-dropdown", "value"),
-        State("value-setter-store", "data"),
-        State("ud_usl_input", "value"),
-        State("ud_lsl_input", "value"),
-        State("ud_ucl_input", "value"),
-        State("ud_lcl_input", "value"),
-    ],
-)
-def set_value_setter_store(set_btn, param, data, usl, lsl, ucl, lcl):
-    if set_btn is None:
-        return data
-    else:
-        data[param]["usl"] = usl
-        data[param]["lsl"] = lsl
-        data[param]["ucl"] = ucl
-        data[param]["lcl"] = lcl
-
-        # Recalculate ooc in case of param updates
-        data[param]["ooc"] = populate_ooc(df[param], ucl, lcl)
-        return data
 
 
 @app.callback(
@@ -1134,7 +906,6 @@ for param in params[1:]:
             Output(param + suffix_count, "children"),
             Output(param + suffix_sparkline_graph, "extendData"),
             Output(param + suffix_ooc_n, "children"),
-            Output(param + suffix_ooc_g, "value"),
             Output(param + suffix_indicator, "color"),
         ],
         inputs=[Input("interval-component", "n_intervals")],
@@ -1181,62 +952,6 @@ def update_control_chart(interval, n1, n2, n3, n4, n5, n6, n7, data, cur_fig):
         if prop_type == "n_intervals" and cur_fig is not None:
             curr_id = cur_fig["data"][0]["name"]
             return generate_graph(interval, data, curr_id)
-
-
-# Update piechart
-@app.callback(
-    output=Output("piechart", "figure"),
-    inputs=[Input("interval-component", "n_intervals")],
-    state=[State("value-setter-store", "data")],
-)
-def update_piechart(interval, stored_data):
-    if interval == 0:
-        return {
-            "data": [],
-            "layout": {
-                "font": {"color": "white"},
-                "paper_bgcolor": "rgba(0,0,0,0)",
-                "plot_bgcolor": "rgba(0,0,0,0)",
-            },
-        }
-
-    if interval >= max_length:
-        total_count = max_length - 1
-    else:
-        total_count = interval - 1
-
-    values = []
-    colors = []
-    for param in params[1:]:
-        ooc_param = (stored_data[param]["ooc"][total_count] * 100) + 1
-        values.append(ooc_param)
-        if ooc_param > 6:
-            colors.append("#f45060")
-        else:
-            colors.append("#91dfd2")
-
-    new_figure = {
-        "data": [
-            {
-                "labels": params[1:],
-                "values": values,
-                "type": "pie",
-                "marker": {"colors": colors, "line": dict(color="white", width=2)},
-                "hoverinfo": "label",
-                "textinfo": "label",
-            }
-        ],
-        "layout": {
-            "margin": dict(t=20, b=50),
-            "uirevision": True,
-            "font": {"color": "white"},
-            "showlegend": False,
-            "paper_bgcolor": "rgba(0,0,0,0)",
-            "plot_bgcolor": "rgba(0,0,0,0)",
-            "autosize": True,
-        },
-    }
-    return new_figure
 
 
 # Running the server
