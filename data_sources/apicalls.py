@@ -4,7 +4,7 @@ from pycoingecko import CoinGeckoAPI
 
 import requests
 
-
+"""https://pypi.org/project/pycoingecko/"""
 coin_gecko = CoinGeckoAPI()
 
 
