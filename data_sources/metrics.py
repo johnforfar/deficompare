@@ -2,7 +2,14 @@
 import abc
 
 
-class ChainMetricProvider(metaclass=abc.ABCMeta):
+class MetricProvider(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def refresh(self):
+        """Refreshes the underlying data by retrieving new data from called APIs."""
+        pass
+
+
+class ChainMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     name: str
 
     """Provides metrics related to blockchains like Solana and Ethereum."""
@@ -24,7 +31,7 @@ class ChainMetricProvider(metaclass=abc.ABCMeta):
     # TODO: Find out whether we receive a time series of past prices or if we are only able to calculate current prices.
 
 
-class DexMetricProvider(metaclass=abc.ABCMeta):
+class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     name: str
     referral_link: str
 

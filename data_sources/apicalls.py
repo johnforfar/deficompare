@@ -4,8 +4,10 @@ from typing import Union
 import requests
 
 
-def retrieve_json(url) -> Union[dict, list]:
-    """May return a list of json objects or an object as a python dictionary, depending on the called URL."""
+def retrieve_json(url) -> Union[list, dict, str, int, float, bool]:
+    """May return a list of json objects or an object as a python dictionary,
+    or any other data type depending on the called URL."""
+    # TODO: Error/timeout handling?
     response = requests.request("GET", url)
     return response.json()
 

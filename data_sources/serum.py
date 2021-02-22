@@ -1,4 +1,4 @@
-from data_sources.requests import retrieve_json
+from data_sources.apicalls import retrieve_json
 from data_sources.metrics import DexMetricProvider
 
 
