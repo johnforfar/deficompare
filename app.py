@@ -173,7 +173,7 @@ def build_tab_1():
                     id="metric-select-menu",
                     # className='five columns',
                     children=[
-                        html.Label(id="metric-select-title", children="Select Metrics"),
+                        html.Label(id="metric-select-title", children="Select ChainMetricProvider"),
                         html.Br(),
                         dcc.Dropdown(
                             id="metric-select-dropdown",
@@ -350,12 +350,12 @@ def build_top_panel(stopped_interval):
         id="top-section-container",
         className="row",
         children=[
-            # Metrics summary
+            # ChainMetricProvider summary
             html.Div(
                 id="metric-summary-session",
                 className="eight columns",
                 children=[
-                    generate_section_banner("Process Control Metrics Summary"),
+                    generate_section_banner("Process Control ChainMetricProvider Summary"),
                     html.Div(
                         id="metric-div",
                         children=[
