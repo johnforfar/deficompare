@@ -6,3 +6,4 @@ pandas>=0.24.2
 
 plotly~=4.14.3
 requests~=2.25.1
+pycoingecko~=1.4.0

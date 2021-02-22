@@ -1,7 +1,11 @@
 import json
 from typing import Union
+from pycoingecko import CoinGeckoAPI
 
 import requests
+
+
+coin_gecko = CoinGeckoAPI()
 
 
 def retrieve_json(url) -> Union[list, dict, str, int, float, bool]:
