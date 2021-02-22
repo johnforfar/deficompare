@@ -17,15 +17,27 @@ class ChainMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
         self.name = name
 
     @abc.abstractmethod
-    def get_current_gas_price(self) -> float:
+    def get_current_coin_price(self) -> float:
+        pass
+
+    @abc.abstractmethod
+    def get_avg_gas_price(self) -> float:
+        pass
+
+    @abc.abstractmethod
+    def get_avg_txn_gas(self) -> int:
+        pass
+
+    @abc.abstractmethod
+    def get_avg_txn_price(self) -> float:
+        pass
+
+    @abc.abstractmethod
+    def get_avg_txn_time(self) -> float:
         pass
 
     @abc.abstractmethod
     def get_last_block_time(self) -> float:
-        pass
-
-    @abc.abstractmethod
-    def get_current_coin_price(self) -> float:
         pass
 
     # TODO: Find out whether we receive a time series of past prices or if we are only able to calculate current prices.
