@@ -1,16 +1,15 @@
-import requests
-import json
 from data_sources.metrics import ChainMetricProvider
+from data_sources.requests import retrieve_json, retrieve_json_as_string
 
 
-class EthereumConnector(ChainMetricProvider):
+def get_eth_gas_json():
+    """Does the same as retrieve_json() in the earlier version."""
+    return retrieve_json_as_string("https://ethgasstation.info/api/ethgasAPI.json")
+
+
+class EthereumMetricProvider(ChainMetricProvider):
     def __init__(self):
-        super().__init__()
-        self.url = "https://ethgasstation.info/api/ethgasAPI.json"
-
-    def _retrieve_json(self):
-        response = requests.request("GET", self.url)
-        return json.dumps(response.json(), sort_keys=True, indent=4)
+        super().__init__("Ethereum")
 
     def get_current_gas_price(self):
         pass

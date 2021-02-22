@@ -1,13 +1,12 @@
+"""Here are 'soft' interfaces of ChainMetricProviders and other DeFi metric providers. These are subject to change."""
 
 
 class ChainMetricProvider:
-    url: str
     name: str
 
     """Provides metrics related to blockchains like Solana and Ethereum."""
-    def __init__(self):
-        url = None
-        name = None
+    def __init__(self, name):
+        self.name = name
 
     def _retrieve_json(self) -> str:
         """Should be private or removed, as not every API provides JSON."""
@@ -26,14 +25,12 @@ class ChainMetricProvider:
 
 
 class DexMetricProvider:
-    url: str
     name: str
     referral_link: str
 
     """Provides metrics related to DEXes like Serum and Uni or 1inch."""
-    def __init__(self):
-        url = None
-        name = None
+    def __init__(self, name):
+        self.name = name
 
     def get_current_tvl(self) -> float:
         pass
