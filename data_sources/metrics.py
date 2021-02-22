@@ -13,13 +13,13 @@ class ChainMetricProvider:
         """Should be private or removed, as not every API provides JSON."""
         pass
 
-    def get_current_gas_price(self):
+    def get_current_gas_price(self) -> float:
         pass
 
-    def get_last_block_time(self):
+    def get_last_block_time(self) -> float:
         pass
 
-    def get_current_coin_price(self):
+    def get_current_coin_price(self) -> float:
         pass
 
     # TODO: Find out whether we receive a time series of past prices or if we are only able to calculate current prices.
