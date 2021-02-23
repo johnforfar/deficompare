@@ -2,6 +2,7 @@
 
 import sqlite3
 
+from constants import TOKEN_CODES
 
 class SQLLiteDatabase:
     def __init__(self):
@@ -9,19 +10,15 @@ class SQLLiteDatabase:
 
         print("Opened database successfully")
 
-        self.conn.execute('''CREATE TABLE IF NOT EXISTS eth_metrics 
-                 (id INT PRIMARY KEY     NOT NULL,
-                 timestamp TIMESTAMP CURRENT_TIMESTAMP,
-                 tx_fee            DOUBLE     NOT NULL,
-                 tx_delay            DOUBLE     NOT NULL
-                 );''')
+        # Create a table for each token
+        for token_code in TOKEN_CODES:
+            self.conn.execute(f'''CREATE TABLE IF NOT EXISTS {token_code}_metrics 
+                     (id INT PRIMARY KEY     NOT NULL,
+                     timestamp TIMESTAMP CURRENT_TIMESTAMP,
+                     tx_fee            DOUBLE     NOT NULL,
+                     tx_delay            DOUBLE     NOT NULL
+                     );''')
 
-        self.conn.execute('''CREATE TABLE IF NOT EXISTS sol_metrics 
-                 (id INT PRIMARY KEY     NOT NULL,
-                 timestamp TIMESTAMP CURRENT_TIMESTAMP,
-                 tx_fee            DOUBLE     NOT NULL,
-                 tx_delay            DOUBLE     NOT NULL
-                 );''')
         self.conn.close()
 
 
