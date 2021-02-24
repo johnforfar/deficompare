@@ -37,9 +37,11 @@ class EthereumMetricProvider(ChainMetricProvider):
         return self.eth_gas_json["block_time"]
 
 
-#provider = EthereumMetricProvider()
+provider = EthereumMetricProvider()
 
 #print(provider.get_current_coin_price())
 #print(provider.get_avg_gas_price())
 #print(provider.get_avg_txn_time())
 #print(provider.get_avg_txn_price())
+print(provider.get_last_block_time())
+
