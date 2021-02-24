@@ -1,11 +1,8 @@
-import time
-import database
-# from data_sources.eth import EthereumMetricProvider
 
 
 class PollingManager:
     def __init__(self):
-        db = database.SQLLiteDatabase()
+        pass
         # etherium_metrics = EthereumMetricProvider()
 
         # TODO enable the polling loop
@@ -20,5 +17,4 @@ class PollingManager:
 
 
 polling_manager = PollingManager()
-
 
