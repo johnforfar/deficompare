@@ -47,7 +47,7 @@ class SolanaMetricProvider(ChainMetricProvider):
         return self.latest_block['metrics']['totalfees'] / self.latest_block['metrics']['txcount']
 
     def get_avg_txn_price(self) -> Union[None, float]:
-        if self.latest_block or self.current_price is None:
+        if self.latest_block is None or self.current_price is None:
             return None
         return self.get_current_coin_price() * self.get_avg_gas_price() * self.get_avg_txn_gas()
 
