@@ -20,3 +20,7 @@ def retrieve_json_as_string(url) -> str:
     """A basic json dump."""
     response = requests.request("GET", url)
     return json.dumps(response.json(), sort_keys=True, indent=4)
+
+
+def print_red(text):
+    print("\033[91m {}\033[00m".format(text))
