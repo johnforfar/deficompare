@@ -20,8 +20,8 @@ class SerumMetricProvider(DexMetricProvider):
     def refresh(self):
         self.pools_resp = get_all_pools()
 
-    def get_estimated_gas(self) -> Union[None, int]:
-        return self.chain.get_avg_txn_gas()
+    def get_estimated_swap_cost(self) -> Union[None, float]:
+        return self.chain.get_avg_txn_price()
 
     def get_minimum_maximum_apy(self) -> (float, float):
         raise NotImplemented

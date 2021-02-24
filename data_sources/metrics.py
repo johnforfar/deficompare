@@ -64,5 +64,5 @@ class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def get_estimated_gas(self) -> Union[None, int]:
+    def get_estimated_swap_cost(self) -> Union[None, float]:
         pass
