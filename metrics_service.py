@@ -23,7 +23,7 @@ class MetricsService:
         )
         return df
 
-metric_service = MetricsService()
-eth_df = metric_service.get_dummy_data_eth()
-print(eth_df)
+# metric_service = MetricsService()
+# eth_df = metric_service.get_dummy_data_eth()
+# print(eth_df)
 
