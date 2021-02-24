@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sqlite3
+import pandas as pd
 
 from constants import TOKEN_CODES
 
@@ -20,6 +21,17 @@ class SQLLiteDatabase:
                      );''')
 
         self.conn.close()
+
+    def get_token_df(self, token_code):
+        self.conn = sqlite3.connect('test.db')
+
+        print("Opened database successfully")
+
+        # Create a table for each token
+        df = pd.read_sql_query(f"SELECT * from {token_code}_metrics", self.conn)
+
+        self.conn.close()
+        return df
 
 
 
