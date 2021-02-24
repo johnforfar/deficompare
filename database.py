@@ -8,6 +8,7 @@ from metrics_service import MetricsService
 
 DB_NAME = 'db.db'
 
+
 class SQLLiteDatabase:
     def __init__(self):
         self.conn = sqlite3.connect(DB_NAME)
@@ -40,7 +41,7 @@ class SQLLiteDatabase:
         """Just for development, storing test data"""
         self.conn = sqlite3.connect(DB_NAME)
 
-        metric_service = MetricsService()
+        metric_service = MetricsService(self)
         eth_df = metric_service.get_dummy_data_eth()
         eth_df.to_sql("eth_metrics", self.conn, if_exists="replace")
 

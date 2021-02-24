@@ -2,12 +2,11 @@ import pandas as pd
 
 
 class MetricsService:
-    def __init__(self):
-        pass
+    def __init__(self, db):
+        self.db = db
 
     def get_df_by_token(self, token_code='') -> pd.DataFrame:
-        # TODO get this from db
-        pass
+        return self.db.get_token_df(token_code)
 
     def get_dummy_data_eth(self, token_code='eth') -> pd.DataFrame:
         # Note: datetime is just python datetime.datetime.now()
@@ -23,7 +22,4 @@ class MetricsService:
         )
         return df
 
-# metric_service = MetricsService()
-# eth_df = metric_service.get_dummy_data_eth()
-# print(eth_df)
 
