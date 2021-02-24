@@ -35,7 +35,7 @@ class EthereumMetricProvider(ChainMetricProvider):
     def get_avg_gas_price(self) -> Union[None, float]:
         if self.eth_gas_json is None:
             return None
-        return self.eth_gas_json["average"]/10
+        return self.eth_gas_json["average"]/1e10
 
     def get_avg_txn_gas(self) -> Union[None, int]:
         return 21000
@@ -43,7 +43,7 @@ class EthereumMetricProvider(ChainMetricProvider):
     def get_avg_txn_price(self) -> Union[None, float]:
         if self.eth_gas_json is None or self.current_price is None:
             return None
-        return self.get_current_coin_price() * (self.get_avg_gas_price() / 1e9) * self.get_avg_txn_gas()
+        return self.get_current_coin_price() * self.get_avg_gas_price() * self.get_avg_txn_gas()
 
     def get_avg_txn_time(self) -> Union[None, float]:
         if self.eth_gas_json is None:
