@@ -16,6 +16,7 @@ class EthereumMetricProvider(ChainMetricProvider):
 
     def refresh(self):
         self.eth_gas_json = get_eth_gas_json()
+        print(self.eth_gas_json)
 
     def get_current_coin_price(self) -> float:
         return coin_gecko.get_price('ethereum', 'usd')['ethereum']['usd']
@@ -33,12 +34,12 @@ class EthereumMetricProvider(ChainMetricProvider):
         return self.eth_gas_json["avgWait"]*60
 
     def get_last_block_time(self) -> float:
-        return NotImplemented
+        return self.eth_gas_json["block_time"]
 
 
-provider = EthereumMetricProvider()
+#provider = EthereumMetricProvider()
 
-print(provider.get_current_coin_price())
-print(provider.get_avg_gas_price())
-print(provider.get_avg_txn_time())
-print(provider.get_avg_txn_price())
+#print(provider.get_current_coin_price())
+#print(provider.get_avg_gas_price())
+#print(provider.get_avg_txn_time())
+#print(provider.get_avg_txn_price())
