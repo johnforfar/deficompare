@@ -50,6 +50,30 @@ class SQLLiteDatabase:
         self.conn.close()
         return df
 
+    def get_next_index_increment(self, table):
+        """Quick and easy way to get the next index, auto increment not working with sqlite_insert"""
+        self.conn = sqlite3.connect(DB_NAME)
+        self.cursor = self.conn.cursor()
+        query = f"""SELECT MAX(id) FROM {table}"""
+        self.cursor.execute(query)
+        res = self.cursor.fetchone()
+        self.conn.close()
+        return int(res[0]) + 1
+
+    def sqlite_insert(self, table, row):
+        """Expects an object with the same key names matching table column names"""
+        next_index = self.get_next_index_increment(table)
+        row['id'] = next_index
+        self.conn = sqlite3.connect(DB_NAME)
+        cols = ', '.join('"{}"'.format(col) for col in row.keys())
+        vals = ', '.join('"{}"'.format(col) for col in row.values())
+        sql = 'INSERT INTO "{0}" ({1}) VALUES ({2})'.format(table, cols, vals)
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(sql, row)
+        self.conn.commit()
+        self.conn.close()
+
+
     def store_dummy_data(self):
         """Just for development, storing test data"""
         self.conn = sqlite3.connect(DB_NAME)
@@ -60,7 +84,7 @@ class SQLLiteDatabase:
         eth_df = token_metrics_service.get_dummy_data_eth()
         eth_df.to_sql(f"{ETHERIUM_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}", self.conn, if_exists="replace")
         sol_df = token_metrics_service.get_dummy_data_sol()
-        sol_df.to_sql(f"{SOLANA_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}", self.conn, if_exists="replace")
+        sol_df.to_sql(f"{SOLANA_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}", self.conn, if_exists="replace", index_label='id')
 
         exchange_metrics_service = ExchangeMetricsService(self)
         uniswap_df = exchange_metrics_service.get_dummy_data_uniswap()

@@ -14,7 +14,7 @@ def main():
     # TODO rm dummy data for prod
     db.store_dummy_data()
 
-    polling_manager = PollingManager()
+    polling_manager = PollingManager(db)
     exchange_metrics_service = ExchangeMetricsService(db)
     token_metrics_service = TokenMetricsService(db)
     # eth_df = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
