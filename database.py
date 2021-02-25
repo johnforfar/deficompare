@@ -4,7 +4,7 @@ import sqlite3
 import pandas as pd
 
 from constants import DB_NAME, TOKEN_METRICS_SUFFIX, EXCHANGE_METRICS_SUFFIX, UNISWAP_EXCHANGE_CODE, SOLANA_TOKEN_CODE, \
-    ETHERIUM_TOKEN_CODE
+    ETHERIUM_TOKEN_CODE, SERUM_EXCHANGE_CODE
 from exchange_metrics_service import ExchangeMetricsService
 from token_metrics_service import TokenMetricsService
 
@@ -65,6 +65,8 @@ class SQLLiteDatabase:
         exchange_metrics_service = ExchangeMetricsService(self)
         uniswap_df = exchange_metrics_service.get_dummy_data_uniswap()
         uniswap_df.to_sql(f"{UNISWAP_EXCHANGE_CODE}{EXCHANGE_METRICS_SUFFIX}", self.conn, if_exists="replace")
+        serum_df = exchange_metrics_service.get_dummy_data_serum()
+        serum_df.to_sql(f"{SERUM_EXCHANGE_CODE}{EXCHANGE_METRICS_SUFFIX}", self.conn, if_exists="replace")
 
 
         self.conn.close()

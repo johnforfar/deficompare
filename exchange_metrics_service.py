@@ -21,3 +21,19 @@ class ExchangeMetricsService:
             columns=['datetime', 'total_value_locked', 'apy_min','apy_max','apy_med','apy_avg', 'est_swap_cost', 'est_staking_cost']
         )
         return df
+
+    def get_dummy_data_serum(self) -> pd.DataFrame:
+        # Note: datetime is just python datetime.datetime.now()
+        df = pd.DataFrame(
+            [
+                ['2021-02-24 21:20:00.000000', 27311270.76, 0.01, 2.26, 0.13, 14.87, 0.00008, 0.00008],
+                ['2021-02-24 21:21:00.000000', 27411270.76, 0.01, 2.26, 0.13, 14.87, 0.00008, 0.00008],
+                ['2021-02-24 21:22:00.000000', 27511270.76, 0.01, 2.26, 0.13, 14.87, 0.00008, 0.00008],
+                ['2021-02-24 21:23:00.000000', 27611270.76, 0.01, 2.26, 0.13, 14.87, 0.00008, 0.00008],
+                ['2021-02-24 21:24:00.000000', 27711270.76, 0.01, 2.26, 0.13, 14.87, 0.00008, 0.00008],
+
+            ],
+            columns=['datetime', 'total_value_locked', 'apy_min','apy_max','apy_med','apy_avg', 'est_swap_cost', 'est_staking_cost']
+        )
+        return df
+
