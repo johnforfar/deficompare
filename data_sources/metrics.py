@@ -12,41 +12,41 @@ class MetricProvider(metaclass=abc.ABCMeta):
 
 class ChainMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     name: str
+    symbol: str
+    coin_price: Union[None, float] = None
+    avg_gas_price: Union[None, float] = None
+    avg_tx_gas: Union[None, int] = None
+    avg_tx_price: Union[None, float] = None
+    avg_tx_time: Union[None, float] = None
+    last_block_time: Union[None, float] = None
 
     """Provides metrics related to blockchains like Solana and Ethereum."""
-    def __init__(self, name):
+    def __init__(self, name, symbol):
         self.name = name
+        self.symbol = symbol
 
-    """Result can either be None or float."""
-    @abc.abstractmethod
-    def get_current_coin_price(self) -> Union[None, float]:
-        pass
-
-    @abc.abstractmethod
-    def get_avg_gas_price(self) -> Union[None, float]:
-        pass
-
-    @abc.abstractmethod
-    def get_avg_txn_gas(self) -> Union[None, int]:
-        pass
-
-    @abc.abstractmethod
-    def get_avg_txn_price(self) -> Union[None, float]:
-        pass
-
-    @abc.abstractmethod
-    def get_avg_txn_time(self) -> Union[None, float]:
-        pass
-
-    @abc.abstractmethod
-    def get_last_block_time(self) -> Union[None, float]:
-        pass
+    def __repr__(self):
+        return f"""{self.name} ({self.symbol}):
+            Coin price (USD): {self.coin_price}
+            Avg-speed gas price ({self.symbol}): {self.avg_gas_price}
+            Avg gas per tx: {self.avg_tx_gas}
+            Avg-speed tx price (USD): {self.avg_tx_price}
+            Avg tx time (sec): {self.avg_tx_time}
+            Last block time (sec): {self.last_block_time}
+            """
 
 
 class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     name: str
     chain: ChainMetricProvider
     referral_link: str
+    total_value_locked: Union[None, float] = None
+    min_apy: Union[None, float] = None
+    avg_apy: Union[None, float] = None
+    median_apy: Union[None, float] = None
+    max_apy: Union[None, float] = None
+    swap_cost: Union[None, float] = None
+    staking_cost: Union[None, float] = None
 
     """Provides metrics related to DEXes like Serum and Uni or 1inch."""
     def __init__(self, name, chain, referral_link):
@@ -54,15 +54,9 @@ class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
         self.chain = chain
         self.referral_link = referral_link
 
-    @abc.abstractmethod
-    def get_current_tvl(self) -> Union[None, float]:
-        """Returns tvl in USD"""
-        pass
-
-    @abc.abstractmethod
-    def get_minimum_maximum_apy(self) -> (Union[None, float], Union[None, float]):
-        pass
-
-    @abc.abstractmethod
-    def get_estimated_swap_cost(self) -> Union[None, float]:
-        pass
+    def __repr__(self):
+        return f"""{self.name} ({self.referral_link}) on {self.chain.name}:
+            Total value locked (USD): {self.total_value_locked}
+            Min/Avg/Median/Max APY (rounded): {round(self.min_apy, 2)}/{round(self.avg_apy, 2)}/{round(self.median_apy, 2)}/{round(self.max_apy, 2)}
+            Predicted swap/staking cost (USD): {self.swap_cost}/{self.staking_cost}
+            """

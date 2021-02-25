@@ -9,6 +9,14 @@ import requests
 coin_gecko = CoinGeckoAPI()
 
 
+def get_price(cg_id: str) -> float:
+    try:
+        return coin_gecko.get_price(cg_id, 'usd')[cg_id]['usd']
+    except Exception:
+        print_red(Exception)
+        return None
+
+
 def retrieve_json(url) -> Union[list, dict, str, int, float, bool]:
     """May return a list of json objects or an object as a python dictionary,
     or any other data type depending on the called URL."""

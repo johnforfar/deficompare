@@ -18,7 +18,7 @@ class MetricsService:
                 ['2021-02-24 21:23:00.000000', 1592.78, 120.0,   93.0,  3.9435453454356346, 12.047619047619047],
                 ['2021-02-24 21:24:00.000000', 1990.78, 110.0,   97.0,  3.9126317999999998, 12.047619047619047],
             ],
-            columns=['datetime', 'current_coin_price', 'avg_gas_price', 'avg_txn_time', 'avg_txn_price', 'last_block_time']
+            columns=['datetime', 'current_coin_price', 'avg_gas_price', 'avg_tx_time', 'avg_tx_price', 'last_block_time']
         )
         return df
 

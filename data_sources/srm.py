@@ -1,37 +1,45 @@
+import numpy as np
 from typing import Union
 
-from data_sources.apicalls import retrieve_json
+from data_sources.apicalls import retrieve_json, print_red
 from data_sources.metrics import DexMetricProvider, ChainMetricProvider
 from data_sources.sol import SolanaMetricProvider
 
 
-def get_all_pools():
-    pools = retrieve_json("https://serum-api.bonfida.com/pools")
+def get_all_pools() -> Union[None, dict]:
+    try:
+        pools = retrieve_json("https://serum-api.bonfida.com/pools")
+        if pools['success'] == 'false':
+            print_red(pools)
+    except Exception:
+        print_red(Exception)
+        return None
     return pools
 
 
 class SerumMetricProvider(DexMetricProvider):
-    pools_resp: dict
-
     def __init__(self, chain: ChainMetricProvider = SolanaMetricProvider()):
         super().__init__("SerumSwap", chain, "https://swap.projectserum.com/")
         self.refresh()
 
     def refresh(self):
-        self.pools_resp = get_all_pools()
+        self.swap_cost = self.chain.avg_tx_price
+        self.staking_cost = self.swap_cost
 
-    def get_estimated_swap_cost(self) -> Union[None, float]:
-        return self.chain.get_avg_txn_price()
+        pools = get_all_pools()
+        if pools is not None:
+            self.total_value_locked = 0
+            for pool in pools['data']:
+                self.total_value_locked += pool['liquidity_locked']
+            self.total_value_locked = round(self.total_value_locked, 2)
 
-    def get_minimum_maximum_apy(self) -> (float, float):
-        raise NotImplemented
+            apys = list(filter(lambda x: x > 0, [pool['apy'] for pool in pools['data']]))
+            self.min_apy = np.min(apys).item()
+            self.avg_apy = np.average(apys)
+            self.median_apy = np.median(apys).item()
+            self.max_apy = np.max(apys).item()
 
-    def get_current_tvl(self) -> Union[None, float]:
-        if self.pools_resp['success'] == 'false':
-            return None
 
-        tvl = 0
-        for pool in self.pools_resp['data']:
-            tvl += pool['liquidity_locked']
-        return round(tvl, 2)
+provider = SerumMetricProvider()
 
+print(provider)
