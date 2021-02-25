@@ -22,4 +22,17 @@ class MetricsService:
         )
         return df
 
+    def get_dummy_data_sol(self, token_code='eth') -> pd.DataFrame:
+        # Note: datetime is just python datetime.datetime.now()
+        df = pd.DataFrame(
+            [
+                ['2021-02-24 21:20:00.000000', 16.17, .000000001,   5020,  0.00008, None],
+                ['2021-02-24 21:21:00.000000', 17.14, .000000001,   5020,  0.00008, None],
+                ['2021-02-24 21:22:00.000000', 18.16, .000000001,   5020, 0.00008, None],
+                ['2021-02-24 21:23:00.000000', 13.13, .000000001,   5020,  0.00008, None],
+                ['2021-02-24 21:24:00.000000', 19.1, .000000001,   5020,  0.00008, None],
+            ],
+            columns=['datetime', 'current_coin_price', 'avg_gas_price', 'avg_tx_time', 'avg_tx_price', 'last_block_time']
+        )
+        return df
 
