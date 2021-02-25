@@ -27,13 +27,13 @@ class ChainMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
 
     def __repr__(self):
         return f"""{self.name} ({self.symbol}):
-            Coin price (USD): {self.coin_price}
-            Avg-speed gas price ({self.symbol}): {self.avg_gas_price}
-            Avg gas per tx: {self.avg_tx_gas}
-            Avg-speed tx price (USD): {self.avg_tx_price}
-            Avg tx time (sec): {self.avg_tx_time}
-            Last block time (sec): {self.last_block_time}
-            """
+    Coin price (USD): {self.coin_price}
+    Avg-speed gas price ({self.symbol}): {self.avg_gas_price}
+    Avg gas per tx: {self.avg_tx_gas:.0f}
+    Avg-speed tx price (USD): {self.avg_tx_price:.5f}
+    Avg tx time (sec): {self.avg_tx_time}
+    Last block time (sec): {self.last_block_time}
+    """
 
 
 class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
@@ -56,7 +56,7 @@ class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
 
     def __repr__(self):
         return f"""{self.name} ({self.referral_link}) on {self.chain.name}:
-            Total value locked (USD): {self.total_value_locked}
-            Min/Avg/Median/Max APY (rounded): {round(self.min_apy, 2)}/{round(self.avg_apy, 2)}/{round(self.median_apy, 2)}/{round(self.max_apy, 2)}
-            Predicted swap/staking cost (USD): {self.swap_cost}/{self.staking_cost}
-            """
+    Total value locked (USD): {self.total_value_locked:.2f}
+    Min/Avg/Median/Max APY rounded: {self.min_apy}/{self.avg_apy}/{self.median_apy}/{self.max_apy}
+    Predicted swap/staking cost (USD): {self.swap_cost:.5f}/{self.staking_cost:.5f}
+    """

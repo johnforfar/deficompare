@@ -1,3 +1,9 @@
+import data_sources as ds
+
+print(ds.SolanaMetricProvider())
+print(ds.SerumMetricProvider())
+print(ds.EthereumMetricProvider())
+print(ds.UniswapMetricProvider())
 
 
 class PollingManager:

@@ -17,7 +17,8 @@ def get_uniswap_tvl() -> Union[None, float]:
                 }
             }"""
         )
-        return uniswap_client.execute(query)['data']['uniswapFactory']['totalLiquidityUSD']
+        result = uniswap_client.execute(query)
+        return float(result['uniswapFactories'][0]['totalLiquidityUSD'])
     except Exception:
-        print_red(Exception)
+        print_red("Unsucessful call to https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2)")
         return None

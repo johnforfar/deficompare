@@ -9,11 +9,11 @@ import requests
 coin_gecko = CoinGeckoAPI()
 
 
-def get_price(cg_id: str) -> float:
+def get_price(cg_id: str) -> Union[None, float]:
     try:
         return coin_gecko.get_price(cg_id, 'usd')[cg_id]['usd']
-    except Exception:
-        print_red(Exception)
+    except Exception as Arguments:
+        print_red(f"Unsucessful call in coin_gecko.get_price: {Arguments}")
         return None
 
 

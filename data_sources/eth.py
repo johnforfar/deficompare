@@ -9,7 +9,7 @@ def get_eth_gas_json() -> Union[None, dict]:
     try:
         return retrieve_json("https://ethgasstation.info/api/ethgasAPI.json")
     except Exception:
-        print_red(Exception)
+        print_red("Unsucessful call to https://ethgasstation.info/api/ethgasAPI.json")
         return None
 
 

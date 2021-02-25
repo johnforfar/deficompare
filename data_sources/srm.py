@@ -34,12 +34,7 @@ class SerumMetricProvider(DexMetricProvider):
             self.total_value_locked = round(self.total_value_locked, 2)
 
             apys = list(filter(lambda x: x > 0, [pool['apy'] for pool in pools['data']]))
-            self.min_apy = np.min(apys).item()
-            self.avg_apy = np.average(apys)
-            self.median_apy = np.median(apys).item()
-            self.max_apy = np.max(apys).item()
-
-
-provider = SerumMetricProvider()
-
-print(provider)
+            self.min_apy = round(np.min(apys).item(), 2)
+            self.avg_apy = round(np.average(apys), 2)
+            self.median_apy = round(np.median(apys).item(), 2)
+            self.max_apy = round(np.max(apys).item(), 2)

@@ -9,7 +9,7 @@ def get_latest_block() -> Union[None, dict]:
     try:
         return retrieve_json("https://api.solana.surf/v1/latest-blocks?limit=1")[0]
     except Exception:
-        print_red(Exception)
+        print_red(f"Unsucessful call to https://api.solana.surf/v1/latest-blocks?limit=1")
         return None
 
 
