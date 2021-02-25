@@ -44,6 +44,8 @@ class SQLLiteDatabase:
         metric_service = MetricsService(self)
         eth_df = metric_service.get_dummy_data_eth()
         eth_df.to_sql("eth_metrics", self.conn, if_exists="replace")
+        sol_df = metric_service.get_dummy_data_sol()
+        sol_df.to_sql("sol_metrics", self.conn, if_exists="replace")
 
         self.conn.close()
 
