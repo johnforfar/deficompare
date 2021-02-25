@@ -6,11 +6,6 @@ from data_sources.metrics import DexMetricProvider, ChainMetricProvider
 from data_sources.eth import EthereumMetricProvider
 
 
-def get_all_pools():
-    pools = retrieve_json("https://serum-api.bonfida.com/pools")
-    return pools
-
-
 class UniswapMetricProvider(DexMetricProvider):
     tvl: Union[None, dict]
 
@@ -20,16 +15,12 @@ class UniswapMetricProvider(DexMetricProvider):
 
     def refresh(self):
         try:
-            self.tvl = get_uniswap_tvl()
+            self.total_value_locked = get_uniswap_tvl()
+            self.min_apy
+            self.avg_apy
+            self.median_apy
+            self.max_apy
+            self.swap_cost = self.chain.avg_gas_price * 200000 * self.chain.coin_price
+            self.staking_cost = self.chain.avg_gas_price * 175000 * self.chain.coin_price
         except Exception:
-            self.tvl = None
             print_red(Exception)
-
-    def get_estimated_swap_cost(self) -> Union[None, float]:
-        return self.chain.get_avg_gas_price() * 200000 * self.chain.get_current_coin_price()
-
-    def get_minimum_maximum_apy(self) -> (float, float):
-        raise NotImplemented
-
-    def get_current_tvl(self) -> Union[None, float]:
-        return self.tvl
