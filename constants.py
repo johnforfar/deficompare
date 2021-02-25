@@ -1,9 +1,22 @@
 # A place to keep all the important constants in one spot for now
 
-# TODO store a copy in a db table
-# Token codes will be here just for convenience
 
-ETHERIUM_CODE = 'eth'
-SOLANA_CODE = 'sol'
+# General
+DB_NAME = 'db.db'
+TOKEN_METRICS_SUFFIX = '_token_metrics'
+EXCHANGE_METRICS_SUFFIX = '_exchange_metrics'
 
-TOKEN_CODES = [ETHERIUM_CODE, SOLANA_CODE]
+# TODO store a copy of token and exchange codes in a db table
+
+# Token codes
+ETHERIUM_TOKEN_CODE = 'eth'
+SOLANA_TOKEN_CODE = 'sol'
+
+
+TOKEN_CODES = [ETHERIUM_TOKEN_CODE, SOLANA_TOKEN_CODE]
+
+# Exchange codes
+UNISWAP_EXCHANGE_CODE = 'uni'
+SERUM_EXCHANGE_CODE = 'srm'
+
+

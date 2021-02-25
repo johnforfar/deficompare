@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class MetricsService:
+class TokenMetricsService:
     def __init__(self, db):
         self.db = db
 
