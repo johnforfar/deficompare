@@ -1,25 +1,30 @@
-from constants import ETHERIUM_TOKEN_CODE
+import time
+
+from constants import POLLING_DELAY_SECONDS
 from database import SQLLiteDatabase
 
-from token_metrics_service import TokenMetricsService
-from exchange_metrics_service import ExchangeMetricsService
 from polling_manager import PollingManager
 
 
 # For now just a temp starting point for the backend testing
 
+import multiprocessing
+
+
+def worker():
+    """worker thread for running the polling and database updates"""
+    db = SQLLiteDatabase()
+    polling_manager = PollingManager(db)
+    while True:
+        # Main loop for polling APIs
+        polling_manager.poll()
+        time.sleep(POLLING_DELAY_SECONDS)
+
 
 def main():
-    db = SQLLiteDatabase()
-    # TODO rm dummy data for prod
-    db.store_dummy_data()
+    p = multiprocessing.Process(target=worker, args=())
+    p.start()
 
-    polling_manager = PollingManager(db)
-    exchange_metrics_service = ExchangeMetricsService(db)
-    token_metrics_service = TokenMetricsService(db)
-    # eth_df = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
-    #
-    # print(eth_df)
 
 if __name__ == '__main__':
     main()
