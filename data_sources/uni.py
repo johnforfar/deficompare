@@ -1,5 +1,8 @@
+import time
+import numpy as np
+
 from data_sources.apicalls import get_price
-from data_sources.graphcalls import get_uniswap_tvl
+from data_sources.graphcalls import get_uniswap_tvl, get_uniswap_daily_pools, get_uniswap_pools
 from data_sources.metrics import DexMetricProvider, ChainMetricProvider
 from data_sources.eth import EthereumMetricProvider
 
@@ -17,7 +20,10 @@ class UniswapMetricProvider(DexMetricProvider):
             self.swap_cost = self.chain.avg_gas_price * 200000 * self.chain.coin_price
             self.staking_cost = self.chain.avg_gas_price * 175000 * self.chain.coin_price
 
-        # TODO: Add APY
-
-#provider = UniMetricProvider()
-#print(provider)
+        volumes = get_uniswap_daily_pools(int(time.time()) - 86400)
+        print(len(volumes))
+        apys = [(float(pool['dailyVolumeUSD']) * 0.003 * 365 / float(pool['reserveUSD'])) * 100 for pool in volumes]
+        self.min_apy = round(np.min(apys).item(), 2)
+        self.avg_apy = round(np.average(apys), 2)
+        self.median_apy = round(np.median(apys).item(), 2)
+        self.max_apy = round(np.max(apys).item(), 2)

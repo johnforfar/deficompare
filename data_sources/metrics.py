@@ -57,6 +57,7 @@ class ChainMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
 
 
 class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
+    """Provides metrics related to DEXes like Serum and Uni or 1inch."""
     name: str
     symbol: str
     chain: ChainMetricProvider
@@ -70,7 +71,6 @@ class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     swap_cost: Union[None, float] = None
     staking_cost: Union[None, float] = None
 
-    """Provides metrics related to DEXes like Serum and Uni or 1inch."""
     def __init__(self, name, symbol, chain, referral_link):
         self.name = name
         self.symbol = symbol

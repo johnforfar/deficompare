@@ -28,6 +28,7 @@ class SerumMetricProvider(DexMetricProvider):
         self.staking_cost = self.swap_cost
 
         pools = get_all_pools()
+        print(len(pools['data']))
         if pools is not None:
             self.total_value_locked = 0
             for pool in pools['data']:
@@ -39,7 +40,3 @@ class SerumMetricProvider(DexMetricProvider):
             self.avg_apy = round(np.average(apys), 2)
             self.median_apy = round(np.median(apys).item(), 2)
             self.max_apy = round(np.max(apys).item(), 2)
-
-
-#provider = SerumMetricProvider()
-#print(provider)
