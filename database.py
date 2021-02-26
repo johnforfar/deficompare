@@ -4,7 +4,7 @@ import sqlite3
 import pandas as pd
 
 from constants import DB_NAME, TOKEN_METRICS_SUFFIX, EXCHANGE_METRICS_SUFFIX, UNISWAP_EXCHANGE_CODE, SOLANA_TOKEN_CODE, \
-    ETHERIUM_TOKEN_CODE, SERUM_EXCHANGE_CODE
+    ETHERIUM_TOKEN_CODE, SERUM_EXCHANGE_CODE, TOKEN_CODES, DEX_SYMBOLS
 from exchange_metrics_service import ExchangeMetricsService
 from token_metrics_service import TokenMetricsService
 
@@ -17,16 +17,33 @@ class SQLLiteDatabase:
 
         print(f"Opened {DB_NAME} successfully")
 
-        # # Create a table for each token
-        # for token_code in TOKEN_CODES:
-        #     self.conn.execute(f'''CREATE TABLE IF NOT EXISTS {token_code}_metrics
-        #              (id INT PRIMARY KEY     NOT NULL,
-        #              timestamp TIMESTAMP CURRENT_TIMESTAMP,
-        #              tx_fee            DOUBLE     NOT NULL,
-        #              tx_delay            DOUBLE     NOT NULL
-        #              );''')
-        #
-        # self.conn.close()
+        # Create a table for each token
+        for token_code in TOKEN_CODES:
+            self.conn.execute(f'''CREATE TABLE IF NOT EXISTS {token_code}{TOKEN_METRICS_SUFFIX}
+                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     datetime DATE,
+                     current_coin_price DOUBLE,
+                     avg_gas_price DOUBLE,
+                     avg_tx_time DOUBLE,
+                     avg_tx_price DOUBLE,
+                     last_block_time DOUBLE
+                     );''')
+
+        # Create a table for each dex
+        for symbol in DEX_SYMBOLS:
+            self.conn.execute(f'''CREATE TABLE IF NOT EXISTS {symbol}{EXCHANGE_METRICS_SUFFIX}
+                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     datetime DATE,
+                     current_token_price DOUBLE,
+                     total_value_locked DOUBLE,
+                     min_apy DOUBLE,
+                     avg_apy DOUBLE,
+                     max_apy DOUBLE,
+                     swap_cost DOUBLE,
+                     staking_cost DOUBLE
+                     );''')
+
+        self.conn.close()
 
     def get_token_df(self, token_code) -> pd.DataFrame:
         """"""
@@ -62,8 +79,8 @@ class SQLLiteDatabase:
 
     def sqlite_insert(self, table, row):
         """Expects an object with the same key names matching table column names"""
-        next_index = self.get_next_index_increment(table)
-        row['id'] = next_index
+        # next_index = self.get_next_index_increment(table)
+        # row['id'] = next_index
         self.conn = sqlite3.connect(DB_NAME)
         cols = ', '.join('"{}"'.format(col) for col in row.keys())
         vals = ', '.join('"{}"'.format(col) for col in row.values())
