@@ -9,6 +9,9 @@ import dash_table
 import plotly.graph_objs as go
 import dash_daq as daq
 
+#remove when launch
+import dash_auth
+
 import pandas as pd
 import time
 
@@ -20,15 +23,35 @@ from polling_manager import PollingManager
 
 import multiprocessing
 
+from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_CODE, SERUM_EXCHANGE_CODE
+from database import SQLLiteDatabase
+from token_metrics_service import TokenMetricsService
 
+#remove when launch
+USERNAME_PASSWORD_PAIRS = [
+['defi', 'etherium']
+]
 
 app = dash.Dash(
     __name__,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
+
+#remove when launch
+auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
+
 server = app.server
 app.config["suppress_callback_exceptions"] = True
 app.title = 'DeFi Compare'
+
+## Pull new API call data
+db = SQLLiteDatabase()
+token_metrics_service = TokenMetricsService(db=db)
+sol_df_token = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
+print(f"Solana Token Data:{sol_df_token}")
+
+eth_df_token = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
+print(f"Ethereum Token Data:{eth_df_token}")
 
 ## Specify CSV file path and store as 'df' 
 APP_PATH = str(pathlib.Path(__file__).parent.resolve())
