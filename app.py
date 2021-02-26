@@ -10,6 +10,17 @@ import plotly.graph_objs as go
 import dash_daq as daq
 
 import pandas as pd
+import time
+
+from constants import POLLING_DELAY_SECONDS
+from database import SQLLiteDatabase
+
+from polling_manager import PollingManager
+
+
+import multiprocessing
+
+
 
 app = dash.Dash(
     __name__,
@@ -954,6 +965,23 @@ def update_control_chart(interval, n1, n2, n3, n4, n5, n6, n7, data, cur_fig):
             return generate_graph(interval, data, curr_id)
 
 
+def worker():
+    """worker thread for running the polling and database updates"""
+    db = SQLLiteDatabase()
+    polling_manager = PollingManager(db)
+    while True:
+        # Main loop for polling APIs
+        polling_manager.poll()
+        time.sleep(POLLING_DELAY_SECONDS)
+
+
+
 # Running the server
 if __name__ == "__main__":
+    # Entry point for polling process
+    p = multiprocessing.Process(target=worker, args=())
+    p.start()
+
     app.run_server(debug=True, port=8050)
+
+
