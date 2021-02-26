@@ -34,7 +34,7 @@ class SQLLiteDatabase:
 
         print(f"Opened {DB_NAME} successfully")
 
-        df = pd.read_sql_query(f"SELECT * from {token_code}_metrics", self.conn)
+        df = pd.read_sql_query(f"SELECT * from {token_code}{TOKEN_METRICS_SUFFIX}", self.conn)
 
         self.conn.close()
         return df
@@ -45,7 +45,7 @@ class SQLLiteDatabase:
 
         print(f"Opened {DB_NAME} successfully")
 
-        df = pd.read_sql_query(f"SELECT * from {exchange_code}_metrics", self.conn)
+        df = pd.read_sql_query(f"SELECT * from {exchange_code}{EXCHANGE_METRICS_SUFFIX}", self.conn)
 
         self.conn.close()
         return df
@@ -82,15 +82,15 @@ class SQLLiteDatabase:
         token_metrics_service = TokenMetricsService(self)
 
         eth_df = token_metrics_service.get_dummy_data_eth()
-        eth_df.to_sql(f"{ETHERIUM_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}", self.conn, if_exists="replace")
+        eth_df.to_sql(f"{ETHERIUM_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}", self.conn, if_exists="replace", index_label='id')
         sol_df = token_metrics_service.get_dummy_data_sol()
         sol_df.to_sql(f"{SOLANA_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}", self.conn, if_exists="replace", index_label='id')
 
         exchange_metrics_service = ExchangeMetricsService(self)
         uniswap_df = exchange_metrics_service.get_dummy_data_uniswap()
-        uniswap_df.to_sql(f"{UNISWAP_EXCHANGE_CODE}{EXCHANGE_METRICS_SUFFIX}", self.conn, if_exists="replace")
+        uniswap_df.to_sql(f"{UNISWAP_EXCHANGE_CODE}{EXCHANGE_METRICS_SUFFIX}", self.conn, if_exists="replace", index_label='id')
         serum_df = exchange_metrics_service.get_dummy_data_serum()
-        serum_df.to_sql(f"{SERUM_EXCHANGE_CODE}{EXCHANGE_METRICS_SUFFIX}", self.conn, if_exists="replace")
+        serum_df.to_sql(f"{SERUM_EXCHANGE_CODE}{EXCHANGE_METRICS_SUFFIX}", self.conn, if_exists="replace", index_label='id')
 
 
         self.conn.close()

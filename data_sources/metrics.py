@@ -3,6 +3,8 @@ import abc
 import datetime
 from typing import Union
 
+from constants import TOKEN_METRICS_SUFFIX, EXCHANGE_METRICS_SUFFIX
+
 
 class MetricProvider(metaclass=abc.ABCMeta):
     @abc.abstractmethod
@@ -50,6 +52,9 @@ class ChainMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
         self.refresh()
         return self.to_dict()
 
+    def store_row_in_db(self, db, code, data):
+        db.sqlite_insert(f'{code}{TOKEN_METRICS_SUFFIX}', data)
+
 
 class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     name: str
@@ -95,3 +100,7 @@ class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     def poll(self):
         self.refresh()
         return self.to_dict()
+
+    def store_row_in_db(self, db, code, data):
+        db.sqlite_insert(f'{code}{EXCHANGE_METRICS_SUFFIX}', data)
+
