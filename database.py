@@ -34,7 +34,7 @@ class SQLLiteDatabase:
 
         print(f"Opened {DB_NAME} successfully")
 
-        df = pd.read_sql_query(f"SELECT * from {token_code}_metrics", self.conn)
+        df = pd.read_sql_query(f"SELECT * from {token_code}{TOKEN_METRICS_SUFFIX}", self.conn)
 
         self.conn.close()
         return df
@@ -45,7 +45,7 @@ class SQLLiteDatabase:
 
         print(f"Opened {DB_NAME} successfully")
 
-        df = pd.read_sql_query(f"SELECT * from {exchange_code}_metrics", self.conn)
+        df = pd.read_sql_query(f"SELECT * from {exchange_code}{EXCHANGE_METRICS_SUFFIX}", self.conn)
 
         self.conn.close()
         return df
