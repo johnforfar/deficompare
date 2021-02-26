@@ -80,16 +80,18 @@ class DexMetricProvider(MetricProvider, metaclass=abc.ABCMeta):
     Predicted swap/staking cost (USD): {self.swap_cost:.5f}/{self.staking_cost:.5f}
     """
 
-    def to_object(self):
+    def to_dict(self):
         return {
             'datetime': datetime.datetime.now(),
             'current_token_price': self.token_price,
             'total_value_locked': self.total_value_locked,
-            'avg_tx_time': self.avg_tx_time,
-            'avg_tx_price': self.avg_tx_price,
-            'last_block_time': self.last_block_time
+            'min_apy': self.min_apy,
+            'avg_apy': self.avg_apy,
+            'max_apy': self.max_apy,
+            'swap_cost': self.swap_cost,
+            'staking_cost': self.staking_cost
         }
 
     def poll(self):
         self.refresh()
-        return self.to_object()
+        return self.to_dict()
