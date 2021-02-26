@@ -8,7 +8,7 @@ class TokenMetricsService:
     def get_df_by_token(self, token_code='') -> pd.DataFrame:
         return self.db.get_token_df(token_code)
 
-    def get_dummy_data_eth(self, token_code='eth') -> pd.DataFrame:
+    def get_dummy_data_eth(self) -> pd.DataFrame:
         # Note: datetime is just python datetime.datetime.now()
         df = pd.DataFrame(
             [
@@ -22,7 +22,7 @@ class TokenMetricsService:
         )
         return df
 
-    def get_dummy_data_sol(self, token_code='eth') -> pd.DataFrame:
+    def get_dummy_data_sol(self) -> pd.DataFrame:
         # Note: datetime is just python datetime.datetime.now()
         df = pd.DataFrame(
             [
