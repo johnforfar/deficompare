@@ -1,16 +1,11 @@
 import data_sources as ds
 from constants import SOLANA_TOKEN_CODE, TOKEN_METRICS_SUFFIX
 
-# print(ds.SolanaMetricProvider())
-# print(ds.SerumMetricProvider())
-# print(ds.EthereumMetricProvider())
-# print(ds.UniswapMetricProvider())
-
 
 class PollingManager:
     def __init__(self, db):
-        self.solana_metrics = ds.SolanaMetricProvider()
-        solana_data = self.solana_metrics.poll()
+        self.solana_metrics = ds.SolanaMetricProvider()  # constructor automatically polls data
+        solana_data = self.solana_metrics.to_dict()
         self.db = db
         self.db.sqlite_insert(f'{SOLANA_TOKEN_CODE}{TOKEN_METRICS_SUFFIX}', solana_data)
 

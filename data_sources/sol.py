@@ -29,18 +29,4 @@ class SolanaMetricProvider(ChainMetricProvider):
             if self.coin_price is not None:
                 self.avg_tx_price = self.coin_price * self.avg_gas_price * self.avg_tx_gas
 
-    def to_object(self):
-        return {
-            'datetime': datetime.datetime.now(),
-            'current_coin_price': self.coin_price,
-            'avg_gas_price': self.avg_gas_price,
-            'avg_tx_time': self.avg_tx_time,
-            'avg_tx_price': self.avg_tx_price,
-            'last_block_time': self.last_block_time
-        }
-
-    def poll(self):
-        self.refresh()
-        return self.to_object()
-
 
