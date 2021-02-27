@@ -20,7 +20,7 @@ class PollingManager:
         solana_data = self.solana_metrics.poll()
         self.solana_metrics.store_row_in_db(self.db, SOLANA_TOKEN_CODE, solana_data)
 
-        etherium_data = self.solana_metrics.poll()
+        etherium_data = self.etherium_metrics.poll()
         self.etherium_metrics.store_row_in_db(self.db, ETHERIUM_TOKEN_CODE, etherium_data)
 
         serum_data = self.serum_metrics.poll()
