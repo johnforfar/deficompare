@@ -21,12 +21,14 @@ class SolanaMetricProvider(ChainMetricProvider):
         self.refresh()
 
     def refresh(self):
-        latest_block = get_latest_block()
-        self.coin_price = get_price('solana')
-        self.avg_gas_price = 0.000000001  # https://docs.solana.com/introduction#what-are-sols
-        if latest_block is not None:
-            self.avg_tx_gas = latest_block['metrics']['totalfees'] / latest_block['metrics']['txcount']
-            if self.coin_price is not None:
-                self.avg_tx_price = self.coin_price * self.avg_gas_price * self.avg_tx_gas
-
+        try:
+            latest_block = get_latest_block()
+            self.coin_price = get_price('solana')
+            self.avg_gas_price = 0.000000001  # https://docs.solana.com/introduction#what-are-sols
+            if latest_block is not None:
+                self.avg_tx_gas = latest_block['metrics']['totalfees'] / latest_block['metrics']['txcount']
+                if self.coin_price is not None:
+                    self.avg_tx_price = self.coin_price * self.avg_gas_price * self.avg_tx_gas
+        except Exception as e:
+            print(e)
 

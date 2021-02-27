@@ -20,8 +20,9 @@ def get_uniswap_tvl() -> Union[None, float]:
         )
         result = uniswap_client.execute(query)
         return float(result['uniswapFactories'][0]['totalLiquidityUSD'])
-    except Exception:
+    except Exception as e:
         print_red("Unsucessful call in graphcalls.get_uniswap_tvl()")
+        print(e)
         return None
 
 
@@ -59,8 +60,9 @@ def get_uniswap_daily_pools(date: int) -> Union[None, list]:
             response = uniswap_client.execute(query)['pairDayDatas']
             result.extend(response)
         return result
-    except Exception:
+    except Exception as e:
         print_red("Unsucessful call in graphcalls.get_uniswap_daily_pools()")
+        print(e)
         return None
 
 
@@ -93,6 +95,7 @@ def get_uniswap_pools() -> Union[None, list]:
             response = uniswap_client.execute(query)['pairs']
             result.extend(response)
         return result
-    except Exception:
+    except Exception as e:
         print_red("Unsucessful call in graphcalls.get_uniswap_pools()")
+        print(e)
         return None

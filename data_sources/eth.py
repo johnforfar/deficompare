@@ -20,12 +20,17 @@ class EthereumMetricProvider(ChainMetricProvider):
         self.refresh()
 
     def refresh(self):
-        eth_gas_json = get_eth_gas_json()
-        self.coin_price = get_price('ethereum')
-        self.avg_tx_gas = 21000
-        if eth_gas_json is not None:
-            self.avg_gas_price = eth_gas_json["average"] / 1e10
-            self.avg_tx_time = eth_gas_json["avgWait"]*60
-            self.last_block_time = eth_gas_json["block_time"]
-            if self.coin_price is not None:
-                self.avg_tx_price = self.coin_price * self.avg_gas_price * self.avg_tx_gas
+        try:
+            eth_gas_json = get_eth_gas_json()
+            self.coin_price = get_price('ethereum')
+            self.avg_tx_gas = 21000
+            if eth_gas_json is not None:
+                self.avg_gas_price = eth_gas_json["average"] / 1e10
+                self.avg_tx_time = eth_gas_json["avgWait"]*60
+                self.last_block_time = eth_gas_json["block_time"]
+                if self.coin_price is not None:
+                    self.avg_tx_price = self.coin_price * self.avg_gas_price * self.avg_tx_gas
+
+        except Exception as e:
+            print(e)
+
