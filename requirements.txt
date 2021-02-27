@@ -9,3 +9,4 @@ requests~=2.25.1
 pycoingecko~=1.4.0
 solana~=0.6.5
 gql~=2.0.0
+dash_auth~=1.4.1
