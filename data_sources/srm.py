@@ -23,20 +23,24 @@ class SerumMetricProvider(DexMetricProvider):
         self.refresh()
 
     def refresh(self):
-        self.token_price = get_price('serum')
-        self.swap_cost = self.chain.avg_tx_price
-        self.staking_cost = self.swap_cost
+        try:
+            self.token_price = get_price('serum')
+            self.swap_cost = self.chain.avg_tx_price
+            self.staking_cost = self.swap_cost
 
-        pools = get_all_pools()
-        print(len(pools['data']))
-        if pools is not None:
-            self.total_value_locked = 0
-            for pool in pools['data']:
-                self.total_value_locked += pool['liquidity_locked']
-            self.total_value_locked = round(self.total_value_locked, 2)
+            pools = get_all_pools()
+            # print(len(pools['data']))
+            if pools is not None:
+                self.total_value_locked = 0
+                for pool in pools['data']:
+                    self.total_value_locked += pool['liquidity_locked']
+                self.total_value_locked = round(self.total_value_locked, 2)
 
-            apys = list(filter(lambda x: x > 0, [pool['apy'] for pool in pools['data']]))
-            self.min_apy = round(np.min(apys).item(), 2)
-            self.avg_apy = round(np.average(apys), 2)
-            self.median_apy = round(np.median(apys).item(), 2)
-            self.max_apy = round(np.max(apys).item(), 2)
+                apys = list(filter(lambda x: x > 0, [pool['apy'] for pool in pools['data']]))
+                self.min_apy = round(np.min(apys).item(), 2)
+                self.avg_apy = round(np.average(apys), 2)
+                self.median_apy = round(np.median(apys).item(), 2)
+                self.max_apy = round(np.max(apys).item(), 2)
+
+        except Exception as e:
+            print(e)
