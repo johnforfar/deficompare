@@ -31,3 +31,7 @@ Open and fair DeFi Comparison Tool across all Blockchains and Decentralised Fina
 * [Dash DAQ](https://dash.plot.ly/dash-daq) - Styled technical components for industrial applications
 * [Heroku](https://www.heroku.com) - Heroku free hosting
 
+## Initial Contributors
+* [Johnny (SOLX)](https://solana.blog) - SOL X - Run a blog about the Solana ecosystem and excited to bring decentralised applications to the masses!
+* [Dipfit](https://twitter.com/dipfit1) - Developer, scientist, scholar, dancer, yogi
+* [Crushing Codes](https://github.com/crushingcodes) - Mad coding wizard
