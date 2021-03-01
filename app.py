@@ -10,9 +10,6 @@ import plotly.graph_objs as go
 import plotly.offline as pyo
 import dash_daq as daq
 
-#remove when launch
-import dash_auth
-
 import pandas as pd
 import time
 
@@ -27,19 +24,10 @@ from token_metrics_service import TokenMetricsService
 
 import plotly.express as px
 
-
-#remove when launch
-USERNAME_PASSWORD_PAIRS = [
-['defi', 'etherium']
-]
-
 app = dash.Dash(
     __name__,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
-
-#remove when launch
-auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 
 server = app.server
 app.config["suppress_callback_exceptions"] = True
