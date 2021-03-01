@@ -17,7 +17,8 @@ from polling_manager import PollingManager
 
 from threading import Thread
 
-from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_CODE, SERUM_EXCHANGE_CODE, POLLING_DELAY_SECONDS
+from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_CODE, SERUM_EXCHANGE_CODE, \
+    POLLING_DELAY_SECONDS, DASHBOARD_REFRESH_SECONDS
 from database import SQLLiteDatabase
 from postgres_database import PostgresDatabase
 from token_metrics_service import TokenMetricsService
@@ -155,7 +156,7 @@ def serve_layout():
                                     ),
                                     dcc.Interval(
                                         id='graph-update',
-                                        interval=1000,
+                                        interval=1000*DASHBOARD_REFRESH_SECONDS,
                                         n_intervals=0
                                     ),
                                     html.Div([
