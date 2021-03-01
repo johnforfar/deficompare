@@ -56,11 +56,6 @@ except:
         db = SQLLiteDatabase()
 
 token_metrics_service = TokenMetricsService(db=db)
-sol_df_token = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
-print(f"Solana Token Data:{sol_df_token}")
-
-eth_df_token = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
-print(f"Ethereum Token Data:{eth_df_token}")
 
 ## page header, about pop-up and logo
 def build_banner():
@@ -95,25 +90,81 @@ def build_banner():
 def generate_section_banner(title):
     return html.Div(className="section-banner", children=title)
 
-def build_fee_graph(df_token):
-    print("hell yeah")
+def build_fee_graph(df_token_1, df_token_2):
+    fee_graph_title = 'Fee Comparison of ' + df_token_1 + ' and ' + df_token_2 + " in USD"
+    print(f"Fee Graph Title: {fee_graph_title}")
+
+    ## FIX NEEDED, better IF statement here for both selected tokens
+    #new_column_name = str("token")
+    if (df_token_1 == "SOL"):
+        df_token_1_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
+        if "token" in df_token_1_data.columns:
+            df_token_1_data['token'] == "SOL" 
+        else:
+            df_token_1_data['token'] = "SOL"
+        print(f"Solana Token Data:{df_token_1_data}")
+
+    if df_token_1 == "ETH":
+        df_token_1_data = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
+        if "token" in df_token_1_data.columns:
+            df_token_1_data['token'] == "ETH" 
+        else:
+            df_token_1_data['token'] = "ETH"
+        print(f"Ethereum Token Data:{df_token_1_data}")
+
+    if (df_token_2 == "SOL"):
+        df_token_2_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
+        if "token" in df_token_2_data.columns:
+            df_token_2_data['token'] == "SOL" 
+        else:
+            df_token_2_data['token'] = "SOL"
+        print(f"Solana Token Data:{df_token_2_data}")
+
+    if df_token_2 == "ETH":
+        df_token_2_data = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
+        if "token" in df_token_2_data.columns:
+            df_token_2_data['token'] == "ETH"
+        else:
+            df_token_2_data['token'] = "ETH"
+        print(f"Ethereum Token Data:{df_token_2_data}")
+
+    #Append dataframe of selected Token 1 and Token 2 data together for charting
+    selected_df_token = df_token_1_data.append(df_token_2_data)
+
+ 
+    #filter by dataframes by selected tokens
+    selected_graph_df_sol = selected_df_token[selected_df_token['token'] == "SOL"]
+    selected_graph_df_eth = selected_df_token[selected_df_token['token'] == "ETH"]
+    
+    # Create graph plots
+    token_1_plot = go.Scatter(
+        x = selected_graph_df_sol['datetime'],
+        y = selected_graph_df_sol['avg_tx_price'],
+        mode = 'lines+markers',
+        name = 'SOL Fees'
+    )
+    token_2_plot = go.Scatter(
+        x = selected_graph_df_eth['datetime'],
+        y = selected_graph_df_eth['avg_tx_price'],
+        mode = 'lines+markers',
+        name = 'ETH Fees'
+    )
+    neo_graph_df = [token_1_plot, token_2_plot]
+
+    #fake token selector
+    all_tokens = ["SOL", "ETH", "ADA"]
+
+
     return html.Div(
         id="control-chart-container",
         className="twelve columns",
         children=[
-            generate_section_banner("Latency Chart"),
+            generate_section_banner(fee_graph_title),
             dcc.Graph(
                 id="control-chart-live",
                 figure=go.Figure(
                     {
-                        "data": [
-                            {
-                                "x": df_token['datetime'],
-                                "y": df_token['avg_tx_price'],
-                                "mode": "lines+markers",
-                                "name": "Solana!",
-                            }
-                        ],
+                        "data": neo_graph_df,
                         "layout": {
                             "paper_bgcolor": "rgba(0,0,0,0)",
                             "plot_bgcolor": "rgba(0,0,0,0)",
@@ -123,11 +174,25 @@ def build_fee_graph(df_token):
                             "yaxis": dict(
                                 showgrid=False, showline=False, zeroline=False
                             ),
+                            "legend": dict(
+                                orientation="h"
+                            ),
                             "autosize": True,
+                            "title": fee_graph_title,
                         },
                     }
                 ),
             ),
+        html.Div([
+            html.P("Fake Checklist"),
+            dcc.Checklist(
+                id="checklist",
+                options=[{"label": x, "value": x} 
+                    for x in all_tokens],
+                value=all_tokens[:2],
+                labelStyle={'display': 'inline-block'}
+            ),
+            ])
         ],
     )
 
@@ -138,15 +203,11 @@ app.layout = html.Div(
         html.Div(
             id="app-container",
             children=[
-                #build_tabs(),
                 # Main app
                 html.Div(
                     id="app-content",
                     children=[
-                        "Main text 1  ",
-                        build_fee_graph(sol_df_token),
-                        #px.line(sol_df_token, x="datetime", y="avg_tx_price", line_shape="spline", render_mode="svg"),
-                        "Main text 2  "
+                        build_fee_graph("SOL", "ETH")    #hard-coded for now, will come from drop-down
                     ],
                 ),
             ],
