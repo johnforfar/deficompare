@@ -13,21 +13,17 @@ An open and fair DeFi Comparison tool across all Blockchains and Decentralised F
 * [Dash DAQ](https://dash.plot.ly/dash-daq) - Styled technical components for industrial applications
 * [Heroku](https://www.heroku.com) - Heroku free hosting
 
-## References
-  - Which coins/chains do exist: https://coinmarketcap.com/coins/
-  - Blockchain data (avg. txn speed & fees):
-    * https://blockchair.com/api/plans (17 different Blockchains)
-    * https://tokenview.com/en/ (+100 different Blockchains)
-  - Exchange rates (to convert fees into $ or €):
-    * https://pro.coinmarketcap.com/ (widely used)
-    * https://binance-docs.github.io/apidocs/spot/en/#websocket-market-streams (First exchange to list SOL, for free)
+## Data Sources
+To ensure highest standards of trustlessness, we aim to use as much subgraphs by https://thegraph.com/ as possible. Further ahead the roadmap lies the implementation of a subgraph of our own, for comparing useful key metrics of DEXes and other DeFi protocols across chains.
+  - Coin/Token prices:
+    * By CoinGecko: https://www.coingecko.com/en/api
+  - Ethereum gas prices and block times:
+    * https://docs.ethgasstation.info/gas-price
+  - Solana lamports consumption and block times:
+    * https://app.swaggerhub.com/apis-docs/V2261/solanabeach-backend_api/0.0.1
   - DEX data:
-    * https://docs.bonfida.com/#project-serum
-  - Good list of DeFi Dapps:
-    * https://en.cryptonomist.ch/Defi/
-    * https://apy.plasma.finance/liquidity-pools (This has Pool fees over 7 days)
-    * https://zapper.fi/dashboard (Another list)
-    * https://defi.instadapp.io/ (Another list)
+    * Serum: https://docs.bonfida.com/#project-serum
+    * Uniswap: https://thegraph.com/explorer/subgraph/uniswap/uniswap-v2
 
 ## Initial Contributors
 * [Johnny (SOLX)](https://solana.blog) - SOL X - Run a blog about the Solana ecosystem and excited to bring decentralised applications to the masses!
@@ -36,4 +32,7 @@ An open and fair DeFi Comparison tool across all Blockchains and Decentralised F
 
 ## Roadmap
 
-(coming soon)
+* Binance Smart Chain (BSC) support
+* More listed DEXes from Ethereum, Solana and BSC
+* Migrating data retrieval into public subgraph
+* Comparison of lending protocols, other DeFi protocol categories
