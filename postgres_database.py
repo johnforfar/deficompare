@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 # import sqlite3
+import os
+
 import pandas as pd
 
 from constants import DB_NAME, TOKEN_METRICS_SUFFIX, EXCHANGE_METRICS_SUFFIX, UNISWAP_EXCHANGE_CODE, SOLANA_TOKEN_CODE, \
@@ -16,13 +18,12 @@ class PostgresDatabase:
         conn = self.connect()
         cursor = conn.cursor()
 
-        print(f"Opened {DB_NAME} successfully")
         commands = []
         # Create a table for each token
         for token_code in TOKEN_CODES:
             commands.append(f'''CREATE TABLE IF NOT EXISTS {token_code}{TOKEN_METRICS_SUFFIX}
                      (id BIGSERIAL PRIMARY KEY,
-                     datetime DATE,
+                     datetime TIMESTAMP,
                      current_coin_price DOUBLE PRECISION,
                      avg_gas_price DOUBLE PRECISION,
                      avg_tx_time DOUBLE PRECISION,
@@ -34,7 +35,7 @@ class PostgresDatabase:
         for symbol in DEX_SYMBOLS:
             commands.append(f'''CREATE TABLE IF NOT EXISTS {symbol}{EXCHANGE_METRICS_SUFFIX}
                      (id BIGSERIAL PRIMARY KEY,
-                     datetime DATE,
+                     datetime TIMESTAMP,
                      current_token_price DOUBLE PRECISION,
                      total_value_locked DOUBLE PRECISION,
                      min_apy DOUBLE PRECISION,
@@ -53,7 +54,6 @@ class PostgresDatabase:
         """"""
         conn = self.connect()
         cursor = conn.cursor()
-        print(f"Opened {DB_NAME} successfully")
 
         df = pd.read_sql_query(f"SELECT * from {token_code}{TOKEN_METRICS_SUFFIX}", conn)
 
@@ -64,6 +64,12 @@ class PostgresDatabase:
     def connect(self):
         """ Connect to the PostgreSQL database server """
         # conn = None
+
+        try:
+            db_password = os.environ['DB_PASSWORD']
+        except:
+            db_password = ''
+
         try:
 
             # connect to the PostgreSQL server
@@ -71,7 +77,7 @@ class PostgresDatabase:
                 host="localhost",
                 database="defi_compare",
                 user="postgres",
-                # password="password",
+                password=db_password,
                 port=5432)
 
         except (Exception, psycopg2.DatabaseError) as error:
@@ -82,7 +88,6 @@ class PostgresDatabase:
         """"""
         conn = self.connect()
         cursor = conn.cursor()
-        print(f"Opened {DB_NAME} successfully")
 
         df = pd.read_sql_query(f"SELECT * from {exchange_code}{EXCHANGE_METRICS_SUFFIX}", conn)
 
@@ -105,15 +110,11 @@ class PostgresDatabase:
         cursor = conn.cursor()
 
         rows = [row]
-        # keys = row.keys()
-        # columns = ', '.join(keys)
-        # vals = ', '.join('"{}"'.format(col) for col in row.values())
-        # sql = 'insert into {0} ({1}) values ({2})'.format(table, columns, vals)
         columns = rows[0].keys()
         query = "INSERT INTO {0} ({1}) VALUES %s".format(table, ','.join(columns))
 
         # convert projects values to sequence of seqeences
-        values = [[value for value in project.values()] for project in rows]
+        values = [[value for value in data.values()] for data in rows]
 
         execute_values(cursor, query, values)
 

@@ -22,6 +22,7 @@ import multiprocessing
 
 from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_CODE, SERUM_EXCHANGE_CODE, POLLING_DELAY_SECONDS
 from database import SQLLiteDatabase
+from postgres_database import PostgresDatabase
 from token_metrics_service import TokenMetricsService
 
 import plotly.express as px
@@ -45,7 +46,15 @@ app.config["suppress_callback_exceptions"] = True
 app.title = 'DeFi Compare'
 
 ## Pull new API call data
-db = SQLLiteDatabase()
+try:
+    use_postgres = os.environ['USE_POSTGRES']
+    if bool(use_postgres):
+        db = PostgresDatabase()
+    else:
+        db = SQLLiteDatabase()
+except:
+        db = SQLLiteDatabase()
+
 token_metrics_service = TokenMetricsService(db=db)
 sol_df_token = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
 print(f"Solana Token Data:{sol_df_token}")
@@ -145,9 +154,19 @@ app.layout = html.Div(
     ],
 )
 
+
 def worker():
     """worker thread for running the polling and database updates"""
-    db = SQLLiteDatabase()
+
+    try:
+        use_postgres = os.environ['USE_POSTGRES']
+        if bool(use_postgres):
+            db = PostgresDatabase()
+        else:
+            db = SQLLiteDatabase()
+    except:
+        db = SQLLiteDatabase()
+
     polling_manager = PollingManager(db)
     while True:
         # Main loop for polling APIs
