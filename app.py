@@ -196,24 +196,27 @@ def build_fee_graph(df_token_1, df_token_2):
         ],
     )
 
-app.layout = html.Div(
+def serve_layout():
+    return html.Div(
     id="big-app-container",
     children=[
-        build_banner(),
-        html.Div(
-            id="app-container",
-            children=[
-                # Main app
-                html.Div(
-                    id="app-content",
-                    children=[
-                        build_fee_graph("SOL", "ETH")    #hard-coded for now, will come from drop-down
-                    ],
-                ),
-            ],
-        ),
-    ],
-)
+            build_banner(),
+            html.Div(
+                id="app-container",
+                children=[
+                    # Main app
+                    html.Div(
+                        id="app-content",
+                        children=[
+                            build_fee_graph("SOL", "ETH")    #hard-coded for now, will come from drop-down
+                        ],
+                    ),
+                ],
+            ),
+        ],
+    )
+
+
 
 
 def worker():
