@@ -64,28 +64,22 @@ class PostgresDatabase:
     def connect(self):
         """ Connect to the PostgreSQL database server """
         try:
+            # try heroku first
             db_url = os.environ['DATABASE_URL']
             conn = psycopg2.connect(db_url, sslmode='require')
 
         except:
-            pass
-        try:
-            # connect to the PostgreSQL server
+            try:
+                # Local connection
+                conn = psycopg2.connect(
+                    host="localhost",
+                    database="defi_compare",
+                    user="postgres",
+                    port=5432)
 
-            # Local connection
-            conn = psycopg2.connect(
-                host="localhost",
-                database="defi_compare",
-                user="postgres",
-                port=5432)
-
-        except (Exception, psycopg2.DatabaseError) as error:
-            conn = psycopg2.connect(
-                host="localhost",
-                database="defi_compare",
-                user="postgres",
-                port=5432)
-            print(error)
+            except (Exception, psycopg2.DatabaseError) as error:
+                conn = None
+                print(error)
         return conn
 
     def get_exchange_df(self, exchange_code) -> pd.DataFrame:
