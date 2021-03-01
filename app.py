@@ -217,6 +217,7 @@ def serve_layout():
     )
 
 
+app.layout = serve_layout
 
 
 def worker():
