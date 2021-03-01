@@ -18,13 +18,19 @@ except Exception as e:
     db = SQLLiteDatabase()
     print(e)
 
-polling_manager = PollingManager(db)
+try:
+    interval_minutes = int(os.environ['POLLING_INTERVAL_MINUTES'])
+except Exception as e:
+    print(e)
+    interval_minutes = 1
 
+polling_manager = PollingManager(db)
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', minutes=1)
+
+@sched.scheduled_job('interval', minutes=interval_minutes)
 def timed_job():
-    print('Polling is run every three minutes.')
+    print(f'Polling is run every {interval_minutes} minute/s.')
     polling_manager.poll()
 
 sched.start()
