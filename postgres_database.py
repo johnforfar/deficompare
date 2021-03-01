@@ -65,23 +65,26 @@ class PostgresDatabase:
         """ Connect to the PostgreSQL database server """
         try:
             db_url = os.environ['DATABASE_URL']
+            conn = psycopg2.connect(db_url, sslmode='require')
+
         except:
             pass
         try:
             # connect to the PostgreSQL server
-            if db_url:
-                # Heroku uses this
-                conn = psycopg2.connect(db_url, sslmode='require')
-            else:
-                # Local connection
-                conn = psycopg2.connect(
-                    host="localhost",
-                    database="defi_compare",
-                    user="postgres",
-                    port=5432)
+
+            # Local connection
+            conn = psycopg2.connect(
+                host="localhost",
+                database="defi_compare",
+                user="postgres",
+                port=5432)
 
         except (Exception, psycopg2.DatabaseError) as error:
-            conn = None
+            conn = psycopg2.connect(
+                host="localhost",
+                database="defi_compare",
+                user="postgres",
+                port=5432)
             print(error)
         return conn
 

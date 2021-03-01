@@ -18,7 +18,7 @@ import time
 
 from polling_manager import PollingManager
 
-import multiprocessing
+from threading import Thread
 
 from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_CODE, SERUM_EXCHANGE_CODE, POLLING_DELAY_SECONDS
 from database import SQLLiteDatabase
@@ -176,7 +176,8 @@ def worker():
 # Running the server
 if __name__ == "__main__":
     # Entry point for polling process
-    p = multiprocessing.Process(target=worker, args=())
-    p.start()
+    thread = Thread(target = worker, args = ())
+
+    thread.start()
 
     app.run_server(debug=True, port=8050)
