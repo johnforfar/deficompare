@@ -1,14 +1,19 @@
 # Welcome to DeFi Compare
 
-Open and fair DeFi Comparison Tool across all Blockchains and Decentralised Finance applications.
+An open and fair DeFi Comparison tool across all Blockchains and Decentralised Finance applications.
 
-## Questions to ask
-* **What is the use-case of our MVP?**
-  - Comparing transaction costs (easy)    -v
-  - Comparing transaction speeds (easy) -> Those two metrics make Solana look really good.
-  - Comparing swap costs? (medium - needs to be further defined: Which DEXes? Which coins/tokens?)
-  - Finding cheapest route to DEX-swap any coin/token in inter-chain environment? (very hard)
-* **Which data is easily available?**
+**PROBLEM:** Some of the fastest Blockchain DeFi applications are not represented at other DeFi Comparison sites.  
+
+**SOLUTION:** Build a simple comparison tool for the upcoming DeFi masses that fairly represents all DeFi blockchains and their respective applications. Metrics that will be represented are transaction costs, transactions speeds, DEX swap costs, decentralised user reviews, more to come. (see Roadmap)
+
+## Built With
+* [Python](https://www.python.org) - Python
+* [Dash](https://dash.plot.ly/) - Main server and interactive components 
+* [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
+* [Dash DAQ](https://dash.plot.ly/dash-daq) - Styled technical components for industrial applications
+* [Heroku](https://www.heroku.com) - Heroku free hosting
+
+## References
   - Which coins/chains do exist: https://coinmarketcap.com/coins/
   - Blockchain data (avg. txn speed & fees):
     * https://blockchair.com/api/plans (17 different Blockchains)
@@ -23,15 +28,12 @@ Open and fair DeFi Comparison Tool across all Blockchains and Decentralised Fina
     * https://apy.plasma.finance/liquidity-pools (This has Pool fees over 7 days)
     * https://zapper.fi/dashboard (Another list)
     * https://defi.instadapp.io/ (Another list)
-    
-## Built With
-* [Python](https://www.python.org) - Python
-* [Dash](https://dash.plot.ly/) - Main server and interactive components 
-* [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
-* [Dash DAQ](https://dash.plot.ly/dash-daq) - Styled technical components for industrial applications
-* [Heroku](https://www.heroku.com) - Heroku free hosting
 
 ## Initial Contributors
 * [Johnny (SOLX)](https://solana.blog) - SOL X - Run a blog about the Solana ecosystem and excited to bring decentralised applications to the masses!
 * [Dipfit](https://twitter.com/dipfit1) - Developer, scientist, scholar, dancer, yogi
 * [Crushing Codes](https://github.com/crushingcodes) - Mad coding wizard
+
+## Roadmap
+
+(coming soon)
