@@ -26,6 +26,7 @@ from postgres_database import PostgresDatabase
 from token_metrics_service import TokenMetricsService
 
 import plotly.express as px
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 
 #remove when launch
@@ -220,32 +221,11 @@ def serve_layout():
 app.layout = serve_layout
 
 
-def worker():
-    """worker thread for running the polling and database updates"""
-
-    try:
-        use_postgres = os.environ['USE_POSTGRES']
-        if bool(use_postgres):
-            db = PostgresDatabase()
-        else:
-            db = SQLLiteDatabase()
-    except:
-        db = SQLLiteDatabase()
-
-    polling_manager = PollingManager(db)
-    while True:
-        # Main loop for polling APIs
-        polling_manager.poll()
-        time.sleep(POLLING_DELAY_SECONDS)
-
 # Running the server
 if __name__ == "__main__":
-    # Entry point for polling process
-    # thread = Thread(target=worker, args=())
-    #
-    # thread.start()
+    app.run_server(debug=False, port=8050)
 
-    app.run_server(debug=False)
-    # app.run_server(debug=False, port=8050)
-    worker()
+
+
+
 

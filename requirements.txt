@@ -11,5 +11,6 @@ pycoingecko~=1.4.0
 solana==0.0.4
 gql~=2.0.0
 dash_auth~=1.4.1
-psycopg2
+psycopg2~=2.8.6
 psycopg2-binary
+APScheduler~=3.7.0

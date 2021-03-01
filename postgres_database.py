@@ -68,7 +68,9 @@ class PostgresDatabase:
             db_url = os.environ['DATABASE_URL']
             conn = psycopg2.connect(db_url, sslmode='require')
 
-        except:
+        except Exception as e:
+            print(e)
+
             try:
                 # Local connection
                 conn = psycopg2.connect(
