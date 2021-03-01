@@ -5,6 +5,7 @@
 DB_NAME = 'db.db'
 TOKEN_METRICS_SUFFIX = '_token_metrics'
 EXCHANGE_METRICS_SUFFIX = '_exchange_metrics'
+POLLING_DELAY_SECONDS = 180
 DASHBOARD_REFRESH_SECONDS = 30
 
 # TODO store a copy of token and exchange codes in a db table
