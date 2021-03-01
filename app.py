@@ -87,7 +87,7 @@ def build_fee_graph(df_token_1, df_token_2):
     if (df_token_1 == "SOL"):
         df_token_1_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
         if "token" in df_token_1_data.columns:
-            df_token_1_data['token'] == "SOL" 
+            df_token_1_data['token'] == "SOL"
         else:
             df_token_1_data['token'] = "SOL"
         print(f"Solana Token Data:{df_token_1_data}")
@@ -95,7 +95,7 @@ def build_fee_graph(df_token_1, df_token_2):
     if df_token_1 == "ETH":
         df_token_1_data = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
         if "token" in df_token_1_data.columns:
-            df_token_1_data['token'] == "ETH" 
+            df_token_1_data['token'] == "ETH"
         else:
             df_token_1_data['token'] = "ETH"
         print(f"Ethereum Token Data:{df_token_1_data}")
@@ -103,7 +103,7 @@ def build_fee_graph(df_token_1, df_token_2):
     if (df_token_2 == "SOL"):
         df_token_2_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
         if "token" in df_token_2_data.columns:
-            df_token_2_data['token'] == "SOL" 
+            df_token_2_data['token'] == "SOL"
         else:
             df_token_2_data['token'] = "SOL"
         print(f"Solana Token Data:{df_token_2_data}")
@@ -184,24 +184,28 @@ def build_fee_graph(df_token_1, df_token_2):
         ],
     )
 
-app.layout = html.Div(
+def serve_layout():
+    return html.Div(
     id="big-app-container",
     children=[
-        build_banner(),
-        html.Div(
-            id="app-container",
-            children=[
-                # Main app
-                html.Div(
-                    id="app-content",
-                    children=[
-                        build_fee_graph("SOL", "ETH")    #hard-coded for now, will come from drop-down
-                    ],
-                ),
-            ],
-        ),
-    ],
-)
+            build_banner(),
+            html.Div(
+                id="app-container",
+                children=[
+                    # Main app
+                    html.Div(
+                        id="app-content",
+                        children=[
+                            build_fee_graph("SOL", "ETH")    #hard-coded for now, will come from drop-down
+                        ],
+                    ),
+                ],
+            ),
+        ],
+    )
+
+
+app.layout = serve_layout
 
 
 def worker():
@@ -225,8 +229,11 @@ def worker():
 # Running the server
 if __name__ == "__main__":
     # Entry point for polling process
-    thread = Thread(target = worker, args = ())
+    # thread = Thread(target=worker, args=())
+    #
+    # thread.start()
 
-    thread.start()
+    app.run_server(debug=False)
+    # app.run_server(debug=False, port=8050)
+    worker()
 
-    app.run_server(debug=True, port=8050)
