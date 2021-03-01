@@ -99,7 +99,7 @@ def build_fee_graph(df_token_1, df_token_2):
     if (df_token_1 == "SOL"):
         df_token_1_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
         if "token" in df_token_1_data.columns:
-            df_token_1_data['token'] == "SOL" 
+            df_token_1_data['token'] == "SOL"
         else:
             df_token_1_data['token'] = "SOL"
         print(f"Solana Token Data:{df_token_1_data}")
@@ -107,7 +107,7 @@ def build_fee_graph(df_token_1, df_token_2):
     if df_token_1 == "ETH":
         df_token_1_data = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
         if "token" in df_token_1_data.columns:
-            df_token_1_data['token'] == "ETH" 
+            df_token_1_data['token'] == "ETH"
         else:
             df_token_1_data['token'] = "ETH"
         print(f"Ethereum Token Data:{df_token_1_data}")
@@ -115,7 +115,7 @@ def build_fee_graph(df_token_1, df_token_2):
     if (df_token_2 == "SOL"):
         df_token_2_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
         if "token" in df_token_2_data.columns:
-            df_token_2_data['token'] == "SOL" 
+            df_token_2_data['token'] == "SOL"
         else:
             df_token_2_data['token'] = "SOL"
         print(f"Solana Token Data:{df_token_2_data}")
@@ -241,8 +241,10 @@ def worker():
 # Running the server
 if __name__ == "__main__":
     # Entry point for polling process
-    thread = Thread(target = worker, args = ())
+    thread = Thread(target=worker, args=())
 
     thread.start()
 
     app.run_server(debug=True, port=8050)
+    worker()
+
