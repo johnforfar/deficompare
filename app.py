@@ -241,10 +241,11 @@ def worker():
 # Running the server
 if __name__ == "__main__":
     # Entry point for polling process
-    thread = Thread(target=worker, args=())
+    # thread = Thread(target=worker, args=())
+    #
+    # thread.start()
 
-    thread.start()
-
-    app.run_server(debug=True, port=8050)
+    app.run_server(debug=False)
+    # app.run_server(debug=False, port=8050)
     worker()
 
