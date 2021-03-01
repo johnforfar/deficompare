@@ -56,21 +56,14 @@ def build_banner():
             html.Div(
                 id="banner-text",
                 children=[
-                    html.H5("DeFi Compare (BETA)"),
-                    html.H6("A DeFi Dapp & Blockchain Comparison Tool"),
+                    html.H5("DeFi Compare (ALPHA)"),
+                    html.H6("An open and fair DeFi comparison tool across all blockchains and decentralised finance applications"),
                 ],
             ),
-            #html.Div(
-            #    id="banner-button",
-            #    children=[daq.StopButton(id="stop-button", size=160, n_clicks=0)],
-            #),
             html.Div(
                 id="banner-logo",
                 children=[
-                    #html.Button(
-                    #    id="learn-more-button", children="LEARN MORE", n_clicks=0
-                    #),
-                    "This is the banner",
+                    html.Label(['SOL X on Twitter', html.A('link', href='https://twitter.com/solanablog/')]),
                     html.Img(id="logo", src=app.get_asset_url("defi-hackathon.png")),
                 ],
             ),
@@ -129,8 +122,11 @@ def serve_layout():
     df_token_1 = "SOL"
     df_token_2 = "ETH"
 
-    # fake token selector
-    all_tokens = ["SOL", "ETH", "ADA"]
+    # Mock-up blockchain selector
+    all_tokens = ["Solana", "Ethereum", "Cardano", "Binance Smart Chain"]
+
+    # Mock-up dapp selector
+    all_dapps = ["Raydium", "Orca", "Serum Swap", "Sushi Swap", "Pancake Swap", "Uniswap", "Curve Finance", "1inch"]
 
     fee_graph_title = 'Fee Comparison of ' + df_token_1 + ' and ' + df_token_2 + " in USD"
 
@@ -160,12 +156,22 @@ def serve_layout():
                                         n_intervals=0
                                     ),
                                     html.Div([
-                                        html.P("Fake Checklist"),
+                                        html.P("Select Blockchain"),
                                         dcc.Checklist(
-                                            id="checklist",
+                                            id="blockchain-checklist",
                                             options=[{"label": x, "value": x}
                                                      for x in all_tokens],
                                             value=all_tokens[:2],
+                                            labelStyle={'display': 'inline-block'}
+                                        ),
+                                    ]),
+                                    html.Div([
+                                        html.P("Select DeFi App"),
+                                        dcc.Checklist(
+                                            id="defi-app-checklist",
+                                            options=[{"label": x, "value": x}
+                                                     for x in all_dapps],
+                                            value=all_dapps[0],
                                             labelStyle={'display': 'inline-block'}
                                         ),
                                     ])
