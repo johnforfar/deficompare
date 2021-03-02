@@ -160,12 +160,10 @@ def serve_layout():
                                         dcc.Checklist(
                                             id="blockchain-checklist",
                                             options=[
-                                                for x in all_tokens:
-                                                    if (x = "SOL") or (x = "ETH"):
-                                                        {"label": x, "value": x}
-                                                    else:
-                                                        {"label": x, "value": x, "disabled": True}
-                                            ],
+                                                {"label": "Solana", "value": "SOL"},
+                                                {"label": "Ethereum", "value": "ETH"},
+                                                {"label": "Cardano", "value": "ADA", disabled: True},
+                                                {"label": "Binance Smart Chain", "value": "BSC", disabled: True},
                                             value=all_tokens[:2],
                                             labelStyle={'display': 'inline-block'}
                                         ),
@@ -174,10 +172,8 @@ def serve_layout():
                                         html.P("Select DeFi App"),
                                         dcc.Checklist(
                                             id="defi-app-checklist",
-                                            options=[
-                                                for x in all_dapps:
-                                                    {"label": x, "value": x, "disabled": True}
-                                            ],
+                                            options=[{"label": x, "value": x, disabled: True}
+                                                     for x in all_dapps],
                                             value=all_dapps[0],
                                             labelStyle={'display': 'inline-block'}
                                         ),
