@@ -159,8 +159,13 @@ def serve_layout():
                                         html.P("Select Blockchain"),
                                         dcc.Checklist(
                                             id="blockchain-checklist",
-                                            options=[{"label": x, "value": x}
-                                                     for x in all_tokens],
+                                            options=[
+                                                for x in all_tokens:
+                                                    if (x = "SOL") or (x = "ETH"):
+                                                        {"label": x, "value": x}
+                                                    else:
+                                                        {"label": x, "value": x, "disabled": True}
+                                            ],
                                             value=all_tokens[:2],
                                             labelStyle={'display': 'inline-block'}
                                         ),
@@ -169,8 +174,10 @@ def serve_layout():
                                         html.P("Select DeFi App"),
                                         dcc.Checklist(
                                             id="defi-app-checklist",
-                                            options=[{"label": x, "value": x}
-                                                     for x in all_dapps],
+                                            options=[
+                                                for x in all_dapps:
+                                                    {"label": x, "value": x, "disabled": True}
+                                            ],
                                             value=all_dapps[0],
                                             labelStyle={'display': 'inline-block'}
                                         ),
