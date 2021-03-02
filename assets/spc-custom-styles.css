@@ -51,7 +51,7 @@ body {
   font-family: 'Open Sans Semi Bold', sans-serif;
   font-weight: 500;
   line-height: 1.2;
-  font-size: 2rem;
+  font-size: 4rem;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
@@ -64,7 +64,7 @@ body {
 .banner button {
   color: #95969A;
   margin-right: 10px;
-  height: 3rem;
+  height: 80px;
   line-height: 3rem;
 }
 
@@ -81,7 +81,7 @@ body {
 }
 
 .banner Img {
-  height: 3rem;
+  height: 80px !important;
   margin: 0px 10px;
 }
 

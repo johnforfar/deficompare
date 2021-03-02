@@ -39,7 +39,8 @@ app.title = 'DeFi Compare'
 try:
     use_postgres = os.environ['USE_POSTGRES']
     if bool(use_postgres):
-        db = PostgresDatabase()
+        db = PostgresDatabase()    #comment out for local testing
+        #db = SQLLiteDatabase()      #enable for local testing
     else:
         db = SQLLiteDatabase()
 except:
@@ -63,8 +64,8 @@ def build_banner():
             html.Div(
                 id="banner-logo",
                 children=[
-                    html.Label(['SOL X on Twitter', html.A('link', href='https://twitter.com/solanablog/')]),
-                    html.Img(id="logo", src=app.get_asset_url("defi-hackathon.png")),
+                    html.Label(['Follow us!  ', html.A('SOL X on Twitter', href='https://twitter.com/solanablog/')]),
+                    html.Img(id="logo", src=app.get_asset_url("defi-compare-logo_wide.png")),
                 ],
             ),
         ],
@@ -160,8 +161,11 @@ def serve_layout():
                                         dcc.Checklist(
                                             id="blockchain-checklist",
                                             options=[
-                                                {"label": x, "value": x}
-                                                     for x in all_tokens],
+                                                {"label": "Solana", "value": "SOL", "disabled": False},
+                                                {"label": "Ethereum", "value": "ETH", "disabled": False},
+                                                {"label": "Cardano", "value": "ADA", "disabled": True},
+                                                {"label": "Binance Smart Chain", "value": "BSC", "disabled": True}
+                                            ],
                                             value=all_tokens[:2],
                                             labelStyle={'display': 'inline-block'}
                                         ),
@@ -170,7 +174,7 @@ def serve_layout():
                                         html.P("Select DeFi App"),
                                         dcc.Checklist(
                                             id="defi-app-checklist",
-                                            options=[{"label": x, "value": x}
+                                            options=[{"label": x, "value": x, "disabled": True}
                                                      for x in all_dapps],
                                             value=all_dapps[0],
                                             labelStyle={'display': 'inline-block'}
