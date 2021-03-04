@@ -64,8 +64,8 @@ def build_banner():
             html.Div(
                 id="banner-logo",
                 children=[
-                    html.Label(['DeFi Hackathon Project!   ', html.A('VOTE NOW !', href='https://airtable.com/shrsx1ltpQfTt9wT6')]),
-                    html.Label(['  Follow us!  ', html.A('Twitter', href='https://twitter.com/solanablog/')]),
+                    html.Label(['DeFi Hackathon Project!   ', html.A(' VOTE NOW ! ', href='https://airtable.com/shrsx1ltpQfTt9wT6')]),
+                    html.Label(['  Follow us!  ', html.A(' Twitter ', href='https://twitter.com/solanablog/')]),
                     html.Img(id="logo", src=app.get_asset_url("defi-compare-logo_wide.png")),
                 ],
             ),
