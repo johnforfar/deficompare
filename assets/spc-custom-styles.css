@@ -46,7 +46,6 @@ body {
   width: 100%;
 }
 
-
 .banner h5 {
   font-family: 'Open Sans Semi Bold', sans-serif;
   font-weight: 500;
@@ -180,6 +179,19 @@ body {
 
 /* Main Dashboard Tab
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+#select-blockchain {
+  text-align: left;
+}
+
+#select-blockchain p {
+  font-style: italic !important;
+  padding: 1rem 2rem !important;
+}
+
+#blockchain-checklist {
+  padding: 1rem 2rem !important;
+}
 
 #top-section-container {
   height: 40rem;

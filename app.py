@@ -64,7 +64,8 @@ def build_banner():
             html.Div(
                 id="banner-logo",
                 children=[
-                    html.Label(['Follow us!  ', html.A('SOL X on Twitter', href='https://twitter.com/solanablog/')]),
+                    html.Label(['DeFi Hackathon Project!   ', html.A('VOTE NOW !', href='https://airtable.com/shrsx1ltpQfTt9wT6')]),
+                    html.Label(['  Follow us!  ', html.A('Twitter', href='https://twitter.com/solanablog/')]),
                     html.Img(id="logo", src=app.get_asset_url("defi-compare-logo_wide.png")),
                 ],
             ),
@@ -143,6 +144,27 @@ def serve_layout():
                         id="app-content",
                         children=[
                             html.Div(
+                                id="select-blockchain", #top-section-container
+                                className="twelve columns",
+                                children=[
+                                    generate_section_banner("Select Blockchain to Compare"),
+                                    html.P("By selecting your blockchains to compare, you will see comparison data such as transaction fees, transaction delays, user experience ratings and a list of DeFi application stats. (More features coming soon)"),
+                                    html.Div([
+                                        dcc.Checklist(
+                                            id="blockchain-checklist",
+                                            options=[
+                                                {"label": "Solana", "value": "SOL", "disabled": False},
+                                                {"label": "Ethereum", "value": "ETH", "disabled": False},
+                                                {"label": "Cardano", "value": "ADA", "disabled": True},
+                                                {"label": "Binance Smart Chain", "value": "BSC", "disabled": True}
+                                            ],
+                                            value=all_tokens[:2],
+                                            labelStyle={'display': 'inline-block'}
+                                        ),
+                                    ]),
+                                ]
+                            ),                            
+                            html.Div(
                                 id="control-chart-container",
                                 className="twelve columns",
                                 children=[
@@ -156,32 +178,8 @@ def serve_layout():
                                         interval=1000*DASHBOARD_REFRESH_SECONDS,
                                         n_intervals=0
                                     ),
-                                    html.Div([
-                                        html.P("Select Blockchain"),
-                                        dcc.Checklist(
-                                            id="blockchain-checklist",
-                                            options=[
-                                                {"label": "Solana", "value": "SOL", "disabled": False},
-                                                {"label": "Ethereum", "value": "ETH", "disabled": False},
-                                                {"label": "Cardano", "value": "ADA", "disabled": True},
-                                                {"label": "Binance Smart Chain", "value": "BSC", "disabled": True}
-                                            ],
-                                            value=all_tokens[:2],
-                                            labelStyle={'display': 'inline-block'}
-                                        ),
-                                    ]),
-                                    html.Div([
-                                        html.P("Select DeFi App"),
-                                        dcc.Checklist(
-                                            id="defi-app-checklist",
-                                            options=[{"label": x, "value": x, "disabled": True}
-                                                     for x in all_dapps],
-                                            value=all_dapps[0],
-                                            labelStyle={'display': 'inline-block'}
-                                        ),
-                                    ])
                                 ],
-                            )
+                            ),
                         ],
                     ),
                 ],
