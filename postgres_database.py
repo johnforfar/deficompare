@@ -6,7 +6,7 @@ import os
 import pandas as pd
 
 from constants import DB_NAME, TOKEN_METRICS_SUFFIX, EXCHANGE_METRICS_SUFFIX, UNISWAP_EXCHANGE_CODE, SOLANA_TOKEN_CODE, \
-    ETHERIUM_TOKEN_CODE, SERUM_EXCHANGE_CODE, TOKEN_CODES, DEX_SYMBOLS
+    ETHERIUM_TOKEN_CODE, SERUM_EXCHANGE_CODE, TOKEN_CODES, DEX_SYMBOLS, DB_TABLE_LIMIT, DB_RESTRICTION_DELETE_COUNT
 from exchange_metrics_service import ExchangeMetricsService
 from token_metrics_service import TokenMetricsService
 import psycopg2
@@ -104,7 +104,40 @@ class PostgresDatabase:
         cursor.close()
         return int(res[0]) + 1
 
+    def restriction_check(self, table):
+        """Currently using heroku hobby plan has row limit of 10k, so delete some when near limit"""
+        conn = self.connect()
+        cursor = conn.cursor()
+
+        query = f"""SELECT count(*) AS exact_count FROM {table};"""
+        cursor.execute(query)
+        res = cursor.fetchone()
+
+        cursor.close()
+        if int(res[0]) > DB_TABLE_LIMIT:
+            self.restriction_execution(table)
+
+
+    def restriction_execution(self, table):
+        """Currently using heroku hobby plan has row limit of 10k, so delete some when near limit"""
+        conn = self.connect()
+        cursor = conn.cursor()
+
+        query = f"""DELETE FROM {table}
+                    WHERE ctid IN (
+                        SELECT ctid
+                        FROM {table}
+                        ORDER BY {table}.datetime asc
+                        LIMIT {DB_RESTRICTION_DELETE_COUNT}
+                    )"""
+        cursor.execute(query)
+
+        cursor.close()
+        conn.commit()
+
     def sqlite_insert(self, table, row):
+        #First check there is enough space before inserting
+        self.restriction_check(table)
 
         conn = self.connect()
         cursor = conn.cursor()
