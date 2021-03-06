@@ -24,6 +24,7 @@ from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_C
 from database import SQLLiteDatabase
 from postgres_database import PostgresDatabase
 from token_metrics_service import TokenMetricsService
+from exchange_metrics_service import ExchangeMetricsService
 
 import plotly.express as px
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -49,6 +50,7 @@ except:
         db = SQLLiteDatabase()
 
 token_metrics_service = TokenMetricsService(db=db)
+exchange_metrics_service = ExchangeMetricsService(db=db)
 
 ##== PAGE HEADER =========================================================================================================
 
@@ -77,6 +79,39 @@ def build_banner():
 
 def generate_section_banner(title):
     return html.Div(className="section-banner", children=title)
+
+##== PAGE HEADER =========================================================================================================
+
+def build_dapp_table():
+    df_symbol_1 = "SRM"
+    df_symbol_2 = "UNI"
+
+    df_exch_1_data = exchange_metrics_service.get_df_by_exchange(SERUM_EXCHANGE_CODE)
+    df_exch_2_data = exchange_metrics_service.get_df_by_exchange(UNISWAP_EXCHANGE_CODE)
+
+    print(df_exch_1_data)
+    print(df_exch_2_data)
+
+    df_exch_1_data_tailed = df_exch_1_data.tail(1)
+    df_exch_2_data_tailed = df_exch_2_data.tail(1)
+
+    df_exch_1_data_tailed.loc[:,"id"] = "SRM"
+    df_exch_2_data_tailed.loc[:,"id"] = "UNI"
+
+    df_exch_data_tailed = df_exch_1_data_tailed.append(df_exch_2_data_tailed)
+    print(df_exch_data_tailed)
+
+    return html.Div([
+        dash_table.DataTable(
+            id='table',
+            columns=[{"name": i, "id": i} 
+                for i in df_exch_data_tailed.columns],
+            data=df_exch_data_tailed.to_dict('records'),
+            style_cell=dict(textAlign='left'),
+            style_header=dict(backgroundColor="black"),
+            style_data=dict(backgroundColor="gray")
+        )
+    ])
 
 ##== FEE GRAPH =========================================================================================================
 
@@ -276,7 +311,8 @@ def serve_layout():
                             ),
                         ],
                     ),
-                    #build_dapp_table(),
+                    generate_section_banner("DeFi Application Comparison Table"),
+                    build_dapp_table(),
                 ],
             ),
         ],
