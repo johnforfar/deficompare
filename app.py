@@ -237,7 +237,6 @@ def serve_layout():
                                 #className="twelve columns",
                                 children=[
                                     generate_section_banner("Select Blockchain to Compare"),
-                                    html.P("By selecting your blockchains to compare, you will see comparison data such as transaction fees, transaction delays, user experience ratings and a list of DeFi application stats. (More features coming soon)"),
                                     html.Div([
                                         dcc.Checklist(
                                             id="blockchain-checklist",
