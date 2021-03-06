@@ -130,6 +130,7 @@ body {
 
 #tabs {
   width: 100%;
+  border-top: #1e2130 solid 8px;
 }
 
 .custom-tabs {
@@ -141,30 +142,24 @@ body {
   cursor: pointer;
 }
 
-#custom-tab {
-  background-color: #161a28;
-  letter-spacing: 1px;
-  color: inherit;
-  border: 0;
-  border-bottom: #1E2130 solid 4px !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  height: 18px;
+.custom-tab {
+  background-color: #161a28 !important;
+  letter-spacing: 1px !important;
+  color: inherit !important;
+  border: 0 !important;
+  border-bottom: #1E2130 solid 4px !important; /* important already */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  height: 18px !important;
+  margin-left: 3px !important;
+  margin-right: 3px !important;
 }
 
-#custom-tab--selected {
-  border-bottom: #91dfd2 solid 4px !important;
-}
-
-#custom-tab {
-  margin-right: 3px;
-}
-
-#custom-tab {
-  margin-left: 3px;
+.custom-tab--selected {
+  border-bottom: #91dfd2 solid 4px !important; /* important already */
 }
 
 .section-banner {
