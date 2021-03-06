@@ -72,6 +72,7 @@ def build_banner():
                     html.Label(['DeFi Hackathon Project > ', html.A(' VOTE NOW ', href='https://airtable.com/shrsx1ltpQfTt9wT6')]),
                     html.Label([' | ', html.A(' Twitter ', href='https://twitter.com/solanablog/')]),
                     html.Label([' | ', html.A(' Discord ', href='https://discord.gg/mrpPmnJJ')]),              
+                    html.Label([' | ', html.A(' Contribute ', href='https://github.com/solanax/deficompare')]),              
                     html.Img(id="logo", src=app.get_asset_url("defi-compare-logo_wide.png")),
                 ],
             ),
