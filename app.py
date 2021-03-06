@@ -11,7 +11,9 @@ import plotly.offline as pyo
 import dash_daq as daq
 
 import pandas as pd
+import numpy as np
 import time
+import datetime
 
 from polling_manager import PollingManager
 
@@ -48,7 +50,8 @@ except:
 
 token_metrics_service = TokenMetricsService(db=db)
 
-## page header, about pop-up and logo
+##== PAGE HEADER =========================================================================================================
+
 def build_banner():
     return html.Div(
         id="banner",
@@ -75,8 +78,10 @@ def build_banner():
 def generate_section_banner(title):
     return html.Div(className="section-banner", children=title)
 
-@app.callback(Output('control-chart-live', 'figure'),
-        [Input('graph-update', 'n_intervals')])
+##== FEE GRAPH =========================================================================================================
+
+@app.callback(Output('fee-graph-live', 'figure'),
+        [Input('fee-graph-update', 'n_intervals')])
 def build_fee_graph(n):
     df_token_1 = "SOL"
     df_token_2 = "ETH"
@@ -85,24 +90,24 @@ def build_fee_graph(n):
     df_token_2_data = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
 
     # Create graph plots
-    token_1_plot = go.Scatter(
+    token_1_fee_plot = go.Scatter(
         x=df_token_1_data['datetime'],
         y=df_token_1_data['avg_tx_price'],
         mode='lines+markers',
         name='SOL Fees'
     )
-    token_2_plot = go.Scatter(
+    token_2_fee_plot = go.Scatter(
         x=df_token_2_data['datetime'],
         y=df_token_2_data['avg_tx_price'],
         mode='lines+markers',
         name='ETH Fees'
     )
-    neo_graph_df = [token_1_plot, token_2_plot]
+    fee_graph_df = [token_1_fee_plot, token_2_fee_plot]
 
     fee_graph_title = 'Fee Comparison of ' + df_token_1 + ' and ' + df_token_2 + " in USD"
 
     return {
-        "data": neo_graph_df,
+        "data": fee_graph_df,
         "layout": {
             "paper_bgcolor": "rgba(0,0,0,0)",
             "plot_bgcolor": "rgba(0,0,0,0)",
@@ -120,6 +125,55 @@ def build_fee_graph(n):
         },
     }
 
+##== LATENCY GRAPH =========================================================================================================
+
+@app.callback(Output('time-graph-live', 'figure'),
+        [Input('time-graph-update', 'n_intervals')])
+def build_time_graph(n):
+    df_token_1 = "SOL"
+    df_token_2 = "ETH"
+
+    df_token_1_data = token_metrics_service.get_df_by_token(SOLANA_TOKEN_CODE)
+    df_token_2_data = token_metrics_service.get_df_by_token(ETHERIUM_TOKEN_CODE)
+
+    # Create graph plots
+    token_1_time_plot = go.Scatter(
+        x=df_token_1_data['datetime'],
+        y=df_token_1_data['avg_tx_time'],
+        mode='lines+markers',
+        name='SOL Latency'
+    )
+    token_2_time_plot = go.Scatter(
+        x=df_token_2_data['datetime'],
+        y=df_token_2_data['avg_tx_time'],
+        mode='lines+markers',
+        name='ETH Latency'
+    )
+    time_graph_df = [token_1_time_plot, token_2_time_plot]
+
+    time_graph_title = 'Latency Comparison of ' + df_token_1 + ' and ' + df_token_2 + " in Seconds"
+
+    return {
+        "data": time_graph_df,
+        "layout": {
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(0,0,0,0)",
+            "xaxis": dict(
+                showline=False, showgrid=False, zeroline=False
+            ),
+            "yaxis": dict(
+                showgrid=False, showline=False, zeroline=False
+            ),
+            "legend": dict(
+                orientation="h"
+            ),
+            "autosize": True,
+            "title": time_graph_title,
+        },
+    }
+
+##== MAIN PAGE =========================================================================================================
+
 def serve_layout():
     df_token_1 = "SOL"
     df_token_2 = "ETH"
@@ -127,14 +181,12 @@ def serve_layout():
     # Mock-up blockchain selector
     all_tokens = ["Solana", "Ethereum", "Cardano", "Binance Smart Chain"]
 
-    # Mock-up dapp selector
-    all_dapps = ["Raydium", "Orca", "Serum Swap", "Sushi Swap", "Pancake Swap", "Uniswap", "Curve Finance", "1inch"]
-
     fee_graph_title = 'Fee Comparison of ' + df_token_1 + ' and ' + df_token_2 + " in USD"
+    time_graph_title = 'Latency Comparison of ' + df_token_1 + ' and ' + df_token_2 + " in Seconds"
 
     return html.Div(
-    id="big-app-container",
-    children=[
+        id="big-app-container",
+        children=[
             build_banner(),
             html.Div(
                 id="app-container",
@@ -145,7 +197,7 @@ def serve_layout():
                         children=[
                             html.Div(
                                 id="select-blockchain", #top-section-container
-                                className="twelve columns",
+                                #className="twelve columns",
                                 children=[
                                     generate_section_banner("Select Blockchain to Compare"),
                                     html.P("By selecting your blockchains to compare, you will see comparison data such as transaction fees, transaction delays, user experience ratings and a list of DeFi application stats. (More features coming soon)"),
@@ -163,29 +215,73 @@ def serve_layout():
                                         ),
                                     ]),
                                 ]
-                            ),                            
+                            ),
                             html.Div(
-                                id="control-chart-container",
-                                className="twelve columns",
+                                id="tabs", 
+                                className="tabs",
                                 children=[
-                                    generate_section_banner(fee_graph_title),
-                                    dcc.Graph(
-                                        id="control-chart-live",
-                                        animate=True
-                                    ),
-                                    dcc.Interval(
-                                        id='graph-update',
-                                        interval=1000*DASHBOARD_REFRESH_SECONDS,
-                                        n_intervals=0
+                                    dcc.Tabs(
+                                        id="app-tabs",
+                                        className="custom-tabs",
+                                        children=[
+                                            dcc.Tab(
+                                                label='Blockchain Fees', 
+                                                className="custom-tab", 
+                                                selected_className="custom-tab--selected", 
+                                                children=[
+                                                    html.Div(
+                                                        id="fee-graph-container",
+                                                        #className="twelve columns",
+                                                        children=[
+                                                            generate_section_banner(fee_graph_title),
+                                                            dcc.Graph(
+                                                                id="fee-graph-live",
+                                                                animate=True
+                                                            ),
+                                                            dcc.Interval(
+                                                                id='fee-graph-update',
+                                                                interval=1000*DASHBOARD_REFRESH_SECONDS,
+                                                                n_intervals=0
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ],
+                                            ),    
+                                            dcc.Tab(
+                                                label='Blockchain Latency',
+                                                className="custom-tab", 
+                                                selected_className="custom-tab--selected", 
+                                                children=[
+                                                    html.Div(
+                                                        id="time-graph-container",
+                                                        #className="twelve columns",
+                                                        children=[
+                                                            generate_section_banner(time_graph_title),
+                                                            dcc.Graph(
+                                                                id="time-graph-live",
+                                                                animate=True
+                                                            ),
+                                                            dcc.Interval(
+                                                                id='time-graph-update',
+                                                                interval=1000*DASHBOARD_REFRESH_SECONDS,
+                                                                n_intervals=0
+                                                            ),
+                                                        ],
+                                                    ),
+                                                ],
+                                            ),
+                                        ],
                                     ),
                                 ],
                             ),
                         ],
                     ),
+                    #build_dapp_table(),
                 ],
             ),
         ],
     )
+            
 
 
 app.layout = serve_layout

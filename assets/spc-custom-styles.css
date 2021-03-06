@@ -141,7 +141,7 @@ body {
   cursor: pointer;
 }
 
-#All-tab.custom-tab, #Fees-tab.custom-tab, #Latency-tab.custom-tab, #Ux-tab.custom-tab {
+#custom-tab {
   background-color: #161a28;
   letter-spacing: 1px;
   color: inherit;
@@ -155,19 +155,17 @@ body {
   height: 18px;
 }
 
-#All-tab.custom-tab--selected, #Fees-tab.custom-tab--selected, #Latency-tab.custom-tab--selected, #Ux-tab.custom-tab--selected {
+#custom-tab--selected {
   border-bottom: #91dfd2 solid 4px !important;
 }
 
-/*
-#All-tab.custom-tab {
+#custom-tab {
   margin-right: 3px;
 }
 
-#Control-chart-tab.custom-tab {
+#custom-tab {
   margin-left: 3px;
 }
-*/
 
 .section-banner {
   color: darkgray;
@@ -243,7 +241,7 @@ body {
   align-items: center;
 }
 
-#control-chart-container {
+#fee-graph-container, #time-graph-container {
   position: relative;
   z-index: 4;
   width: 100%;
