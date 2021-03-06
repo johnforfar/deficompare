@@ -2,6 +2,9 @@
 
 An open and fair DeFi Comparison tool across all Blockchains and Decentralised Finance applications.
 
+**WEBSITE:**
+[DeFi.Compare](https://defi.compare) - The Official Defi Compare Website !!!
+
 **PROBLEM:** Some of the fastest Blockchain DeFi applications are not represented at other DeFi Comparison sites.  
 
 **SOLUTION:** Build a simple comparison tool for the upcoming DeFi masses that fairly represents all DeFi blockchains and their respective applications. Metrics that will be represented are transaction costs, transactions speeds, DEX swap costs, decentralised user reviews, more to come. (see Roadmap)
