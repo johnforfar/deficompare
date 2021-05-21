@@ -3,10 +3,65 @@ from typing import Union
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 
+from data_sources import keys
 from data_sources.apicalls import print_red
+from datetime import datetime, timedelta
 
 uniswap_client = Client(
-    transport=RequestsHTTPTransport(url="https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2"))
+    transport=RequestsHTTPTransport(
+        url="https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2"))
+
+bitquery_client = Client(
+    transport=RequestsHTTPTransport(
+        url="https://graphql.bitquery.io",
+        headers={"X-API-KEY": keys.bitquery_api_key}))
+
+
+def get_intervals(since, till, interval):
+    num_intervals = int((till - since) / interval)
+    return [since + interval * i for i in range(num_intervals + 1)]
+
+
+def get_average_btc_like_fees(network: str, since: datetime, till: datetime = datetime.now(),
+                              interval: timedelta = timedelta(minutes=5)):
+    intervals = get_intervals(since, till, interval)
+    query_str = "{{bitcoin(network: {} ) {{".format(network)
+    interval_keys = [f"t{i}" for i in range(len(intervals) - 1)]
+    for i, key in enumerate(interval_keys):
+        query_str += "{}: transactions(time: {{ since: \"{}\", till: \"{}\" }}) {{ avgFee: feeValue(calculate: average) }}\n".format(
+            key, intervals[i].isoformat(), intervals[i + 1].isoformat())
+    query_str += "}}"
+
+    try:
+        query = gql(query_str)
+        result = bitquery_client.execute(query)['bitcoin']
+        return {str(intervals[i + 1]): transactions_data[0]['avgFee'] for i, transactions_data in
+                enumerate(result.values())}
+    except Exception as e:
+        print_red("Unsucessful call in graphcalls.get_average_btc_like_fees()")
+        print(e)
+        return None
+
+
+def get_average_eth_like_gas(network: str, since: datetime, till: datetime = datetime.now(),
+                             interval: timedelta = timedelta(minutes=5)):
+    intervals = get_intervals(since, till, interval)
+    query_str = "{{ethereum(network: {} ) {{".format(network)
+    interval_keys = [f"t{i}" for i in range(len(intervals) - 1)]
+    for i, key in enumerate(interval_keys):
+        query_str += "{}: transactions(time: {{ since: \"{}\", till: \"{}\" }}) {{ gasPrice }}\n".format(
+            key, intervals[i].isoformat(), intervals[i + 1].isoformat())
+    query_str += "}}"
+
+    try:
+        query = gql(query_str)
+        result = bitquery_client.execute(query)['ethereum']
+        return {str(intervals[i + 1]): int(transactions_data[0]['gasPrice']) for i, transactions_data in
+                enumerate(result.values())}
+    except Exception as e:
+        print_red("Unsucessful call in graphcalls.get_average_eth_like_gas()")
+        print(e)
+        return None
 
 
 def get_uniswap_tvl() -> Union[None, float]:
