@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import Union
 
+import pandas as pd
+
 from pycoingecko import CoinGeckoAPI
 
 from data_sources.helpers import print_red
@@ -17,9 +19,10 @@ def get_price(cg_id: str) -> Union[None, float]:
         return None
 
 
-def get_historic_prices(cg_id: str, since: datetime, till: datetime) -> Union[None, float]:
+def get_historic_prices(cg_id: str, since: datetime, till: datetime) -> Union[None, pd.Series]:
     try:
-        return coin_gecko.get_coin_market_chart_range_by_id(cg_id, 'usd', since.timestamp(), till.timestamp())['prices']
+        response = coin_gecko.get_coin_market_chart_range_by_id(cg_id, 'usd', int(since.timestamp()), int(till.timestamp()))
+        return pd.Series({datetime.fromtimestamp(item[0]/1000, tz=since.tzinfo): item[1] for item in response['prices']})
     except Exception as Arguments:
         print_red(f"Unsucessful call in coin_gecko.get_historic_prices: {Arguments}")
         return None
