@@ -1,9 +1,10 @@
 import numpy as np
 from typing import Union
 
-from data_sources.apicalls import retrieve_json, print_red, get_price
-from data_sources.metrics import DexMetricProvider, ChainMetricProvider
-from data_sources.sol import SolanaMetricProvider
+from data_sources.helpers import retrieve_json, print_red
+from data_sources.coingecko import get_price
+from data_providers.metrics import DexMetricProvider, ChainMetricProvider
+from data_providers.sol import SolanaMetricProvider
 
 
 def get_all_pools() -> Union[None, dict]:

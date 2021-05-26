@@ -1,10 +1,10 @@
 import time
 import numpy as np
 
-from data_sources.apicalls import get_price
-from data_sources.graphcalls import get_uniswap_tvl, get_uniswap_daily_pools, get_uniswap_pools
-from data_sources.metrics import DexMetricProvider, ChainMetricProvider
-from data_sources.eth import EthereumMetricProvider
+from data_sources.coingecko import get_price
+from data_sources.thegraph import get_uniswap_tvl, get_uniswap_daily_pools
+from data_providers.metrics import DexMetricProvider, ChainMetricProvider
+from data_providers.eth import EthereumMetricProvider
 
 
 class UniswapMetricProvider(DexMetricProvider):

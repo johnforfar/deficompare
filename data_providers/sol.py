@@ -1,7 +1,8 @@
 from typing import Union
 
-from data_sources.metrics import ChainMetricProvider
-from data_sources.apicalls import retrieve_json, get_price, print_red
+from data_providers.metrics import ChainMetricProvider
+from data_sources.helpers import retrieve_json, print_red
+from data_sources.coingecko import get_price
 
 
 def get_latest_blocks() -> Union[None, list]:
