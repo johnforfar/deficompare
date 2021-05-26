@@ -1,5 +1,4 @@
 import os
-import pathlib
 
 import dash
 import dash_core_components as dcc
@@ -7,17 +6,6 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import dash_table
 import plotly.graph_objs as go
-import plotly.offline as pyo
-import dash_daq as daq
-
-import pandas as pd
-import numpy as np
-import time
-import datetime
-
-from polling_manager import PollingManager
-
-from threading import Thread
 
 from constants import SOLANA_TOKEN_CODE, ETHERIUM_TOKEN_CODE, UNISWAP_EXCHANGE_CODE, SERUM_EXCHANGE_CODE, \
     POLLING_DELAY_SECONDS, DASHBOARD_REFRESH_SECONDS
@@ -26,8 +14,6 @@ from postgres_database import PostgresDatabase
 from token_metrics_service import TokenMetricsService
 from exchange_metrics_service import ExchangeMetricsService
 
-import plotly.express as px
-from apscheduler.schedulers.blocking import BlockingScheduler
 
 app = dash.Dash(
     __name__,
