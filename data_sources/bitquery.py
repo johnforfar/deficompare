@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from typing import Union
 
 import pandas as pd
+from math import nan
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 
@@ -32,7 +33,7 @@ def get_average_btc_like_fees(network: str, since: datetime, till: datetime = da
     try:
         query = gql(query_str)
         result = bitquery_client.execute(query)['bitcoin']
-        return pd.Series({str(intervals[i + 1]): transactions_data[0]['avgFee']
+        return pd.Series({intervals[i + 1]: nan if transactions_data[0]['avgFee'] == 0.0 else transactions_data[0]['avgFee']
                           for i, transactions_data in enumerate(result.values())})
     except Exception as e:
         print_red("Unsucessful call in graphcalls.get_average_btc_like_fees()")
