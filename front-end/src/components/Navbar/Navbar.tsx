@@ -14,11 +14,12 @@ import {
     MenuDivider,
     useDisclosure,
     useColorModeValue,
-    Stack, useColorMode,
+    Stack, useColorMode, Spacer,
 } from '@chakra-ui/react';
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons';
+import DarkModeToggle from "react-dark-mode-toggle";
 
-const Links = ['Dashboard', 'Projects', 'Team'];
+const Links = ['Overview'];
 
 const NavLink = ({children}: { children: ReactNode }) => (
     <Link
@@ -64,9 +65,12 @@ const Navbar = (props: ContainerProps) => {
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Menu>
-                            <Button onClick={toggleColorMode}>
-                                Toggle {colorMode === "light" ? "Dark" : "Light"}
-                            </Button>
+                            <DarkModeToggle
+                                onChange={toggleColorMode}
+                                checked={colorMode === "dark"}
+                                size={70}
+                            />
+                            <Spacer width={'10px'}></Spacer>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
