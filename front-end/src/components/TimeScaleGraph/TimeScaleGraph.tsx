@@ -1,15 +1,15 @@
 import React, {Component, useEffect, useState} from "react";
 import "./styles.scss";
-import {Line} from '@nivo/line'
-import useNivoTheme, {CustomNivoTheme} from '../../hooks/useNivoTheme/useNivoTheme';
-import {TokenMetricField, TokenMetricModel} from '../../models/TokenMetricModel/TokenMetricModel';
-import {ethTokenMetricsSample, solTokenMetricsSample} from '../../sampleData';
+import {Line, Serie} from '@nivo/line'
+import useNivoTheme from '../../hooks/useNivoTheme/useNivoTheme';
+import {TokenMetricField} from '../../models/TokenMetricModel/TokenMetricModel';
 import last from 'lodash/last'
 import {timeFormat} from 'd3-time-format'
 import * as time from 'd3-time'
 
 type ContainerProps = {
-    activeButton: TokenMetricField
+    activeButton: TokenMetricField;
+    data: Serie[];
 };
 
 const commonProperties = {
@@ -21,14 +21,7 @@ const commonProperties = {
 }
 
 const TimeScaleGraph = (props: ContainerProps) => {
-    const ethMetrics = ethTokenMetricsSample.map((metric)=>{
-        return new TokenMetricModel(metric, 'Etherium')
-    })
-    const solMetrics = solTokenMetricsSample.map((metric)=>{
-        return new TokenMetricModel(metric, 'Solana')
-    })
 
-    const data = [TokenMetricModel.getAvgTxFeeData(ethMetrics, props.activeButton), TokenMetricModel.getAvgTxFeeData(solMetrics, props.activeButton)]
     const {theme} = useNivoTheme()
     const formatTime = timeFormat('%Y %b %d')
 
@@ -52,14 +45,14 @@ const TimeScaleGraph = (props: ContainerProps) => {
         <Line
             {...commonProperties}
             margin={{top: 30, right: 50, bottom: 60, left: 50}}
-            data={data}
+            data={props.data}
             xScale={{type: 'time', format: 'native'}}
             yScale={{type: 'linear'}}
             axisTop={{
                 format: '%H:%M',
                 tickValues: 'every 24 hours',
                 //@ts-ignore
-                legend: `${formatTime(data[0].data[0].x)} - ${formatTime(last(data).data[0].x)}`,
+                legend: `${formatTime(props.data[0].data[0].x)} - ${formatTime(last(props.data).data[0].x)}`,
                 legendPosition: 'middle',
                 legendOffset: 0,
             }}
