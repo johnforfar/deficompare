@@ -3,7 +3,7 @@ import "./styles.scss";
 import {Line} from '@nivo/line'
 import useNivoTheme from '../../hooks/useNivoTheme/useNivoTheme';
 import {TokenMetricModel} from '../../models/TokenMetricModel/TokenMetricModel';
-import {ethTokenMetricsSample} from '../../sampleData';
+import {ethTokenMetricsSample, solTokenMetricsSample} from '../../sampleData';
 import moment from 'moment';
 import range from 'lodash/range'
 import last from 'lodash/last'
@@ -24,42 +24,32 @@ const commonProperties = {
     animate: true,
     enableSlices: 'x',
 }
-//     const {theme} = useNivoTheme()
-//     const ethMetricModel = new TokenMetricModel(ethTokenMetricsSample, 'eth')
-//     // const data = [ethMetricModel.getGasFeeData()]
 
 const TimeScaleGraph = (props: ContainerProps) => {
-    const date = new Date()
-    date.setMinutes(0)
-    date.setSeconds(0)
-    date.setMilliseconds(0)
-    const [dataA, setDataA] = useState(range(100).map(i => ({
-        x: time.timeMinute.offset(date, i * 30),
-        y: 10 + Math.round(Math.random() * 20),
-    })))
-
+    const ethMetricModel = new TokenMetricModel(ethTokenMetricsSample, 'eth')
+    const solMetricModel = new TokenMetricModel(solTokenMetricsSample, 'sol')
+    const data = [ethMetricModel.getAvgTxFeeData(), solMetricModel.getAvgTxFeeData()]
+    const {theme} = useNivoTheme()
     const formatTime = timeFormat('%Y %b %d')
 
     return (
         <Line
             {...commonProperties}
             margin={{top: 30, right: 50, bottom: 60, left: 50}}
-            data={[
-                {id: 'A', data: dataA},
-            ]}
+            data={data}
             xScale={{type: 'time', format: 'native'}}
-            yScale={{type: 'linear', max: 100}}
+            yScale={{type: 'linear'}}
             axisTop={{
                 format: '%H:%M',
-                tickValues: 'every 4 hours',
+                tickValues: 'every 24 hours',
+                //@ts-ignore
+                legend: `${formatTime(data[0].data[0].x)} - ${formatTime(last(data).data[0].x)}`,
+                legendPosition: 'middle',
+                legendOffset: 0,
             }}
             axisBottom={{
                 format: '%H:%M',
-                tickValues: 'every 4 hours',
-                //@ts-ignore
-                legend: `${formatTime(dataA[0].x)} ——— ${formatTime(last(dataA).x)}`,
-                legendPosition: 'middle',
-                legendOffset: 46,
+                tickValues: 'every 1 hours',
             }}
             axisRight={{}}
             enablePoints={false}
@@ -68,15 +58,13 @@ const TimeScaleGraph = (props: ContainerProps) => {
             animate={false}
             motionStiffness={120}
             motionDamping={50}
-            isInteractive={false}
+            isInteractive={true}
             enableSlices={false}
             useMesh={true}
-            theme={{
-                axis: {ticks: {text: {fontSize: 14}}},
-                grid: {line: {stroke: '#ddd', strokeDasharray: '1 2'}},
-            }}
+            theme={theme}
         />
     )
 }
+
 
 export default TimeScaleGraph;

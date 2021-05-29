@@ -1,10 +1,10 @@
 import {Box, Button, Center, Container, Flex, Heading, Icon, Square, Stack, useColorModeValue} from "@chakra-ui/react";
 import {useParams} from "react-router";
 import "./styles.scss";
-import TimeScaleGraph from '../../components/TimeScaleGraph/TimeScaleGraph';
 import ComparisonTable from '../../components/ComparisonTable/ComparisonTable';
 import React from 'react';
 import GasFeeChart from '../../components/GasFeeChart/GasFeeChart';
+import TimeScaleGraph from '../../components/TimeScaleGraph/TimeScaleGraph';
 
 const Overview = () => {
     const {name} = useParams<{ name: string }>();

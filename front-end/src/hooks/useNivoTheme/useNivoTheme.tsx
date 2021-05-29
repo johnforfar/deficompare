@@ -3,10 +3,12 @@ import {Theme} from '@nivo/core'
 import {useColorMode} from '@chakra-ui/react';
 
 type HookProps = {
-    overrides?:Theme
+    overrides?: Theme
+    darkOnlyOverrides?: Theme
+    lightOnlyOverrides?: Theme
 };
 
-const useNivoTheme = (props?:HookProps) => {
+const useNivoTheme = (props?: HookProps) => {
     const {colorMode} = useColorMode()
     let theme: Theme = {
         background: "#000000",
@@ -31,13 +33,38 @@ const useNivoTheme = (props?:HookProps) => {
         }
     }
     if (colorMode === 'dark') {
-        theme.background = 'black'
-        theme.textColor = 'white'
-    } else {
+        theme.background = 'black';
+        theme.textColor = 'white';
+        if (theme.tooltip && theme.tooltip.container) {
+            theme.tooltip.container.background = 'black'
+        } else {
+            theme.tooltip = {
+                container: {
+                    background: 'black'
+                }
+            }
+        }
+        if (props && props.darkOnlyOverrides) {
+            //Merge the two themes
+            theme = {
+                ...theme,
+                ...props.overrides
+            }
+        }
+    } else if (colorMode === 'light') {
         theme.background = 'white'
         theme.textColor = 'black'
+        if (props && props.lightOnlyOverrides) {
+            //Merge the two themes
+            theme = {
+                ...theme,
+                ...props.lightOnlyOverrides
+            }
+        }
     }
-    if(props && props.overrides){
+
+
+    if (props && props.overrides) {
         //Merge the two themes
         theme = {
             ...theme,
