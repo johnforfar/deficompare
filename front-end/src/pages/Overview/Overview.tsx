@@ -5,6 +5,7 @@ import ComparisonTable from '../../components/ComparisonTable/ComparisonTable';
 import React from 'react';
 import GasFeeChart from '../../components/GasFeeChart/GasFeeChart';
 import TimeScaleGraph from '../../components/TimeScaleGraph/TimeScaleGraph';
+import ChartTypeSelector from '../../components/ChartTypeSelector/ChartTypeSelector';
 
 const Overview = () => {
     const {name} = useParams<{ name: string }>();
@@ -34,6 +35,7 @@ const Overview = () => {
             position={'relative'}>
                  <Box>
                      {/*<GasFeeChart></GasFeeChart>*/}
+                     <ChartTypeSelector></ChartTypeSelector>
                     <TimeScaleGraph></TimeScaleGraph>
                 </Box>
                 <Box>
