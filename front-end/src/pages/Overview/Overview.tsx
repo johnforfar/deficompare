@@ -36,9 +36,9 @@ const Overview = () => {
                      {/*<GasFeeChart></GasFeeChart>*/}
                     <TimeScaleGraph></TimeScaleGraph>
                 </Box>
-                <Box >
+                <Box>
                     {/*TODO*/}
-                    {/*<ComparisonTable></ComparisonTable>*/}
+                    <ComparisonTable></ComparisonTable>
                 </Box>
           </Stack>
         </Stack>
