@@ -1,21 +1,14 @@
 import React, {Component, useEffect, useState} from "react";
 import "./styles.scss";
 import {Line} from '@nivo/line'
-import useNivoTheme from '../../hooks/useNivoTheme/useNivoTheme';
+import useNivoTheme, {CustomNivoTheme} from '../../hooks/useNivoTheme/useNivoTheme';
 import {TokenMetricModel} from '../../models/TokenMetricModel/TokenMetricModel';
 import {ethTokenMetricsSample, solTokenMetricsSample} from '../../sampleData';
-import moment from 'moment';
-import range from 'lodash/range'
 import last from 'lodash/last'
-
 import {timeFormat} from 'd3-time-format'
 import * as time from 'd3-time'
 
 type ContainerProps = {};
-
-const getRequiredDateFormat = (timeStamp: string, format = "MM-DD-YYYY") => {
-    return moment(timeStamp).format(format);
-};
 
 const commonProperties = {
     width: 900,
@@ -32,6 +25,22 @@ const TimeScaleGraph = (props: ContainerProps) => {
     const {theme} = useNivoTheme()
     const formatTime = timeFormat('%Y %b %d')
 
+    const CustomTooltip = (slice: any) => {
+        //Needs to be within the graph in order to get access to theme
+        return (
+            <div
+                style={{
+                    background: theme.tooltip.container.background,
+                    color: theme.tooltip.container.textEmphasisColor,
+                    padding: '9px 12px',
+                    border: '1px solid #ccc',
+                }}
+            >
+                <strong>{slice.point.serieId}</strong> {slice.point.data.yFormatted} <br/>
+                {slice.point.data.xFormatted}
+            </div>
+        )
+    }
     return (
         <Line
             {...commonProperties}
@@ -62,6 +71,7 @@ const TimeScaleGraph = (props: ContainerProps) => {
             enableSlices={false}
             useMesh={true}
             theme={theme}
+            tooltip={CustomTooltip}
         />
     )
 }
