@@ -1,105 +1,144 @@
-import React from "react";
+import React, {Component, useEffect, useState} from "react";
 import "./styles.scss";
 import {Line} from '@nivo/line'
 import useNivoTheme from '../../hooks/useNivoTheme/useNivoTheme';
+import {TokenMetricModel} from '../../models/TokenMetricModel/TokenMetricModel';
+import {ethTokenMetricsSample} from '../../sampleData';
+import moment from 'moment';
+import range from 'lodash/range'
+import last from 'lodash/last'
+
+import { timeFormat } from 'd3-time-format'
+import * as time from 'd3-time'
 
 type ContainerProps = {};
 
-const TimeScaleGraph = (props: ContainerProps) => {
-    const {theme} = useNivoTheme()
-    const data = [
-        {
-            id: 'fake corp. A',
-            data: [
-                {x: '2018-01-01', y: 7},
-                {x: '2018-01-02', y: 5},
-                {x: '2018-01-03', y: 11},
-                {x: '2018-01-04', y: 9},
-                {x: '2018-01-05', y: 12},
-                {x: '2018-01-06', y: 16},
-                {x: '2018-01-07', y: 13},
-                {x: '2018-01-08', y: 13},
-            ],
-        },
-        {
-            id: 'fake corp. B',
-            data: [
-                {x: '2018-01-04', y: 14},
-                {x: '2018-01-05', y: 14},
-                {x: '2018-01-06', y: 15},
-                {x: '2018-01-07', y: 11},
-                {x: '2018-01-08', y: 10},
-                {x: '2018-01-09', y: 12},
-                {x: '2018-01-10', y: 9},
-                {x: '2018-01-11', y: 7},
-            ],
-        },
-    ]
+const getRequiredDateFormat = (timeStamp: string, format = "MM-DD-YYYY") => {
+    return moment(timeStamp).format(format);
+};
 
-const commonProperties = {
-    width: 900,
-    height: 400,
-    margin: { top: 20, right: 20, bottom: 60, left: 80 },
-    animate: true,
-    enableSlices: 'x',
+// const TimeScaleGraph = (props: ContainerProps) => {
+    const commonProperties = {
+        width: 900,
+        height: 400,
+        margin: {top: 20, right: 20, bottom: 60, left: 80},
+        animate: true,
+        enableSlices: 'x',
+    }
+    //     const {theme} = useNivoTheme()
+//     const ethMetricModel = new TokenMetricModel(ethTokenMetricsSample, 'eth')
+//     // const data = [ethMetricModel.getGasFeeData()]
+
+class TimeScaleGraph extends Component {
+    private formatTime: (date: Date) => string;
+    private timer: NodeJS.Timeout;
+    constructor(props:any) {
+        super(props)
+
+        const date = new Date()
+        date.setMinutes(0)
+        date.setSeconds(0)
+        date.setMilliseconds(0)
+
+        this.state = {
+            dataA: range(100).map(i => ({
+                x: time.timeMinute.offset(date, i * 30),
+                y: 10 + Math.round(Math.random() * 20),
+            })),
+            dataB: range(100).map(i => ({
+                x: time.timeMinute.offset(date, i * 30),
+                y: 30 + Math.round(Math.random() * 20),
+            })),
+            dataC: range(100).map(i => ({
+                x: time.timeMinute.offset(date, i * 30),
+                y: 60 + Math.round(Math.random() * 20),
+            })),
+        }
+        this.timer = setInterval(this.next, 100)
+
+        this.formatTime = timeFormat('%Y %b %d')
+    }
+
+    componentDidMount() {
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer)
+    }
+
+    next = () => {
+        // @ts-ignore
+        const dataA = this.state.dataA.slice(1)
+        dataA.push({
+        // @ts-ignore
+            x: time.timeMinute.offset(last(dataA).x, 30),
+            y: 10 + Math.round(Math.random() * 20),
+        })
+        // @ts-ignore
+        const dataB = this.state.dataB.slice(1)
+        dataB.push({
+        // @ts-ignore
+            x: time.timeMinute.offset(last(dataB).x, 30),
+            y: 30 + Math.round(Math.random() * 20),
+        })
+        // @ts-ignore
+        const dataC = this.state.dataC.slice(1)
+        dataC.push({
+        // @ts-ignore
+            x: time.timeMinute.offset(last(dataC).x, 30),
+            y: 60 + Math.round(Math.random() * 20),
+        })
+
+        this.setState({ dataA, dataB, dataC })
+    }
+
+    render() {
+        // @ts-ignore
+        const { dataA, dataB, dataC } = this.state
+
+        //
+        return (
+            <Line
+                {...commonProperties}
+                margin={{ top: 30, right: 50, bottom: 60, left: 50 }}
+                data={[
+                    { id: 'A', data: dataA },
+                    { id: 'B', data: dataB },
+                    { id: 'C', data: dataC },
+                ]}
+                xScale={{ type: 'time', format: 'native' }}
+                yScale={{ type: 'linear', max: 100 }}
+                axisTop={{
+                    format: '%H:%M',
+                    tickValues: 'every 4 hours',
+                }}
+                axisBottom={{
+                    format: '%H:%M',
+                    tickValues: 'every 4 hours',
+                    //@ts-ignore
+                    legend: `${this.formatTime(dataA[0].x)} ——— ${this.formatTime(last(dataA).x)}`,
+                    legendPosition: 'middle',
+                    legendOffset: 46,
+                }}
+                axisRight={{}}
+                enablePoints={false}
+                enableGridX={true}
+                curve="monotoneX"
+                animate={false}
+                motionStiffness={120}
+                motionDamping={50}
+                isInteractive={false}
+                enableSlices={false}
+                useMesh={true}
+                theme={{
+                    axis: { ticks: { text: { fontSize: 14 } } },
+                    grid: { line: { stroke: '#ddd', strokeDasharray: '1 2' } },
+                }}
+            />
+        )
+    }
 }
 
-const curveOptions = ['linear', 'monotoneX', 'step', 'stepBefore', 'stepAfter']
 
-// @ts-ignore
-const CustomSymbol = ({ size, color, borderWidth, borderColor }) => (
-    <g>
-        <circle fill="#fff" r={size / 2} strokeWidth={borderWidth} stroke={borderColor} />
-        <circle
-            r={size / 5}
-            strokeWidth={borderWidth}
-            stroke={borderColor}
-            fill={color}
-            fillOpacity={0.35}
-        />
-    </g>
-)
 
-    return (
-
-    <>
-        <Line
-            {...commonProperties}
-            data={data}
-            theme={theme}
-            xScale={{
-                type: 'time',
-                format: '%Y-%m-%d',
-                useUTC: false,
-                precision: 'day',
-            }}
-            xFormat="time:%Y-%m-%d"
-            yScale={{
-                type: 'linear',
-                stacked: false,
-            }}
-            axisLeft={{
-                legend: 'linear scale',
-                legendOffset: 12,
-            }}
-            axisBottom={{
-                format: '%b %d',
-                tickValues: 'every 2 days',
-                legend: 'time scale',
-                legendOffset: -12,
-            }}
-
-            enablePointLabel={true}
-            pointSymbol={CustomSymbol}
-            pointSize={16}
-            pointBorderWidth={1}
-            pointBorderColor={{
-                from: 'color',
-                modifiers: [['darker', 0.3]],
-            }}
-            useMesh={true}
-            enableSlices={false}
-        />
-    </>)
-}
 export default TimeScaleGraph;
