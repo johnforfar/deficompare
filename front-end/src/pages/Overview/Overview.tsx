@@ -37,7 +37,8 @@ const Overview = () => {
                     <TimeScaleGraph></TimeScaleGraph>
                 </Box>
                 <Box >
-                    <ComparisonTable></ComparisonTable>
+                    {/*TODO*/}
+                    {/*<ComparisonTable></ComparisonTable>*/}
                 </Box>
           </Stack>
         </Stack>
