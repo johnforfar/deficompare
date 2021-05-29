@@ -1,10 +1,10 @@
-import {ExchangeMetric} from '../../sampleData';
+import {ExchangeMetricDB} from '../../sampleData';
 
 export class ExchangeMetricModel {
-    private modelData: ExchangeMetric;
+    private modelData: ExchangeMetricDB;
     private name: string;
 
-    constructor(modelData: ExchangeMetric, name: string) {
+    constructor(modelData: ExchangeMetricDB, name: string) {
         this.modelData = modelData;
         this.name = name;
     }

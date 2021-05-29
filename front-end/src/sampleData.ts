@@ -8,7 +8,7 @@ export type TokenMetricDB = {
     last_block_time: number | null;
 }
 
-export type ExchangeMetric = {
+export type ExchangeMetricDB = {
     id: number;
     datetime: string;
     current_token_price: number;
@@ -1484,7 +1484,7 @@ export const solTokenMetricsSample: TokenMetricDB [] = [
     }
 ]
 
-export const srmExchangeMetricsSample: ExchangeMetric [] = [
+export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
     {
         "id": 7,
         "datetime": "2021-03-01 19:24:15.899642",
@@ -2378,7 +2378,7 @@ export const srmExchangeMetricsSample: ExchangeMetric [] = [
     }
 ]
 
-export const uniExchangeMetricsSample: ExchangeMetric [] = [
+export const uniExchangeMetricsSample: ExchangeMetricDB [] = [
     {
         "id": 7,
         "datetime": "2021-03-01 19:24:17.654979",

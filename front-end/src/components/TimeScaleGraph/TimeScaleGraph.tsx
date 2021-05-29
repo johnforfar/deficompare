@@ -2,13 +2,15 @@ import React, {Component, useEffect, useState} from "react";
 import "./styles.scss";
 import {Line} from '@nivo/line'
 import useNivoTheme, {CustomNivoTheme} from '../../hooks/useNivoTheme/useNivoTheme';
-import {TokenMetricModel} from '../../models/TokenMetricModel/TokenMetricModel';
+import {TokenMetricField, TokenMetricModel} from '../../models/TokenMetricModel/TokenMetricModel';
 import {ethTokenMetricsSample, solTokenMetricsSample} from '../../sampleData';
 import last from 'lodash/last'
 import {timeFormat} from 'd3-time-format'
 import * as time from 'd3-time'
 
-type ContainerProps = {};
+type ContainerProps = {
+    activeButton: TokenMetricField
+};
 
 const commonProperties = {
     width: 900,
@@ -19,9 +21,14 @@ const commonProperties = {
 }
 
 const TimeScaleGraph = (props: ContainerProps) => {
-    const ethMetricModel = new TokenMetricModel(ethTokenMetricsSample, 'eth')
-    const solMetricModel = new TokenMetricModel(solTokenMetricsSample, 'sol')
-    const data = [ethMetricModel.getAvgTxFeeData(), solMetricModel.getAvgTxFeeData()]
+    const ethMetrics = ethTokenMetricsSample.map((metric)=>{
+        return new TokenMetricModel(metric, 'Etherium')
+    })
+    const solMetrics = solTokenMetricsSample.map((metric)=>{
+        return new TokenMetricModel(metric, 'Solana')
+    })
+
+    const data = [TokenMetricModel.getAvgTxFeeData(ethMetrics, props.activeButton), TokenMetricModel.getAvgTxFeeData(solMetrics, props.activeButton)]
     const {theme} = useNivoTheme()
     const formatTime = timeFormat('%Y %b %d')
 
