@@ -1,10 +1,8 @@
 import React, {useMemo} from "react";
-import "../../themes/ReactTable.scss"
 import "./styles.scss";
 import {useTable} from 'react-table'
 import {ExchangeMetricModel} from '../../models/ExchangeMetricModel/ExchangeMetricModel';
 import {srmExchangeMetricsSample, uniExchangeMetricsSample} from '../../sampleData';
-import last from "lodash/last";
 
 type ContainerProps = {};
 

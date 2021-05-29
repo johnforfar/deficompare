@@ -11,7 +11,7 @@ const Overview = () => {
 
     return (
 
-      <Container maxW={'3xl'}>
+      <Container >
         <Stack
           as={Box}
           textAlign={'center'}

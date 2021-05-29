@@ -11,7 +11,6 @@ export class ExchangeMetricModel {
 
     static getAllTableHeadings() {
         const headings = [
-            {Header: 'ID', accessor: 'id'},
             {Header: 'Exchange', accessor: 'name'},
             {Header: 'Updated', accessor: 'datetime'},
             {Header: 'Current Token Price', accessor: 'currentTokenPrice'},
@@ -22,7 +21,7 @@ export class ExchangeMetricModel {
             {Header: 'Swap Cost', accessor: 'swapCost'},
             {Header: 'Staking Cost', accessor: 'stakingCost'},
         ]
-      return headings
+        return headings
     }
 
     toObject() {
@@ -39,6 +38,7 @@ export class ExchangeMetricModel {
             stakingCost: this.modelData.staking_cost,
         }
     }
+
     static getLatestExchangeMetric(metrics: ExchangeMetricModel []) {
         const metricsSorted = metrics.sort((metric, nextMetric) => {
             if (metric.toObject().datetime > nextMetric.toObject().datetime) {
@@ -48,7 +48,8 @@ export class ExchangeMetricModel {
             }
         })
         if (metricsSorted.length > 0) {
-            return metricsSorted[metricsSorted.length - 1].toObject()
+            let latestMetricData = metricsSorted[metricsSorted.length - 1].toObject()
+            return latestMetricData;
         }
         return null;
     }
