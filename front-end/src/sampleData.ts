@@ -749,60 +749,7 @@ export const ethTokenMetricsSample: TokenMetricDB [] = [
         "avg_tx_price": 4.796511720000001,
         "last_block_time": 10.666666666666666
     },
-    {
-        "id": 88,
-        "datetime": "2021-03-06 00:22:40.217472",
-        "current_coin_price": 1504.76,
-        "avg_gas_price": 0.000000119,
-        "avg_tx_time": 84,
-        "avg_tx_price": 3.76039524,
-        "last_block_time": 12.907407407407407
-    },
-    {
-        "id": 89,
-        "datetime": "2021-03-06 00:22:52.920342",
-        "current_coin_price": 1504.76,
-        "avg_gas_price": 0.000000119,
-        "avg_tx_time": 90,
-        "avg_tx_price": 3.76039524,
-        "last_block_time": 13.185185185185185
-    },
-    {
-        "id": 90,
-        "datetime": "2021-03-06 00:23:02.550436",
-        "current_coin_price": 1504.76,
-        "avg_gas_price": 0.000000119,
-        "avg_tx_time": 90,
-        "avg_tx_price": 3.76039524,
-        "last_block_time": 13.185185185185185
-    },
-    {
-        "id": 91,
-        "datetime": "2021-03-06 00:23:13.103285",
-        "current_coin_price": 1504.76,
-        "avg_gas_price": 0.000000119,
-        "avg_tx_time": 90,
-        "avg_tx_price": 3.76039524,
-        "last_block_time": 13.185185185185185
-    },
-    {
-        "id": 92,
-        "datetime": "2021-03-06 00:24:39.629196",
-        "current_coin_price": 1502.65,
-        "avg_gas_price": 0.000000119,
-        "avg_tx_time": 90,
-        "avg_tx_price": 3.75512235,
-        "last_block_time": 13.218181818181819
-    },
-    {
-        "id": 93,
-        "datetime": "2021-03-06 00:24:49.599251",
-        "current_coin_price": 1502.65,
-        "avg_gas_price": 0.000000119,
-        "avg_tx_time": 90,
-        "avg_tx_price": 3.75512235,
-        "last_block_time": 13.218181818181819
-    }
+
 ]
 
 export const solTokenMetricsSample: TokenMetricDB [] = [
@@ -1533,60 +1480,6 @@ export const solTokenMetricsSample: TokenMetricDB [] = [
         "avg_gas_price": 0.000000001,
         "avg_tx_time": 0.52,
         "avg_tx_price": 0.00007785611842105264,
-        "last_block_time": 0.52
-    },
-    {
-        "id": 88,
-        "datetime": "2021-03-06 00:22:32.564339",
-        "current_coin_price": 12.93,
-        "avg_gas_price": 0.000000001,
-        "avg_tx_time": 0.52,
-        "avg_tx_price": 0.00006490519736842106,
-        "last_block_time": 0.52
-    },
-    {
-        "id": 89,
-        "datetime": "2021-03-06 00:22:51.672800",
-        "current_coin_price": 12.93,
-        "avg_gas_price": 0.000000001,
-        "avg_tx_time": 0.52,
-        "avg_tx_price": 0.00006490519736842106,
-        "last_block_time": 0.52
-    },
-    {
-        "id": 90,
-        "datetime": "2021-03-06 00:23:01.591874",
-        "current_coin_price": 12.93,
-        "avg_gas_price": 0.000000001,
-        "avg_tx_time": 0.52,
-        "avg_tx_price": 0.00006490519736842106,
-        "last_block_time": 0.52
-    },
-    {
-        "id": 91,
-        "datetime": "2021-03-06 00:23:11.641948",
-        "current_coin_price": 12.93,
-        "avg_gas_price": 0.000000001,
-        "avg_tx_time": 0.52,
-        "avg_tx_price": 0.00006490519736842106,
-        "last_block_time": 0.52
-    },
-    {
-        "id": 92,
-        "datetime": "2021-03-06 00:24:38.181751",
-        "current_coin_price": 12.93,
-        "avg_gas_price": 0.000000001,
-        "avg_tx_time": 0.52,
-        "avg_tx_price": 0.00006490519736842106,
-        "last_block_time": 0.52
-    },
-    {
-        "id": 93,
-        "datetime": "2021-03-06 00:24:48.219089",
-        "current_coin_price": 12.93,
-        "avg_gas_price": 0.000000001,
-        "avg_tx_time": 0.52,
-        "avg_tx_price": 0.00006490519736842106,
         "last_block_time": 0.52
     }
 ]
@@ -2482,72 +2375,6 @@ export const srmExchangeMetricsSample: ExchangeMetric [] = [
         "max_apy": 18.1,
         "swap_cost": 0.00007800671052631579,
         "staking_cost": 0.00007800671052631579
-    },
-    {
-        "id": 88,
-        "datetime": "2021-03-06 00:22:40.716025",
-        "current_token_price": 4.88,
-        "total_value_locked": 20922747.13,
-        "min_apy": 0.01,
-        "avg_apy": 2.27,
-        "max_apy": 17.54,
-        "swap_cost": 0.00006490519736842106,
-        "staking_cost": 0.00006490519736842106
-    },
-    {
-        "id": 89,
-        "datetime": "2021-03-06 00:22:53.430191",
-        "current_token_price": 4.88,
-        "total_value_locked": 20922747.13,
-        "min_apy": 0.01,
-        "avg_apy": 2.27,
-        "max_apy": 17.54,
-        "swap_cost": 0.00006490519736842106,
-        "staking_cost": 0.00006490519736842106
-    },
-    {
-        "id": 90,
-        "datetime": "2021-03-06 00:23:03.154477",
-        "current_token_price": 4.88,
-        "total_value_locked": 20922747.13,
-        "min_apy": 0.01,
-        "avg_apy": 2.27,
-        "max_apy": 17.54,
-        "swap_cost": 0.00006490519736842106,
-        "staking_cost": 0.00006490519736842106
-    },
-    {
-        "id": 91,
-        "datetime": "2021-03-06 00:23:13.592658",
-        "current_token_price": 4.88,
-        "total_value_locked": 20922747.13,
-        "min_apy": 0.01,
-        "avg_apy": 2.27,
-        "max_apy": 17.54,
-        "swap_cost": 0.00006490519736842106,
-        "staking_cost": 0.00006490519736842106
-    },
-    {
-        "id": 92,
-        "datetime": "2021-03-06 00:24:40.212730",
-        "current_token_price": 4.88,
-        "total_value_locked": 20922747.13,
-        "min_apy": 0.01,
-        "avg_apy": 2.27,
-        "max_apy": 17.54,
-        "swap_cost": 0.00006490519736842106,
-        "staking_cost": 0.00006490519736842106
-    },
-    {
-        "id": 93,
-        "datetime": "2021-03-06 00:24:50.079686",
-        "current_token_price": 4.88,
-        "total_value_locked": 20922747.13,
-        "min_apy": 0.01,
-        "avg_apy": 2.27,
-        "max_apy": 17.54,
-        "swap_cost": 0.00006490519736842106,
-        "staking_cost": 0.00006490519736842106
     }
 ]
 
@@ -3442,71 +3269,5 @@ export const uniExchangeMetricsSample: ExchangeMetric [] = [
         "max_apy": 1917.16,
         "swap_cost": 45.523968,
         "staking_cost": 39.83347200000001
-    },
-    {
-        "id": 88,
-        "datetime": "2021-03-06 00:22:42.413162",
-        "current_token_price": 27.34,
-        "total_value_locked": 4040385696.1873097,
-        "min_apy": 0,
-        "avg_apy": 35.87,
-        "max_apy": 723.7,
-        "swap_cost": 35.813288,
-        "staking_cost": 31.336627
-    },
-    {
-        "id": 89,
-        "datetime": "2021-03-06 00:22:55.252211",
-        "current_token_price": 27.34,
-        "total_value_locked": 4040385696.1873097,
-        "min_apy": 0,
-        "avg_apy": 35.87,
-        "max_apy": 723.7,
-        "swap_cost": 35.813288,
-        "staking_cost": 31.336627
-    },
-    {
-        "id": 90,
-        "datetime": "2021-03-06 00:23:05.085380",
-        "current_token_price": 27.34,
-        "total_value_locked": 4040572755.1091266,
-        "min_apy": 0,
-        "avg_apy": 35.87,
-        "max_apy": 723.7,
-        "swap_cost": 35.813288,
-        "staking_cost": 31.336627
-    },
-    {
-        "id": 91,
-        "datetime": "2021-03-06 00:23:15.376340",
-        "current_token_price": 27.34,
-        "total_value_locked": 4040536962.3452888,
-        "min_apy": 0,
-        "avg_apy": 35.87,
-        "max_apy": 723.7,
-        "swap_cost": 35.813288,
-        "staking_cost": 31.336627
-    },
-    {
-        "id": 92,
-        "datetime": "2021-03-06 00:24:42.363206",
-        "current_token_price": 27.27,
-        "total_value_locked": 4035310228.70552,
-        "min_apy": 0,
-        "avg_apy": 35.87,
-        "max_apy": 723.7,
-        "swap_cost": 35.76307,
-        "staking_cost": 31.292686250000003
-    },
-    {
-        "id": 93,
-        "datetime": "2021-03-06 00:24:51.644358",
-        "current_token_price": 27.27,
-        "total_value_locked": 4035409035.051036,
-        "min_apy": 0,
-        "avg_apy": 35.87,
-        "max_apy": 723.7,
-        "swap_cost": 35.76307,
-        "staking_cost": 31.292686250000003
     }
 ]
