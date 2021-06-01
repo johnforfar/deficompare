@@ -1,4 +1,4 @@
-import {Box, Button, Center, Container, Flex, Heading, Icon, Square, Stack, useColorModeValue} from "@chakra-ui/react";
+import {Box, Container, Heading, Stack} from "@chakra-ui/react";
 import {useParams} from "react-router";
 import "./styles.scss";
 import ComparisonTable from '../../components/ComparisonTable/ComparisonTable';
@@ -22,7 +22,7 @@ const Overview = () => {
                     Defi Compare v2
                 </Heading>
                 <p color={'gray.500'}>
-                    Description
+                    Crypto Compare
                 </p>
                 <Stack
                     direction={'column'}

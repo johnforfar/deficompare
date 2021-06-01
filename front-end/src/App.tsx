@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import Navbar from './components/Navbar/Navbar';
 // 1. import `ChakraProvider` component
-import {Box, ChakraProvider, useColorMode} from "@chakra-ui/react"
+import {Box, Button, ChakraProvider, useColorMode} from "@chakra-ui/react"
 import TimeScaleGraph from './components/TimeScaleGraph/TimeScaleGraph';
 import ComparisonTable from './components/ComparisonTable/ComparisonTable';
 import {
@@ -14,12 +14,10 @@ import {
 import Overview from './pages/Overview/Overview';
 
 function App() {
-    const {colorMode, toggleColorMode} = useColorMode()
-
     return (
+        <ChakraProvider>
             <Router>
 
-        <ChakraProvider>
 
             <Navbar></Navbar>
 
@@ -34,8 +32,8 @@ function App() {
             <Overview />
           </Route>
         </Switch>
-        </ChakraProvider>
             </Router>
+        </ChakraProvider>
     );
 }
 
