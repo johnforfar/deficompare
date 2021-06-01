@@ -53,8 +53,8 @@ const ChartTypeSelector = (props: ContainerProps) => {
     const {activeButton, handleButtonSelect} = useActiveButton({currentButton: AVG_TX_PRICE_FIELD})
     return <>
         <Stack direction="row" spacing={4}>
-            {buttons.map((button) => {
-                return (<Button leftIcon={button.iconEl} colorScheme="teal"
+            {buttons.map((button,index) => {
+                return (<Button key={index} leftIcon={button.iconEl} colorScheme="teal"
                                 variant={activeButton === button.type ? "solid" : "outline"}
                                 onClick={() => {
                                     handleButtonSelect(button.type)
