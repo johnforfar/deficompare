@@ -28,7 +28,6 @@ function App() {
                     {/*  <Users />*/}
                     {/*</Route>*/}
                     <Route path="/">
-                        <Link to={''}>Hello</Link>
                         <Overview/>
                     </Route>
                 </Switch>

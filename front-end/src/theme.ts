@@ -9,8 +9,8 @@ const config: ThemeConfig = {
 }
 
 const colors = {
-    primary: "#845EC2",
-    secondary: "#FF6F91",
+    primary: "#832BCC",
+    secondary: "#66C7F4",
     highlight: "#00C9A7",
     warning: "#FFC75F",
     danger: "#C34A36",
@@ -19,8 +19,8 @@ const colors = {
 const styles: Styles = {
     global: (props: Dict) => ({
         body: {
-            color: mode('gray.800', 'whiteAlpha.900')(props),
-            bg: mode('white', 'gray.900')(props)
+            bg: mode('white', 'black')(props),
+            // color: mode('white', 'black')(props),
         }
     })
 };
@@ -29,7 +29,19 @@ const components = {
     Link: {
         baseStyle: (props: Dict) => ({
             bg: mode(whiten("primary", 20), darken("primary", 20))(props),
-            color: props.colorMode === "dark" ? "gray.800" : "white",
+            // color: mode('white', 'white')(props),
+        }),
+    },
+    Container: {
+        baseStyle: (props: Dict) => ({
+            bg: mode('white', 'black')(props),
+            // color: mode('white', 'black')(props),
+        }),
+    },
+    Button: {
+        baseStyle: (props: Dict) => ({
+            bg: mode(whiten("primary", 20), darken("primary", 20))(props),
+            // color: mode('white', 'black')(props),
         }),
     },
 }
