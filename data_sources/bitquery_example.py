@@ -18,7 +18,7 @@ bitquery_to_cg_ids = {"ethereum": "ethereum",
                       "dogecoin": "dogecoin"}
 
 eth_likes = ["ethereum", "ethclassic", "bsc"]
-btc_likes = ["bitcash", "litecoin", "bitcash", "dash", "cardano", "dogecoin"]
+btc_likes = ["bitcoin", "litecoin", "bitcash", "dash", "cardano", "dogecoin"]
 
 
 def get_prices_and_fees(name, since=None, till=None, interval=None):
