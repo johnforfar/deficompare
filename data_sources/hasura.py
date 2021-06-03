@@ -17,6 +17,8 @@ hasura_client = Client(
 
 
 def insert_network_coins(df: pd.DataFrame):
+    """Inserts or ignores if already present. If new data is added, put in update_columns!"""
+
     df_records = df.to_dict(orient='index')
     records = []
     for key, values in df_records.items():
@@ -24,10 +26,10 @@ def insert_network_coins(df: pd.DataFrame):
         record.update(values)
         records.append(record)
     records_str = re.sub(r'(?<!: )"(\S*?)"', '\\1', json.dumps(records))
-    print(records_str)
     query = gql(
         codecs.decode(rf"""mutation {{
-            insert_network_coins(objects: {records_str}) {{
+            insert_network_coins(objects: {records_str},
+                on_conflict: {{constraint: network_coins_pkey, update_columns: []}}) {{
                 returning {{
                     time
                     name
