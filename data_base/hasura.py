@@ -7,7 +7,6 @@ from gql.transport.requests import RequestsHTTPTransport
 import pandas as pd
 import codecs
 
-from data_sources.helpers import print_red
 from data_sources.keys import hasura_graphql_url, hasura_admin_secret
 
 hasura_client = Client(

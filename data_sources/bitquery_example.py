@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta, timezone
 import pandas as pd
-import numpy as np
 
 from data_sources.bitquery import get_average_btc_like_fees, get_average_eth_like_gas
 from data_sources.coingecko import get_historic_prices
+
+from data_base.hasura import insert_network_coins
 
 tz = timezone(timedelta(hours=2))
 
@@ -79,11 +80,10 @@ def _get_btc_like_price_gas_fees(network, since=None, till=None, interval=None):
     df.name = network
     return df.assign(name=network)
 
-from data_sources.hasura import insert_network_coins
 
 now = datetime.now(tz=tz)
 till = now
-since = till - timedelta(hours=12)
+since = till - timedelta(hours=18)
 interval = timedelta(minutes=15)
 
 for network in bitquery_to_cg_ids.keys():
