@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.scss";
 import {Button, Stack} from '@chakra-ui/react';
-import {FaBeer, FaGasPump} from 'react-icons/fa'
-import {BiTime, GiPriceTag, GrMoney, MdAvTimer} from 'react-icons/all';
+import {FaBeer, FaGasPump, FaCoins} from 'react-icons/fa'
+import {BiTime, GiPriceTag, MdAvTimer} from 'react-icons/all';
 import useActiveButton from '../../hooks/useActiveButton/useActiveButton';
 import {
     AVG_GAS_PRICE_FIELD,
@@ -30,7 +30,7 @@ const buttons: { type: TokenMetricField, label: string, iconEl: React.ReactEleme
     {
         type: COIN_PRICE_FIELD,
         label: 'Coin Price',
-              iconEl: <GrMoney/>
+              iconEl: <FaCoins/>
 
     },
     {
