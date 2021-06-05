@@ -7,7 +7,6 @@ const config: ThemeConfig = {
     initialColorMode: "dark",
     useSystemColorMode: false,
 }
-
 const colors = {
     primary: "#832BCC",
     secondary: "#66C7F4",
@@ -26,23 +25,31 @@ const styles: Styles = {
 };
 
 const components = {
-    Link: {
-        baseStyle: (props: Dict) => ({
-            bg: mode(whiten("primary", 20), darken("primary", 20))(props),
-            // color: mode('white', 'white')(props),
-        }),
-    },
     Container: {
         baseStyle: (props: Dict) => ({
             bg: mode('white', 'black')(props),
-            // color: mode('white', 'black')(props),
         }),
     },
     Button: {
-        baseStyle: (props: Dict) => ({
-            bg: mode(whiten("primary", 20), darken("primary", 20))(props),
-            // color: mode('white', 'black')(props),
-        }),
+        variants: {
+            outline: (props: Dict) => ({
+                border: "2px solid",
+                borderColor: "primary",
+                color: props.colorMode === 'dark' ? "white" : 'primary',
+                _hover: {
+                    bg: 'primary',
+                    color: 'white'
+                }
+            }),
+            solid: (props: Dict) => ({
+                bg: "primary",
+                color: 'white',
+                _hover: {
+                    bg: 'primary',
+                    color: 'white'
+                }
+            })
+        }
     },
 }
 
