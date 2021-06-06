@@ -14,6 +14,7 @@ const ComparisonTable = (props: ContainerProps) => {
         return new ExchangeMetricModel(metric, 'Uniswap Exchange')
     })
 
+
     const testingData = ExchangeMetricModel.getLatestExchangeMetric(serumMetics)
 
     const data = useMemo(
@@ -30,7 +31,7 @@ const ComparisonTable = (props: ContainerProps) => {
 
     const columns = useMemo(
         () => [
-        ...ExchangeMetricModel.getAllTableHeadings(),
+            ...ExchangeMetricModel.getAllTableHeadings(),
 
         ],
         []
@@ -46,7 +47,7 @@ const ComparisonTable = (props: ContainerProps) => {
         rows,
         prepareRow,
     } = tableInstance
-
+// front-end/public/cryptocurrency-icons/svg/color/bay.svg
     return (
         // apply the table props
         <table {...getTableProps()} className={'ReactTable'}>

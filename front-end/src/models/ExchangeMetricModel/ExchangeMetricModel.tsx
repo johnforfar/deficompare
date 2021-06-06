@@ -11,6 +11,7 @@ export class ExchangeMetricModel {
 
     static getAllTableHeadings() {
         const headings = [
+            {Header: '     ', accessor: 'icon'},
             {Header: 'Exchange', accessor: 'name'},
             {Header: 'Updated', accessor: 'datetime'},
             {Header: 'Current Token Price', accessor: 'currentTokenPrice'},
@@ -26,6 +27,7 @@ export class ExchangeMetricModel {
 
     toObject() {
         return {
+            icon: <img src={"./cryptocurrency-icons/svg/color/uni.svg"}/>,
             id: this.modelData.id,
             name: this.name,
             datetime: this.modelData.datetime,
