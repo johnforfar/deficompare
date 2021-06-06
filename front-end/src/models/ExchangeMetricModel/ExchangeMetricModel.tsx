@@ -1,5 +1,19 @@
 import {ExchangeMetricDB} from '../../sampleData';
 
+export interface ExchangeMetricObject {
+    datetime: string;
+    minApy: number;
+    totalValueLocked: number;
+    icon: JSX.Element;
+    name: string;
+    maxApy: number;
+    stakingCost: number;
+    id: number;
+    avgApy: number;
+    swapCost: number;
+    currentTokenPrice: number
+}
+
 export class ExchangeMetricModel {
     private modelData: ExchangeMetricDB;
     private name: string;
@@ -25,7 +39,7 @@ export class ExchangeMetricModel {
         return headings
     }
 
-    toObject() {
+    toObject() :ExchangeMetricObject {
         return {
             icon: <img src={"./cryptocurrency-icons/svg/color/uni.svg"}/>,
             id: this.modelData.id,
