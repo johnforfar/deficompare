@@ -42,7 +42,7 @@ export class ExchangeMetricModel {
     toObject() :ExchangeMetricObject {
         const iconPath = `./cryptocurrency-icons/svg/color/${this.modelData.exchange_code}.svg`
         return {
-            icon: <img src={iconPath}/>,
+            icon: <img src={iconPath} alt={''}/>,
             id: this.modelData.id,
             name: this.name,
             datetime: this.modelData.datetime,
