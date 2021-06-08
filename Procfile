@@ -1,2 +1,2 @@
-web: gunicorn app:server
+web: bin/boot
 clock: python clock.py
