@@ -1650,7 +1650,7 @@ export const solTokenMetricsSample: TokenMetricDB [] = [
 
 export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 7,
         "datetime": "2021-03-01 19:24:15.899642",
         "current_token_price": 5.45,
@@ -1662,7 +1662,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007288657894736842
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 8,
         "datetime": "2021-03-01 19:24:15.925950",
         "current_token_price": 5.45,
@@ -1674,7 +1674,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007288657894736842
     },
     {
-                "exchange_code": "sol",
+                "exchange_code": "srm",
         "id": 9,
         "datetime": "2021-03-01 19:25:22.204266",
         "current_token_price": 5.45,
@@ -1686,7 +1686,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007288657894736842
     },
     {
-                "exchange_code": "sol",
+                "exchange_code": "srm",
         "id": 10,
         "datetime": "2021-03-01 19:25:22.675011",
         "current_token_price": 5.45,
@@ -1698,7 +1698,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007288657894736842
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 11,
         "datetime": "2021-03-01 19:26:52.003498",
         "current_token_price": 5.45,
@@ -1710,7 +1710,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007283638157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 12,
         "datetime": "2021-03-01 19:26:53.905665",
         "current_token_price": 5.45,
@@ -1722,7 +1722,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007283638157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 13,
         "datetime": "2021-03-01 19:28:09.133821",
         "current_token_price": 5.45,
@@ -1734,7 +1734,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007283638157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 14,
         "datetime": "2021-03-01 19:28:12.036417",
         "current_token_price": 5.45,
@@ -1746,7 +1746,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007283638157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 15,
         "datetime": "2021-03-01 20:01:32.377049",
         "current_token_price": 5.54,
@@ -1758,7 +1758,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000751454605263158
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 16,
         "datetime": "2021-03-01 20:01:36.791855",
         "current_token_price": 5.54,
@@ -1770,7 +1770,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000751454605263158
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 17,
         "datetime": "2021-03-01 20:02:36.813486",
         "current_token_price": 5.55,
@@ -1782,7 +1782,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000751454605263158
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 18,
         "datetime": "2021-03-01 20:03:42.208632",
         "current_token_price": 5.55,
@@ -1794,7 +1794,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000751454605263158
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 19,
         "datetime": "2021-03-01 20:04:47.956755",
         "current_token_price": 5.55,
@@ -1806,7 +1806,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000751454605263158
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 20,
         "datetime": "2021-03-01 20:05:16.768925",
         "current_token_price": 5.55,
@@ -1818,7 +1818,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 21,
         "datetime": "2021-03-01 20:05:17.649169",
         "current_token_price": 5.55,
@@ -1830,7 +1830,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 22,
         "datetime": "2021-03-01 20:06:21.014579",
         "current_token_price": 5.55,
@@ -1842,7 +1842,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 23,
         "datetime": "2021-03-01 20:06:21.562800",
         "current_token_price": 5.55,
@@ -1854,7 +1854,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 24,
         "datetime": "2021-03-01 20:07:25.824334",
         "current_token_price": 5.55,
@@ -1866,7 +1866,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 25,
         "datetime": "2021-03-01 20:07:25.978253",
         "current_token_price": 5.55,
@@ -1878,7 +1878,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 26,
         "datetime": "2021-03-01 20:08:30.597626",
         "current_token_price": 5.53,
@@ -1890,7 +1890,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 27,
         "datetime": "2021-03-01 20:08:30.738722",
         "current_token_price": 5.53,
@@ -1902,7 +1902,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 28,
         "datetime": "2021-03-01 20:09:34.515693",
         "current_token_price": 5.53,
@@ -1914,7 +1914,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 29,
         "datetime": "2021-03-01 20:09:34.720444",
         "current_token_price": 5.53,
@@ -1926,7 +1926,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 30,
         "datetime": "2021-03-01 20:10:38.442294",
         "current_token_price": 5.53,
@@ -1938,7 +1938,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 31,
         "datetime": "2021-03-01 20:10:38.565418",
         "current_token_price": 5.53,
@@ -1950,7 +1950,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 32,
         "datetime": "2021-03-01 20:11:42.442444",
         "current_token_price": 5.53,
@@ -1962,7 +1962,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 33,
         "datetime": "2021-03-01 20:11:42.465054",
         "current_token_price": 5.53,
@@ -1974,7 +1974,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000752458552631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 34,
         "datetime": "2021-03-01 20:11:59.449566",
         "current_token_price": 5.53,
@@ -1986,7 +1986,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007509526315789475
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 35,
         "datetime": "2021-03-01 20:12:02.610330",
         "current_token_price": 5.53,
@@ -1998,7 +1998,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007509526315789475
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 36,
         "datetime": "2021-03-01 23:04:41.162815",
         "current_token_price": 5.37,
@@ -2010,7 +2010,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007379013157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 37,
         "datetime": "2021-03-01 23:04:51.204439",
         "current_token_price": 5.37,
@@ -2022,7 +2022,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007379013157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 38,
         "datetime": "2021-03-01 23:33:04.131214",
         "current_token_price": 5.38,
@@ -2034,7 +2034,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 39,
         "datetime": "2021-03-01 23:34:02.537074",
         "current_token_price": 5.38,
@@ -2046,7 +2046,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 40,
         "datetime": "2021-03-01 23:35:46.927804",
         "current_token_price": 5.38,
@@ -2058,7 +2058,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 41,
         "datetime": "2021-03-01 23:36:03.747195",
         "current_token_price": 5.44,
@@ -2070,7 +2070,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 42,
         "datetime": "2021-03-01 23:37:03.253915",
         "current_token_price": 5.44,
@@ -2082,7 +2082,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 43,
         "datetime": "2021-03-01 23:38:05.006851",
         "current_token_price": 5.44,
@@ -2094,7 +2094,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 44,
         "datetime": "2021-03-01 23:39:06.618747",
         "current_token_price": 5.44,
@@ -2106,7 +2106,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 45,
         "datetime": "2021-03-01 23:40:03.227275",
         "current_token_price": 5.44,
@@ -2118,7 +2118,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 46,
         "datetime": "2021-03-01 23:41:20.362040",
         "current_token_price": 5.47,
@@ -2130,7 +2130,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 47,
         "datetime": "2021-03-01 23:42:03.021837",
         "current_token_price": 5.47,
@@ -2142,7 +2142,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 48,
         "datetime": "2021-03-01 23:43:11.681743",
         "current_token_price": 5.47,
@@ -2154,7 +2154,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 49,
         "datetime": "2021-03-01 23:44:03.246346",
         "current_token_price": 5.47,
@@ -2166,7 +2166,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.0000742921052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 50,
         "datetime": "2021-03-01 23:44:50.568356",
         "current_token_price": 5.47,
@@ -2178,7 +2178,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 51,
         "datetime": "2021-03-01 23:45:09.736597",
         "current_token_price": 5.47,
@@ -2190,7 +2190,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 52,
         "datetime": "2021-03-01 23:45:34.300938",
         "current_token_price": 5.47,
@@ -2202,7 +2202,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 53,
         "datetime": "2021-03-01 23:45:51.054059",
         "current_token_price": 5.47,
@@ -2214,7 +2214,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 54,
         "datetime": "2021-03-01 23:46:09.868357",
         "current_token_price": 5.47,
@@ -2226,7 +2226,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 55,
         "datetime": "2021-03-01 23:46:30.832205",
         "current_token_price": 5.47,
@@ -2238,7 +2238,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 56,
         "datetime": "2021-03-01 23:46:52.004530",
         "current_token_price": 5.47,
@@ -2250,7 +2250,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 57,
         "datetime": "2021-03-01 23:47:10.426844",
         "current_token_price": 5.47,
@@ -2262,7 +2262,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 58,
         "datetime": "2021-03-01 23:47:30.546566",
         "current_token_price": 5.47,
@@ -2274,7 +2274,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 59,
         "datetime": "2021-03-01 23:47:50.523997",
         "current_token_price": 5.47,
@@ -2286,7 +2286,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 60,
         "datetime": "2021-03-01 23:48:11.967275",
         "current_token_price": 5.47,
@@ -2298,7 +2298,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 61,
         "datetime": "2021-03-01 23:48:29.866010",
         "current_token_price": 5.47,
@@ -2310,7 +2310,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 62,
         "datetime": "2021-03-01 23:48:49.862334",
         "current_token_price": 5.47,
@@ -2322,7 +2322,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 63,
         "datetime": "2021-03-01 23:49:10.795169",
         "current_token_price": 5.47,
@@ -2334,7 +2334,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 64,
         "datetime": "2021-03-01 23:49:30.485058",
         "current_token_price": 5.48,
@@ -2346,7 +2346,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 65,
         "datetime": "2021-03-01 23:49:51.009713",
         "current_token_price": 5.48,
@@ -2358,7 +2358,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 66,
         "datetime": "2021-03-01 23:50:10.502179",
         "current_token_price": 5.48,
@@ -2370,7 +2370,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 67,
         "datetime": "2021-03-01 23:50:29.882912",
         "current_token_price": 5.48,
@@ -2382,7 +2382,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 68,
         "datetime": "2021-03-01 23:50:51.483572",
         "current_token_price": 5.48,
@@ -2394,7 +2394,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 69,
         "datetime": "2021-03-01 23:51:10.797397",
         "current_token_price": 5.48,
@@ -2406,7 +2406,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 70,
         "datetime": "2021-03-01 23:51:31.190594",
         "current_token_price": 5.48,
@@ -2418,7 +2418,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 71,
         "datetime": "2021-03-01 23:51:50.381606",
         "current_token_price": 5.48,
@@ -2430,7 +2430,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 72,
         "datetime": "2021-03-01 23:52:10.862002",
         "current_token_price": 5.48,
@@ -2442,7 +2442,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 73,
         "datetime": "2021-03-01 23:52:30.199699",
         "current_token_price": 5.48,
@@ -2454,7 +2454,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 74,
         "datetime": "2021-03-01 23:52:50.815275",
         "current_token_price": 5.48,
@@ -2466,7 +2466,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 75,
         "datetime": "2021-03-01 23:53:10.448151",
         "current_token_price": 5.48,
@@ -2478,7 +2478,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 76,
         "datetime": "2021-03-01 23:53:30.664493",
         "current_token_price": 5.48,
@@ -2490,7 +2490,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 77,
         "datetime": "2021-03-01 23:53:49.765110",
         "current_token_price": 5.48,
@@ -2502,7 +2502,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 78,
         "datetime": "2021-03-01 23:54:10.832602",
         "current_token_price": 5.48,
@@ -2514,7 +2514,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 79,
         "datetime": "2021-03-01 23:54:29.474777",
         "current_token_price": 5.48,
@@ -2526,7 +2526,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007474388157894737
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 80,
         "datetime": "2021-03-02 00:49:53.723370",
         "current_token_price": 5.69,
@@ -2538,7 +2538,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 81,
         "datetime": "2021-03-02 00:50:52.612557",
         "current_token_price": 5.69,
@@ -2550,7 +2550,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 82,
         "datetime": "2021-03-02 00:51:52.783299",
         "current_token_price": 5.69,
@@ -2562,7 +2562,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 83,
         "datetime": "2021-03-02 00:52:53.927146",
         "current_token_price": 5.69,
@@ -2574,7 +2574,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 84,
         "datetime": "2021-03-02 00:53:52.766264",
         "current_token_price": 5.69,
@@ -2586,7 +2586,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 85,
         "datetime": "2021-03-02 00:54:52.804087",
         "current_token_price": 5.79,
@@ -2598,7 +2598,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 86,
         "datetime": "2021-03-02 00:55:52.992722",
         "current_token_price": 5.79,
@@ -2610,7 +2610,7 @@ export const srmExchangeMetricsSample: ExchangeMetricDB [] = [
         "staking_cost": 0.00007800671052631579
     },
     {
-        "exchange_code": "sol",
+        "exchange_code": "srm",
         "id": 87,
         "datetime": "2021-03-02 00:56:53.587745",
         "current_token_price": 5.79,
