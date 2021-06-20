@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import {HamburgerIcon, CloseIcon} from '@chakra-ui/icons';
 import DarkModeToggle from "react-dark-mode-toggle";
+import {Image} from "@chakra-ui/react"
 
 const Links = ['Overview'];
 
@@ -54,14 +55,18 @@ const Navbar = (props: ContainerProps) => {
                         display={{md: 'none'}}
                         onClick={isOpen ? onClose : onOpen}
                     />
+                    <Image fit={'cover'} height={'100%'}
+                           objectFit="contain" src={'logo-512x512.png'}/>
+
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box>Defi Compare v2</Box>
                         <HStack
                             as={'nav'}
                             spacing={4}
                             display={{base: 'none', md: 'flex'}}>
                             {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
+                                <NavLink key={link}>
+                                    <b>{link}</b>
+                                </NavLink>
                             ))}
                         </HStack>
                     </HStack>
