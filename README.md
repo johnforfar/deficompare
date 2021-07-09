@@ -1,20 +1,18 @@
 # Welcome to DeFi Compare
 
-An open and fair DeFi Comparison tool across all Blockchains and Decentralised Finance applications.
+The trusted DeFi comparison tool for the next one billion users.
 
 **WEBSITE:**
 [DeFi.Compare](https://defi.compare) - The Official Defi Compare Website !!!
 
-**PROBLEM:** Some of the fastest Blockchain DeFi applications are not represented at other DeFi Comparison sites.  
+**PROBLEM:** Existing DeFi comparison sites are too complex, technical and not suitable for those new to DeFi. There is a missing gap between CeFi & DeFi onboarding & education. 
 
 **SOLUTION:** Build a simple comparison tool for the upcoming DeFi masses that fairly represents all DeFi blockchains and their respective applications. Metrics that will be represented are transaction costs, transactions speeds, DEX swap costs, decentralised user reviews, more to come. (see Roadmap)
 
 ## Built With
-* [Python](https://www.python.org) - Python
-* [Dash](https://dash.plot.ly/) - Main server and interactive components 
-* [Plotly Python](https://plot.ly/python/) - Used to create the interactive plots
-* [Dash DAQ](https://dash.plot.ly/dash-daq) - Styled technical components for industrial applications
-* [Heroku](https://www.heroku.com) - Heroku free hosting
+* [Python](#) - Python
+* [React](#) - React front end
+* [Hasura & Timescale](#) - Database - Hasura & Timescale
 
 ## Data Sources
 To ensure highest standards of trustlessness, we aim to use as much subgraphs by https://thegraph.com/ as possible. Further ahead the roadmap lies the implementation of a subgraph of our own, for comparing useful key metrics of DEXes and other DeFi protocols across chains.
@@ -29,8 +27,8 @@ To ensure highest standards of trustlessness, we aim to use as much subgraphs by
     * Uniswap: https://thegraph.com/explorer/subgraph/uniswap/uniswap-v2
 
 ## Initial Contributors
-* [Johnny (SOLX)](https://solana.blog) - SOL X - Run a blog about the Solana ecosystem and excited to bring decentralised applications to the masses!
-* [Dipfit](https://twitter.com/dipfit1) - Developer, scientist, scholar, dancer, yogi
+* [Johnny (SOLX)](https://github.com/solx-ventures/) - Huge Solana fan, NFT & gamer
+* [MHHukiewitz](https://github.com/MHHukiewitz) - Developer, scientist
 * [Crushing Codes](https://github.com/crushingcodes) - Mad coding wizard
 
 ## Roadmap
